@@ -1,5 +1,5 @@
 \documentclass{article}
-\usepackage[left=2mm, right=2mm, top=2mm, bottom=2mm]{geometry}
+\usepackage[left=0mm, right=2mm, top=2mm, bottom=2mm]{geometry}
 \usepackage[document]{ragged2e}
 \usepackage{graphicx}
 \usepackage{array, makecell}
@@ -8,8 +8,9 @@
 \newcommand{\mcr}{\makecell[{{r}}]}
 \newcommand{\pic}{\includegraphics[scale=0.3]}
 %\renewcommand{\arraystretch}{3.5}
-\graphicspath{ {/home/dashie/Templates/Screenshots/} }
+\graphicspath{{./Pictures/}}
 \begin{document}
+\begin{flushleft}
   \begin{table}[h!]
   \begin{flushleft}
     \begin{tiny}
@@ -57,9 +58,9 @@
         \hline
         \mc{return types: all of the above AND void, \\ SETOF type (array of a type), TABLE, Trigger} \\
         \hline
-        \mc{\pic{220707-2} \\ \pic{220707-3}}\\
+        \mc{\pic{220608-2} \\ \pic{220608-3}}\\
         \hline
-        \mc{hstore / map:\\ \pic{220707-4} \\ \pic{220707-5} \\ \pic{220707-6}\\ hstore supports GIST/GIN indexing}\\
+        \mc{hstore / map:\\ \pic{220608-4} \\ \pic{220608-5} \\ \pic{220608-6}\\ hstore supports GIST/GIN indexing}\\
         \hline
         \mc{\pic{220607-1} \\ also note that type\%rowtype is used like this: \\ r ang\%rowtype -> for r in select * from ang;}\\
         \hline
@@ -97,18 +98,40 @@
         \hline
         \mcc{\textbf{JSON | SQL}}\\
         \hline
-        \mc{\pic{220707-1}}\\
+        \mc{\pic{220608-1}}\\
         \hline
       \end{tabular}
       \begin{tabular}[h]{|l|}
         \hline
-        \mc{testfdsgggggggggggggggggdddddddddddddddddddddddddddggggggggggg} \\ 
+        \mcc{\textbf{Optimization and indexing}} \\ 
+        \hline
+        \mc{The basics of indexing is that is saves \\ time on queries, but it uses more space, \\ 
+        and needs to be redone on udpate/insert.}\\
+        \hline
+        \mc{Data stored in Pages / Heap (Collection of Pages) \\ Indexing on either can be possible. \\
+        ex: Page index -> Primary key index\\ ex: Heap Index -> index on tables \\ PSQL does table 
+        cluster indexing \\ instead of integrated indexing -> key value (both indexed)}\\
+        \hline
+        \mc{Hash Index: just like hashmap in programming\\ good for single or small multiple queries \\
+        bad for entire tables etc -> collision \\ hashing might take a long time with a lot of data.}\\
+        \hline
+        \mc{Bitmap indexing: Bitmap -> 0 1 stores Booleans/Enums \\ very fast read / slow update \\ in postgres \textbf{only implicit} use Brin instead.}\\
+        \hline
+        \mc{Brin indexing: }\\
+        \hline
+        \mc{}\\
+        \hline
+        \mc{}\\
+        \hline
+        \mc{}\\
         \hline
       \end{tabular}
     \end{tabular}
     \vfill
+    \hfill
     \end{tiny}
   \end{flushleft}
   \end{table}
+\end{flushleft}
 \end{document}
 
