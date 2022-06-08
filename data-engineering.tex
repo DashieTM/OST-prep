@@ -144,8 +144,8 @@
         \hl
         \mc{\b{The steps of optimization}}\\
         \hl
-        \mc{1. generate the plan of transaction \\ 2. reform the term to optimize perfomance \\ without knowledge of the internal structure. \\ -> all values are considered equal \\
-        3. optimization based on: available indexes, analysis & costs \\ 4. generate all possible plans to calculate cost \\ 5. analyze said plans -> how many tuples, what kind... \\ 6. profit?}\\
+        \mc{1. generate the plan of transaction \\ 2. reform the term to optimize performance \\ without knowledge of the internal structure. \\ -> all values are considered equal \\
+        3. optimization based on: available indexes, analysis \& costs \\ 4. generate all possible plans to calculate cost \\ 5. analyze said plans -> how many tuples, what kind... \\ 6. profit?}\\
         \hl
         \mc{\b{selectivety} this is the ratio of tuples a query returns \\ low selectivety would mean high number of rows \\ an example is select * from table where sex='Male'
         \\ the opposite would be high selectivety.}\\
@@ -208,7 +208,7 @@
               \mc{\b{case message dropped:} \\ > if the prepare statement gets lost,\\ or the RM doesn't respond, then the TM\\ simply aborts the transaction for all. \\ 
               > if RM doesn't get a response in READY state \\ then the RM will remind the TM until it gets one.}\\
               \hl
-              \mc{There are different 2PC protocols, PSQL, MYSQL, X/Open, \\ Java Transaction API, Orace Transaction Manager, Microtroll... \\ + often used / proven system   + guarantees ACID \\
+              \mc{There are different 2PC protocols, PSQL, MYSQL, X/Open, \\ Java Transaction API, Orace Transaction Manager, Microtroll \\ + often used / proven system   + guarantees ACID \\
               -- slow -- blocks transactions often \\ !!only use this when the complexity calls for it!!}\\
               \hl
               \mc{\b{Query handling:} \\there are 3 ways of handling a queries distributed databases:\\ > Ship Whole -> run query locally and remove duplicates \\ > Push Down -> split query when needed \\ 
@@ -224,12 +224,12 @@
               \hl
               \mc{\b{The Cap Theorem}\\ The CAP theorem dicates, that you can only have \\ 2 of 3 desired traits of a database, these include \\ \b{consistency}, \b{parition tolerance} and \b{availability}.\\
                 traditional databases have the \b{ACID} philosophy which is both \\ \b{consistent and tolerant}, however it often blocks transactions. \\ here comes \b{NoSQL with the BASE} philosophy \\ 
-              it is both \b{available} at all times and \b{tolerant},\\however it is \b{NOT consistent during transactions}. \\ Only after those have stopped will the system become consistent. \\
+              it is both \b{available} at all times and \b{tolerant},\\however it is \b{NOT consistent during transactions}. \\ Only after those have stopped will the system get consistent. \\
               >tolerance means the system will work despite partial outage<}\\
               \hl
               \mc{\b{BASE THEOREM}\\ >> \b{Basically Available:} \\The database will not block transactions \\ any and all requests will be responded to (can still fail though!) \\
-              >> \b{Soft state:} \\ The state of the system can change even without input, \\ therefore we consider this to be a soft (not fixed) state \\ >> \b{Eventual consistency:}\\ The system will eventually
-              become consistent (no more transactions)\\ }\\
+              >> \b{Soft state:} \\ The state of the system can change even without input, \\ therefore we consider this to be a soft (not fixed) state \\ >> \b{Eventual consistency:}\\ The system will become
+              consistent after end of transactions.\\ }\\
               \hl
             \end{tabular}
             \begin{tabular}[t]{|l|}
@@ -263,11 +263,38 @@
             \end{tabular}
             \begin{tabular}[t]{|l|}
               \hl
-              \mcc{\b{NoSQL Graph Stores}}\\
+              \mcc{\b{sharding}}\\
               \hl
-              \mc{made for compact objects with typed aggregations \\ sometimes without schema -> implicit schema \\ or not uniform data}\\
+              \mc{\b{horizontal fragmentation into nodes} \\ reduces IO due to outsourcing to other servers}\\
               \hl
-              \mc{}\\
+              \mc{\b{The shard key -> fragmentation key should be:} \\ >> distributed equally in the data \\ >> is a field/function or a combination of fields \\ 
+              should be not unique, but can be a hash on PK?....\\
+              default is hash on \_id aka PK\\ shards can usually not be changed -> redo database.}\\
+              \hl
+              \mc{MongoDB only offers few constraints like \\ the unique index constraint.}\\
+              \hl
+              \mc{\b{advantages:}\\ >> simple query language, >> no schema \\ \b{disadvantages:} \\ >> no constraints \\ >> no real joins (workaround with lookup)  \\ >> slow/questionable transactions -> BASE \\
+              >> security -> default open in the web}\\
+              \hl
+              \mc{\b{MongoDB Transactions}}\\
+              \hl
+              \mc{updates work similar to increasing an array \\ it even automatically pushes it to a new document \\ if the current one is too big! \\ however you can avoid relocation by using \\ 
+              referencing instead of embedding.}\\
+              \hl
+            \mc{\b{Performance hindering features:} \\ >> Atomicity of writes | >> Document Growth \\ >> Sharding | >> Indexes and Capped Collections  }\\
+              \hl
+              \mc{MongoDB works with \b{Replica Sets} \\ child node has the data as well \\ in case of outage you can still get your data \\ due to the nature of MongoDB this happens \\ without having
+              a specific distributed database.\\ Also the nodes will pick a new Master if the\\ old one goes down.}\\
+              \hl
+            \mc{\b{embedded:} ALL IN ONE FILE \\ Preferred for >> ONE-TO-ONE \\ >> ONE-TO-MANY without many overlaps \\ Warning with this method, uncontrolled growth of document}\\
+              \hl
+              \mc{\b{referenced:} Stored in multiple files \\ Preferred when dealing with complex relationships \\ this is the advantage Document stores have over key/value! \\ example of reference: \\ 
+              \pic{220608-22} \\ \pic{220608-23}} \\ \b{and here how to create it:} \\ \pic{220608-24}\\
+              \hl
+              \mc{in general, only use references for things that make sense, \\ for example don't make a reference for a blog post \\ or for a persons gender etc. \\
+              embed the small stuff, reference the big stuff}\\
+              \hl
+              \mc{\pic{220608-25} \\ \pic{220608-26}\\ \pic{220608-27}}\\
               \hl
             \end{tabular}
           \end{tabular}
@@ -280,6 +307,20 @@
         \begin{tiny}
           \begin{tabular}{lll}
             \begin{tabular}[t]{|l|}
+              \hl
+              \mcc{\b{MongoDB CRUD}}\\
+              \hl
+              \mc{\pic{220608-28} \\ \pic{220608-29} \\ \pic{220608-30} \\ \pic{220608-31} \\ \pic{220608-32} \\ \pic{220608-33}}\\
+              \hl
+              \mc{}\\
+              \hl
+              \mc{}\\
+              \hl
+              \mcc{\b{NoSQL Graph Stores}}\\
+              \hl
+              \mc{made for compact objects with typed aggregations \\ sometimes without schema -> implicit schema \\ or not uniform data}\\
+              \hl
+              \mc{}\\
               \hl
               \mc{}\\
               \hl
