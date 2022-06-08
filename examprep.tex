@@ -1,0 +1,114 @@
+\documentclass{article}
+\usepackage[left=2mm, right=2mm, top=2mm, bottom=2mm]{geometry}
+\usepackage[document]{ragged2e}
+\usepackage{graphicx}
+\usepackage{array, makecell}
+\newcommand{\mc}{\makecell[{{l}}]}
+\newcommand{\mcc}{\makecell[{{c}}]}
+\newcommand{\mcr}{\makecell[{{r}}]}
+\newcommand{\pic}{\includegraphics[scale=0.3]}
+%\renewcommand{\arraystretch}{3.5}
+\graphicspath{ {/home/dashie/Templates/Screenshots/} }
+\begin{document}
+  \begin{table}[h!]
+  \begin{flushleft}
+    \begin{tiny}
+      \begin{tabular}[h]{lcr}
+        \begin{tabular}{|l|}
+        \hline
+        \mcc{\textbf{Functions in PGPLSQL}} \\
+        \hline
+        \mc{functions in psql \\ create or replace function funcName() \\ return \textbf{s} returntype as \textbf{ \$\$ } \\ begin \\  raise notice 'Hello Birb!'; \\ end; \\ \textbf{\$\$ }
+        language langName \\ The two \$ are always necessary. Also note the \\ returns with an s and the language at the end. \\ Which \textbf{MUST} be a \textbf{PROCEDURAL LANGUAGE}, \\
+        so c++ doesn't work here. } \\
+        \hline
+        \mc{Parameters are handled like in any language \\ func(x bigint, y bigint) \\ you can also define multiple return types\\ func(variadic a numeric[]) \\ or a generic return \\ 
+        func(param anyelement)} \\ 
+        \hline
+        \mc{Variable Declaration: \\ returns void as \$\$ \\ DECLARE \\ x bigint; y bigint; \\ BEGIN ....} \\ 
+        \hline
+        \mc{Variable manipulation: x \textbf{:=} 6 + 4} \\
+        \hline
+        \mc{if: IF n = 0 THEN RETURN 1; \\ (optional)ELSE RETURN 2; END IF; \\ ELSIF also possible (note elsif not elseif)} \\ 
+        \hline
+        \mc{case x when 1, 2 then msg := 'one or two'; end case; \\ essentially this checks if x is 1 \textbf{OR} 2}\\
+        \hline
+        \mc{case when x between 0 and 10 then .... \\ similar but with a range, both can be\\ simulated by if else.}\\
+        \hline
+        \mc{Exceptions: BEGIN z:= x / y;\\ EXCEPTION WHEN division-by-zero \\ THEN z:= 0; (or error rather) END; \\ if you want to catch all: WHEN others THEN} \\ often used after exception: RAISE;
+        (show error) \\ 
+        \hline
+        \mc{For Loop: For var IN query LOOP \\ statements END LOOP; \\ for r in SELECT * FROM ang LOOP \\ RETURN NEXT r; END LOOP; RETURN; END; \\ note that the return next doesn't return \\ you store 
+        it in a buffer \\ and return it at the end of the function. \\ for infinite loops: FOR i IN 1..\_max LOOP;} \\
+        \hline
+        \mc{update and insert: INSERT INTO ANG VALUES(...); \\ UPDATE ang set salary = salary + 500 \\where name = 'dashie'; \\ interestingly, after the where name = 'dashie' \\ you can use if not found
+        then (handle error)\\ this allows for easier error handling.}\\
+        \hline
+        \mc{queries: \textbf{execute} 'SELECT * from ang' \\ || into result; return result; END;} \\
+        \hline
+        \mc{comments are done by either -- or /* */ for multiline} \\ 
+        \hline
+        \mc{anonymous function: you can omit \\the name and just write do \$\$ ...} \\ 
+        \hline
+        \mc{cursor: declare curs CURSOR FOR query; \\BEGIN OPEN curs; LOOP do something CLOSE\\ curs; END;\\ Cursors are essentially just iterables. \\ cursors can also be unbound curs1 refcursor \\
+        or they can be parameterized curs3 cursor(arg)}\\
+        \hline
+        \mc{\pic{220607-3} \\ arrays: SELECT '{1,2,3}'::int[] \\ or SELECT ARRAY[1,2,3] \\ var int[] only in variable declaration. \\ \textbf{!!arrays start with 1 in psql !!}}\\
+        \hline
+        \mc{return types: all of the above AND void, \\ SETOF type (array of a type), TABLE, Trigger} \\
+        \hline
+        \mc{\pic{220707-2} \\ \pic{220707-3}}\\
+        \hline
+        \mc{hstore / map:\\ \pic{220707-4} \\ \pic{220707-5} \\ \pic{220707-6}\\ hstore supports GIST/GIN indexing}\\
+        \hline
+        \mc{\pic{220607-1} \\ also note that type\%rowtype is used like this: \\ r ang\%rowtype -> for r in select * from ang;}\\
+        \hline
+        \mc{important to know, you can always use these \\functions to manipulate queries, for example \\ select upper(name) from ang; \\ depending on the function you can also \\ 
+        select generatetab(1,10)}\\
+        \hline
+        \mc{\pic{220607-2}}\\
+        \hline
+        \mc{cast: cast(input as type); \\ cast(record.id as text);}\\
+        \hline
+      \end{tabular}
+      \begin{tabular}[h]{|l|}
+        \hline
+        \mc{stored procedures are nothing but a chaining of functions:\\ \pic{220607-4}} \\
+        \hline
+        \mc{some good to know things: plain SQL is more efficient. \\ write variables lower case for sql \\ use cast over typename -> not select date '2022-06-07'}\\
+        \hline
+        \mcc{\textbf{Triggers}}\\
+        \hline
+        \mc{\\\pic{220607-5}}\\
+        \hline
+        \mc{\pic{220607-6} \\ statement is once, row means once \\per row, aka for the entire table. \\ \pic{220607-7}} \\ \pic{220607-8} \\ \pic{220607-9} \\ \pic{220607-10} \\ \pic{220607-11}\\ 
+        \hline
+        \mc{Return types: RETURN NEW -> returns a new table/row \\ RETURN OLD -> returns the old table/row \\ (but could change other rows!) \\ RETURN NULL -> cancel operation.}\\
+        \hline
+        \mc{running order: before statement, before row, \\ after row, after statement -> \\ and of course alphabetically.}\\
+        \hline
+        \mc{inside the Trigger functions you can use the \\ variables that don't matter aka can be ANY -> user \\ or the entered user from the trigger -> NEW.user \\ or explicitly the old one ->
+        OLD.user \\ and last user defined stuff like -> SELECT 'I' \\ which just places an I as the variable \\ or something like now() for timestamps.}\\
+        \hline
+        \mc{Triggers make the database slower and harder to maintain. \\ some databases therefore let you disable them if you want.\\ On a table basis. \\ Also watch out for cascading effects of 
+        triggers \\ they might cause something else to be deleted.}\\
+        \hline
+        \mc{Stored Procedures are really helpful for security \\ They have all the prviliges, but only \\ allow the user to do what the \\ creator has predefined.}\\
+        \hline
+        \mcc{\textbf{JSON | SQL}}\\
+        \hline
+        \mc{\pic{220707-1}}\\
+        \hline
+      \end{tabular}
+      \begin{tabular}[h]{|l|}
+        \hline
+        \mc{testfdsgggggggggggggggggdddddddddddddddddddddddddddggggggggggg} \\ 
+        \hline
+      \end{tabular}
+    \end{tabular}
+    \vfill
+    \end{tiny}
+  \end{flushleft}
+  \end{table}
+\end{document}
+

@@ -1,0 +1,65 @@
+\documentclass{article}
+\usepackage[left=3mm, right=3mm, top=5mm, bottom=5mm]{geometry}
+\usepackage[document]{ragged2e}
+\usepackage{array, makecell}
+\newcommand{\mc}{\makecell[{{p{1\linewidth}}}]}
+\renewcommand{\arraystretch}{3.5}
+\begin{document}
+  \begin{flushleft}
+      \begin{table}[h!]
+        \begin{tabular}{|p{0.2\linewidth}|p{0.755\linewidth}|}
+          \hline
+        \textbf{Command | Function} & \textbf{Description} \\ 
+          \hline\hline
+        \mc{type \\ type IntArr = [Int]} & \mc{This is used as a definition of a type using predefined types. Aka this combines types to another type.} \\
+          \hline
+        \mc{newtype \\ newtype IntArr = [Int] \\ instance Eq... } & \mc{This achieves the same thing with the only difference being the ability to call instances like Eq, Show and more.} \\
+          \hline
+        \mc{data \\ data BinaryTree = \\    Leaf \\     | Branch Tree Tree }& \mc{This is the most complex version that allows you to branch with the | operator and also allows instances of Eq, Show and more.} \\      
+          \hline
+        \mc{case \\ x of case ok of \\ True... \\ False... } & \mc{this is a fancy version of if then else. You define the cases below like you would in a function with pattern matching -> | }\\
+          \hline
+        \mc{let x in \\  let x = 5 in x + 10} & \mc{define a variable in the following code. Most used in the do notation, can also be chained together, which is weird but super useful.} \\
+          \hline
+        \mc{Lambda \\ \textbackslash{}x -> x * 5} & \mc{This is a function without a real name. The parameter is passed implicitly from the right into the function via replacing ever y x(name of function) inside the function.} \\
+          \hline
+        \mc{Currying \\ (a -> b -> c) \\ (a -> b) -> (b -> c) }& \mc{In haskell the functions are usually unary, meaning the take 1 input and create 1 output. Therefore haskell does syntactic sugar in order to provide more complex functions. This is called Currying.}  \\
+          \hline
+        \mc{foldr \\ foldr func end List} & \mc{Foldr applies a function (a -> b) for one element to an entire list and returns a 'b' -> the return type of the function. This differs to map in that the return type is defined by the function and doesn't stay a list. foldr (+) 0 [1,4,8] would be 1+4+8+0 -> 13 : note that foldr is defined as the following : foldr f end (x:xs) = x `f` foldr f end xs} \\
+          \hline
+        \mc{foldl \\ foldl func end List} & \mc{foldl is very weird, it essentially applies the function to the end element every step. In other words, this is a weird mix between iterative and recursive. example foldl (+) 1 [1,2,3] -> foldl f (f end x) xs -> end is now 2 -> go to 3 add 2 -> 5. Here it is the same result as with foldr, but with division the result would be very different! foldr div 1 [1,2] is an error div by 0! foldl div 1 [1,2] is simply 0 due to the iterative nature.} \\
+          \hline
+          \mc{map \\ map func List} & \mc{This maps a function to an entire list and returns the list of the results. \\ (+3) [1,5,8] would return [4,8,11] }\\
+          \hline
+          \mc{ zip \\ zip list1 list2 } & \mc{ This puts together 2 lists in pairs. -> zip [1 .. 10] [a .. z] -> [(1,a),(2,b),(3,c) .. (10,j)] \\ Note that the zip functions ends when one of the list returns nothing -> aka the list is at its end. \\ In other words (11,k) or ( ,k) will not be in the result.} \\
+          \hline
+          \mc{list comprehension \\ ex: [ x + 5 | x <- [0 .. 5] ] \\ would return [5,6,7,8,9,10] } & \mc{This is an easy way to calculate with lists. Important note, if you want to combine 2 lists in a list comprehension, then you need to know that it doesn't zip perfectly. If you want that functionality, then you need to use the zip command explicitly. Otherwise it does things like this [(1,1),(1,2),(1,3),(1,4)....] FUN} \\ 
+          \hline
+          \mc{dot notation \\(+3).head.reverse [5,6,3,4] \\ 4 + 3 -> 7 } & \mc{This is syntactic sugar in order to make chaining commands easier by removing the () around the functions. Note that due to the way the dot notation works you don't need to specify the parameter in the function declaration, it is passed implicitly.}\\ 
+          \hline
+          \mc{Dollar sign \$ } & \mc{the dollar sign is an easy way to remove (). Example: (+3) \$ 5 + 3 -> (5+3) + 3} \\ 
+          \hline
+          \mc{the where notation \\ a = b + 5\\  where b = 5 } & \mc{This is essentially the opposite way to the let notation, while achieving the same result.} \\
+          \hline
+      \end{tabular}
+    \end{table}
+      \begin{table}[h!]
+        \begin{tabular}{|p{0,2\linewidth}|p{0.755\linewidth}|}
+          \hline
+          \mc{pure \\ pure func -> wrappedFunc} & \mc{This is essentially the wrap function that will allow you to apply functions to wrapped values. It is defined in the applicative class. (see below) Also note that the pure function often only shows one type: for example the pure function for Maybe only shows Just and doesn't take the function as an explicit parameter -> pure = Just} \\
+          \hline
+          \mc{Functor \\ fmap func wrappedValue \\fmap f (Just a) = Just(f a)\\ fmap f Nothing = Nothing} & \mc{A functor is a type that can be modified by regular functions via the fmap function. example: (+3) to Maybe Int -> fmap (+3) (Just 4) -> 7 while fmap (+3) Nothing -> Nothing }\\ 
+          \hline
+          \mc{Applicative \\ Maybe func <*> Maybe Int \\ (Just f) <*> v = fmap  f v \\ Nothing <*> v = Nothing} & \mc{Apply a wrapped function to a wrapped value. The interesting part here is that the function can also be the return type of another function. Essentially allowing you to chain functions.  -> pure func <\$> val1 <*> val2 <*> val3} \\
+          \hline
+        \mc{Monad \\ wrappedValue >>= func \\ (Just v) >>= f = f v \\ Nothing >>= f = Nothing} & \mc{The Monad has many more functions but the described to the left is the bind operator, \\ it allows you to do the same with as with the functor, \\ just this time you can chain it because of the applicative class.\\
+        The Monad also has the useful operator <|> that allows you to make choices,\\ aka if the first fails then try the second.
+      ex: choice = parseLevel1 <|> parseLevel2 <|> parseLevel3} \\ 
+          \hline
+          \mc{do notation \\ do x <- monadtype \\ y <- monadtype \\ expression|return statement} & \mc{This is used to easily evaluate a function dealing with Monads. The example is from the parser for the lambda interpreter.} \\
+          \hline
+      \end{tabular}
+    \end{table}
+  \end{flushleft}
+\end{document}
+
