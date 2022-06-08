@@ -1,137 +1,286 @@
 \documentclass{article}
-\usepackage[left=0mm, right=2mm, top=2mm, bottom=2mm]{geometry}
+\usepackage[left=0mm, right=0mm, top=0mm, bottom=0mm]{geometry}
 \usepackage[document]{ragged2e}
 \usepackage{graphicx}
 \usepackage{array, makecell}
+\usepackage{FiraMono}
+\usepackage{tabulary}
 \newcommand{\mc}{\makecell[{{l}}]}
 \newcommand{\mcc}{\makecell[{{c}}]}
 \newcommand{\mcr}{\makecell[{{r}}]}
+\renewcommand{\b}{\textbf}
 \newcommand{\pic}{\includegraphics[scale=0.3]}
+\newcommand{\hl}{\hline}
 %\renewcommand{\arraystretch}{3.5}
 \graphicspath{{./Pictures/}}
 \begin{document}
 \begin{flushleft}
-  \begin{table}[h!]
+  \begin{table}[ht!]
   \begin{flushleft}
     \begin{tiny}
-      \begin{tabular}[h]{lcr}
-        \begin{tabular}{|l|}
-        \hline
-        \mcc{\textbf{Functions in PGPLSQL}} \\
-        \hline
-        \mc{functions in psql \\ create or replace function funcName() \\ return \textbf{s} returntype as \textbf{ \$\$ } \\ begin \\  raise notice 'Hello Birb!'; \\ end; \\ \textbf{\$\$ }
-        language langName \\ The two \$ are always necessary. Also note the \\ returns with an s and the language at the end. \\ Which \textbf{MUST} be a \textbf{PROCEDURAL LANGUAGE}, \\
+      \begin{tabular}{lll}
+        \begin{tabular}[t]{|l|}
+        \hl
+        \mcc{\b{Functions in PGPLSQL}} \\
+        \hl
+        \mc{functions in psql \\ create or replace function funcName() \\ return \b{s} returntype as \b{ \$\$ } \\ begin \\  raise notice 'Hello Birb!'; \\ end; \\ \b{\$\$ }
+        language langName \\ The two \$ are always necessary. Also note the \\ returns with an s and the language at the end. \\ Which \b{MUST} be a \b{PROCEDURAL LANGUAGE}, \\
         so c++ doesn't work here. } \\
-        \hline
+        \hl
         \mc{Parameters are handled like in any language \\ func(x bigint, y bigint) \\ you can also define multiple return types\\ func(variadic a numeric[]) \\ or a generic return \\ 
         func(param anyelement)} \\ 
-        \hline
+        \hl
         \mc{Variable Declaration: \\ returns void as \$\$ \\ DECLARE \\ x bigint; y bigint; \\ BEGIN ....} \\ 
-        \hline
-        \mc{Variable manipulation: x \textbf{:=} 6 + 4} \\
-        \hline
+        \hl
+        \mc{Variable manipulation: x \b{:=} 6 + 4} \\
+        \hl
         \mc{if: IF n = 0 THEN RETURN 1; \\ (optional)ELSE RETURN 2; END IF; \\ ELSIF also possible (note elsif not elseif)} \\ 
-        \hline
-        \mc{case x when 1, 2 then msg := 'one or two'; end case; \\ essentially this checks if x is 1 \textbf{OR} 2}\\
-        \hline
+        \hl
+        \mc{case x when 1, 2 then msg := 'one or two'; end case; \\ essentially this checks if x is 1 \b{OR} 2}\\
+        \hl
         \mc{case when x between 0 and 10 then .... \\ similar but with a range, both can be\\ simulated by if else.}\\
-        \hline
+        \hl
         \mc{Exceptions: BEGIN z:= x / y;\\ EXCEPTION WHEN division-by-zero \\ THEN z:= 0; (or error rather) END; \\ if you want to catch all: WHEN others THEN} \\ often used after exception: RAISE;
         (show error) \\ 
-        \hline
+        \hl
         \mc{For Loop: For var IN query LOOP \\ statements END LOOP; \\ for r in SELECT * FROM ang LOOP \\ RETURN NEXT r; END LOOP; RETURN; END; \\ note that the return next doesn't return \\ you store 
         it in a buffer \\ and return it at the end of the function. \\ for infinite loops: FOR i IN 1..\_max LOOP;} \\
-        \hline
+        \hl
         \mc{update and insert: INSERT INTO ANG VALUES(...); \\ UPDATE ang set salary = salary + 500 \\where name = 'dashie'; \\ interestingly, after the where name = 'dashie' \\ you can use if not found
         then (handle error)\\ this allows for easier error handling.}\\
-        \hline
-        \mc{queries: \textbf{execute} 'SELECT * from ang' \\ || into result; return result; END;} \\
-        \hline
+        \hl
+        \mc{queries: \b{execute} 'SELECT * from ang' \\ || into result; return result; END;} \\
+        \hl
         \mc{comments are done by either -- or /* */ for multiline} \\ 
-        \hline
+        \hl
         \mc{anonymous function: you can omit \\the name and just write do \$\$ ...} \\ 
-        \hline
+        \hl
         \mc{cursor: declare curs CURSOR FOR query; \\BEGIN OPEN curs; LOOP do something CLOSE\\ curs; END;\\ Cursors are essentially just iterables. \\ cursors can also be unbound curs1 refcursor \\
         or they can be parameterized curs3 cursor(arg)}\\
-        \hline
-        \mc{\pic{220607-3} \\ arrays: SELECT '{1,2,3}'::int[] \\ or SELECT ARRAY[1,2,3] \\ var int[] only in variable declaration. \\ \textbf{!!arrays start with 1 in psql !!}}\\
-        \hline
+        \hl
+        \mc{\pic{220607-3} \\ arrays: SELECT '{1,2,3}'::int[] \\ or SELECT ARRAY[1,2,3] \\ var int[] only in variable declaration. \\ \b{!!arrays start with 1 in psql !!}}\\
+        \hl
         \mc{return types: all of the above AND void, \\ SETOF type (array of a type), TABLE, Trigger} \\
-        \hline
+        \hl
         \mc{\pic{220608-2} \\ \pic{220608-3}}\\
-        \hline
+        \hl
         \mc{hstore / map:\\ \pic{220608-4} \\ \pic{220608-5} \\ \pic{220608-6}\\ hstore supports GIST/GIN indexing}\\
-        \hline
+        \hl
+      \end{tabular}
+      \begin{tabular}[t]{|l|}
+        \hl
         \mc{\pic{220607-1} \\ also note that type\%rowtype is used like this: \\ r ang\%rowtype -> for r in select * from ang;}\\
-        \hline
+        \hl
         \mc{important to know, you can always use these \\functions to manipulate queries, for example \\ select upper(name) from ang; \\ depending on the function you can also \\ 
         select generatetab(1,10)}\\
-        \hline
+        \hl
         \mc{\pic{220607-2}}\\
-        \hline
+        \hl
         \mc{cast: cast(input as type); \\ cast(record.id as text);}\\
-        \hline
-      \end{tabular}
-      \begin{tabular}[h]{|l|}
-        \hline
+        \hl
         \mc{stored procedures are nothing but a chaining of functions:\\ \pic{220607-4}} \\
-        \hline
+        \hl
         \mc{some good to know things: plain SQL is more efficient. \\ write variables lower case for sql \\ use cast over typename -> not select date '2022-06-07'}\\
-        \hline
-        \mcc{\textbf{Triggers}}\\
-        \hline
-        \mc{\\\pic{220607-5}}\\
-        \hline
-        \mc{\pic{220607-6} \\ statement is once, row means once \\per row, aka for the entire table. \\ \pic{220607-7}} \\ \pic{220607-8} \\ \pic{220607-9} \\ \pic{220607-10} \\ \pic{220607-11}\\ 
-        \hline
+        \hl
+        \mcc{\b{Triggers}}\\
+        \hl
+        \mc{\pic{220607-5}}\\
+        \hl
+        \mc{\pic{220607-6} \\ statement is once, row means once \\per row, aka for the entire table. \\ \pic{220607-7}} \\ \pic{220607-8} \pic{220607-10}\\ \pic{220607-9} \pic{220607-11}\\ 
+        \hl
         \mc{Return types: RETURN NEW -> returns a new table/row \\ RETURN OLD -> returns the old table/row \\ (but could change other rows!) \\ RETURN NULL -> cancel operation.}\\
-        \hline
+        \hl
         \mc{running order: before statement, before row, \\ after row, after statement -> \\ and of course alphabetically.}\\
-        \hline
+        \hl
         \mc{inside the Trigger functions you can use the \\ variables that don't matter aka can be ANY -> user \\ or the entered user from the trigger -> NEW.user \\ or explicitly the old one ->
         OLD.user \\ and last user defined stuff like -> SELECT 'I' \\ which just places an I as the variable \\ or something like now() for timestamps.}\\
-        \hline
+        \hl
         \mc{Triggers make the database slower and harder to maintain. \\ some databases therefore let you disable them if you want.\\ On a table basis. \\ Also watch out for cascading effects of 
         triggers \\ they might cause something else to be deleted.}\\
-        \hline
+        \hl
         \mc{Stored Procedures are really helpful for security \\ They have all the prviliges, but only \\ allow the user to do what the \\ creator has predefined.}\\
-        \hline
-        \mcc{\textbf{JSON | SQL}}\\
-        \hline
-        \mc{\pic{220608-1}}\\
-        \hline
+        \hl
       \end{tabular}
-      \begin{tabular}[h]{|l|}
-        \hline
-        \mcc{\textbf{Optimization and indexing}} \\ 
-        \hline
+      \begin{tabular}[t]{|l|}
+        \hl
+        \mc{\pic{220608-1}}\\
+        \hl
+        \mcc{\b{Optimization and indexing}} \\ 
+        \hl
         \mc{The basics of indexing is that is saves \\ time on queries, but it uses more space, \\ 
         and needs to be redone on udpate/insert.}\\
-        \hline
+        \hl
         \mc{Data stored in Pages / Heap (Collection of Pages) \\ Indexing on either can be possible. \\
         ex: Page index -> Primary key index\\ ex: Heap Index -> index on tables \\ PSQL does table 
         cluster indexing \\ instead of integrated indexing -> key value (both indexed)}\\
-        \hline
-        \mc{Hash Index: just like hashmap in programming\\ good for single or small multiple queries \\
-        bad for entire tables etc -> collision \\ hashing might take a long time with a lot of data.}\\
-        \hline
-        \mc{Bitmap indexing: Bitmap -> 0 1 stores Booleans/Enums \\ very fast read / slow update \\ in postgres \textbf{only implicit} use Brin instead.}\\
-        \hline
-        \mc{Brin indexing: }\\
-        \hline
-        \mc{}\\
-        \hline
-        \mc{}\\
-        \hline
-        \mc{}\\
-        \hline
+        \hl
+        \mc{\b{B-Tree:} the default, can index multiple entries (only btree!) \\ CREATE UNIQUE INDEX name ON table (column [1,2...])}\\
+        \hl
+        \mc{\b{Hash Index:} just like hashmap in programming\\ good for single or small multiple queries \\
+        bad for entire tables etc -> collision \\ hashing might take a long time with a lot of data. \\ B-tree almost always better!}\\
+        \hl
+        \mc{\b{GiST:} balanced/treelike , Range/neighbor/fulltext search \\ used for geometric datatypes. SP-Gist for unbalanced trees.}\\
+        \hl
+        \mc{\b{GIN:} General Inverted Index "list of words \\ that point to documents" wtf?. Good for duplicates. \\ Good for hstore,Json,Arrays \\ \pic{220608-12}}\\
+        \hl
+        \mc{\b{Bitmap indexing:} Bitmap -> 0 1 stores Booleans/Enums \\ very fast read / slow update \\ in postgres \b{only implicit} use Brin instead.}\\
+        \hl
+        \mc{\b{BRIN:} Block Range Index, stores min/max values as blocks \\ good for range search, sorted data, small disk usage \\ data is naturally sorted, address next to postal code.}\\
+        \hl
+        \mc{Bloom Index -> equality search, \\Trigram Index -> Full text search \\ RUM , non-default-GIN jsonb-path-ops}\\
+        \hl
+        \mc{creating index:\\CREATE INDEX <indexname> ON <table(attribute)>;  \\ and: DROP INDEX <indexname>;}\\
+        \hl
+        \mc{default index order for psql is btree,ASC,NULL first}\\
+        \hl
+        \mc{\pic{220608-7} \\ \pic{220608-8}}\\
+        \hl
+        \mc{PG planner join strategies: Nested Loop,Merge,Hash \\ \b{-Nested Loop:} for r in right row r == for l in left row.... \\ good for small tables, easy to setup \\ 
+        \b{-Merge:} Merge rows one after the other \\ higher starting cost,
+        good for bigger tables \\ \b{-Hash:} Hash the row then compare to other row\\ only == check possible, high starting cost, low execution cost}\\
+        \hl
+        \mc{PG planner scans: Full,Index,Index Only, Bitmap \\ \b{-full} scans the entire table \\ \b{-index} scans index and more (if necessary) \\ \b{-index only} only scans index \\ 
+        \b{-Bitmap} scans the bitmap generated by an index.}\\
+        \hl
+        \mc{\b{The steps of optimization}}\\
+        \hl
+        \mc{1. generate the plan of transaction \\ 2. reform the term to optimize perfomance \\ without knowledge of the internal structure. \\ -> all values are considered equal \\
+        3. optimization based on: available indexes, analysis and costs \\ 4. generate all possible plans to calculate cost \\ 5. analyze said plans -> how many tuples, what kind... \\ 6. profit?}\\
+        \hl
+        \mc{\b{selectivety} this is the ratio of tuples a query returns \\ low selectivety would mean high number of rows \\ an example is select * from table where sex='Male'
+        \\ the opposite would be high selectivety.}\\
+        \hl
+        \mc{\b{density} this is the ratio of duplicates a query returns \\ the more duplicates the higher the density. \\ you can therefore also make graphs about the distribution \\ 
+        of density -> names a-c low g-l high}\\
+        \hl
+        \mc{\b{best practices:} index only when selectivety over 10\% \\ numeric comparison over text, join over subquery, \\use short attributes, understand the query -> user, \\ don't select * from,
+        don't use cross products.}\\
+        \hl
+        \mc{\b{distributed database systems}}\\
+        \hl
+        \mc{the advantages and disadvantages are obvious: \\ + better performance       -- more complex \\ +better reliability      + better management}\\
+        \hl
+        \mc{\b{homogeneous database system:}\\ > all nodes have identical software \\> all nodes know about each other and work toghether \\> shows itself to the user as one big system }\\
+        \hl
+        \mc{\b{heterogeneous database system:}\\> nodes can have different software \\> as well as different schemas -> can lead to problems \\> nodes might NOT know about each other.}\\
+        \hl
       \end{tabular}
     \end{tabular}
-    \vfill
     \hfill
     \end{tiny}
   \end{flushleft}
   \end{table}
-\end{flushleft}
+  \pagebreak
+    \begin{table}[ht!]
+      \begin{flushleft}
+        \begin{tiny}
+          \begin{tabular}{lll}
+            \begin{tabular}[t]{|l|}
+              \hl
+              \mc{\b{fragmentation:} this is the splitting of schemas \\ into multiple Nodes -> table 1 in node1 \\ table 2 in node 2.}\\
+              \hl
+              \mc{In Psql the horizontal fragmentation happens in 3 ways: \\ > 1 or more attributes for "partitioning key" \\ > "list"  explicit designation \\ > hash function (ex: Modulo)}\\
+              \hl
+              \mc{In Graph stores this would be called "sharding" \\ an example for this is the MongoDB \\ horizontal paritioning and allocation within a single node}\\
+              \hl
+              \mc{\b{replication:} this is the duplication of data in schemas \\ this means table 1 might be on node1 and 2. \\ \b{vertical -> splitting of columns} \\ row1 in node1, row2 in node2\\ 
+              \b{horizontal -> splitting of rows} \\ part of column in node1 part of column in node2} \\
+              \hl
+              \mc{\b{unidirectional:}}\\
+              \hl
+              \mc{\b{bidirectional:}}\\
+              \hl
+              \mc{\b{synchronous:}}\\
+              \hl
+              \mc{\b{asynchronous:}}\\
+              \hl
+              \mc{\b{allocation:} this is the distribution of work to the nodes \\ node1 might handle query or part of query1 \\ while node2 handles something else.}\\
+              \hl
+              \mc{as already stated above, the user doesn't see anything about \\ fragmentation or similar, the user simply interacts \\ with the schema and executes transactions. \\ these \b{transactions are 
+              always local} \\ This means that the user will talk to \b{Transaction Manager}\\ that will handle the transaction and call the necessary \\functions on the \b{Resource Managers} (inside nodes).}\\
+              \hl
+              \mc{\pic{220608-13} \\ \pic{220608-14}}\\
+              \hl
+              \mc{\b{case TM failed/restart:} \\ > if the TM crashes before the commit message -> abort \\ > if the TM crashes after RM respond ready -> block RM \\ this is one of the main problems btw...}\\
+              \hl
+              \mc{\b{case RM failed/restart:} \\ > if no entry in log, RM aborts \\ > if READY-Entry available -> RM asks TM what to do. \\ > if COMMIT-Entry available -> RM redoes transaction}\\
+              \hl
+              \mc{\b{case message dropped:} \\ > if the prepare statement gets lost,\\ or the RM doesn't respond, then the TM\\ simply aborts the transaction for all. \\ 
+              > if RM doesn't get a response in READY state \\ then the RM will remind the TM until it gets one.}\\
+              \hl
+              \mc{}\\
+            \end{tabular}
+            \begin{tabular}[t]{|l|}
+              \hl
+              \mc{}\\
+              \hl
+            \end{tabular}
+            \begin{tabular}[t]{|l|}
+              \hl
+              \mc{}\\
+              \hl
+            \end{tabular}
+          \end{tabular}
+        \end{tiny}
+      \end{flushleft}
+    \end{table}
+  \pagebreak
+    \begin{table}[ht!]
+      \begin{flushleft}
+        \begin{tiny}
+          \begin{tabular}{lll}
+            \begin{tabular}[t]{|l|}
+              \hl
+              \mc{}\\
+              \hl
+            \end{tabular}
+            \begin{tabular}[t]{|l|}
+              \hl
+              \mc{}\\
+              \hl
+            \end{tabular}
+            \begin{tabular}[t]{|l|}
+              \hl
+              \mc{}\\
+              \hl
+            \end{tabular}
+          \end{tabular}
+        \end{tiny}
+      \end{flushleft}
+    \end{table}
+  \pagebreak
+    \begin{table}[ht!]
+      \begin{flushleft}
+        \begin{tiny}
+          \begin{tabular}{lll}
+            \begin{tabular}[t]{|l|}
+              \hl
+              \mc{}\\
+              \hl
+            \end{tabular}
+            \begin{tabular}[t]{|l|}
+              \hl
+              \mc{}\\
+              \hl
+            \end{tabular}
+            \begin{tabular}[t]{|l|}
+              \hl
+              \mc{}\\
+              \hl
+        \mc{easiest way to convert PSQL to JSON is a temporary table. \\ \pic{220608-9} \\ you can also directly \b{select json\_build\_object }\\ or \b{select json\_build\_object(jsonb\_agg(tmp))} \\ 
+        also note the jsonb\_agg(trim (proj.bezeichnung)) \\ for simplicity, the joins on the picture are removed.}\\
+        \hl
+        \mc{The jsonb agg is necessary for aggregation \\ otherwise the join wouldn't work for JSON.}\\
+        \hl
+        \mc{\pic{220608-10} \\ \pic{220608-11}}\\
+        \hl
+        \mcc{\b{JSON | SQL}}\\
+        \hl
+            \end{tabular}
+          \end{tabular}
+        \end{tiny}
+      \end{flushleft}
+    \end{table}
+  \end{flushleft} 
 \end{document}
 
