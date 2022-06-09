@@ -3,15 +3,18 @@
 \usepackage[document]{ragged2e}
 \usepackage{graphicx}
 \usepackage{array, makecell}
-\usepackage{FiraMono}
+\usepackage{verbatimbox}
+\usepackage[T1]{fontenc}
+\usepackage{tabularray}
 \usepackage{tabulary}
-\newcommand{\mc}{\makecell[{{l}}]}
+\newcommand{\mc}{\makecell[l]}
 \newcommand{\mcc}{\makecell[{{c}}]}
 \newcommand{\mcr}{\makecell[{{r}}]}
 \renewcommand{\b}{\textbf}
 \newcommand{\pic}{\includegraphics[scale=0.3]}
+\newcommand{\fpic}{\vspace{-0.05in} \\ \includegraphics[scale=0.3]}
 \newcommand{\hl}{\hline}
-%\renewcommand{\arraystretch}{3.5}
+\renewcommand{\arraystretch}{1.5}
 \graphicspath{{./Pictures/}}
 \begin{document}
 \begin{flushleft}
@@ -58,23 +61,23 @@
         \mc{cursor: declare curs CURSOR FOR query; \\BEGIN OPEN curs; LOOP do something CLOSE\\ curs; END;\\ Cursors are essentially just iterables. \\ cursors can also be unbound curs1 refcursor \\
         or they can be parameterized curs3 cursor(arg)}\\
         \hl
-        \mc{\pic{220607-3} \\ arrays: SELECT '{1,2,3}'::int[] \\ or SELECT ARRAY[1,2,3] \\ var int[] only in variable declaration. \\ \b{!!arrays start with 1 in psql !!}}\\
+        \mc{ \fpic{220607-3} \\ arrays: SELECT '{1,2,3}'::int[] \\ or SELECT ARRAY[1,2,3] \\ var int[] only in variable declaration. \\ \b{!!arrays start with 1 in psql !!}}\\
         \hl
         \mc{return types: all of the above AND void, \\ SETOF type (array of a type), TABLE, Trigger} \\
         \hl
-        \mc{\pic{220608-2} \\ \pic{220608-3}}\\
+        \mc{ \fpic{220608-2} \\ \pic{220608-3}}\\
         \hl
         \mc{hstore / map:\\ \pic{220608-4} \\ \pic{220608-5} \\ \pic{220608-6}\\ hstore supports GIST/GIN indexing}\\
         \hl
       \end{tabular}
       \begin{tabular}[t]{|l|}
         \hl
-        \mc{\pic{220607-1} \\ also note that type\%rowtype is used like this: \\ r ang\%rowtype -> for r in select * from ang;}\\
+        \mc{\fpic{220607-1} \\ also note that type\%rowtype is used like this: \\ r ang\%rowtype -> for r in select * from ang;}\\
         \hl
         \mc{important to know, you can always use these \\functions to manipulate queries, for example \\ select upper(name) from ang; \\ depending on the function you can also \\ 
         select generatetab(1,10)}\\
         \hl
-        \mc{\pic{220607-2}}\\
+        \mc{\fpic{220607-2}}\\
         \hl
         \mc{cast: cast(input as type); \\ cast(record.id as text);}\\
         \hl
@@ -84,9 +87,9 @@
         \hl
         \mcc{\b{Triggers}}\\
         \hl
-        \mc{\pic{220607-5}}\\
+        \mc{\fpic{220607-5}}\\
         \hl
-        \mc{\pic{220607-6} \\ statement is once, row means once \\per row, aka for the entire table. \\ \pic{220607-7}} \\ \pic{220607-8} \pic{220607-10}\\ \pic{220607-9} \pic{220607-11}\\ 
+        \mc{\fpic{220607-6} \\ statement is once, row means once \\per row, aka for the entire table. \\ \pic{220607-7}} \\ \pic{220607-8} \pic{220607-10}\\ \pic{220607-9} \pic{220607-11}\\ 
         \hl
         \mc{Return types: RETURN NEW -> returns a new table/row \\ RETURN OLD -> returns the old table/row \\ (but could change other rows!) \\ RETURN NULL -> cancel operation.}\\
         \hl
@@ -103,7 +106,7 @@
       \end{tabular}
       \begin{tabular}[t]{|l|}
         \hl
-        \mc{\pic{220608-1}}\\
+        \mc{\fpic{220608-1}}\\
         \hl
         \mcc{\b{Optimization and indexing}} \\ 
         \hl
@@ -133,7 +136,7 @@
         \hl
         \mc{default index order for psql is btree,ASC,NULL first}\\
         \hl
-        \mc{\pic{220608-7} \\ \pic{220608-8}}\\
+        \mc{\fpic{220608-7} \\ \pic{220608-8}}\\
         \hl
         \mc{PG planner join strategies: Nested Loop,Merge,Hash \\ \b{-Nested Loop:} for r in right row r == for l in left row.... \\ good for small tables, easy to setup \\ 
         \b{-Merge:} Merge rows one after the other \\ higher starting cost,
@@ -172,7 +175,7 @@
     \end{tiny}
   \end{flushleft}
   \end{table}
-  \pagebreak
+  \clearpage
     \begin{table}[ht!]
       \begin{flushleft}
         \begin{tiny}
@@ -199,7 +202,9 @@
               \mc{as already stated above, the user doesn't see anything about \\ fragmentation or similar, the user simply interacts \\ with the schema and executes transactions. \\ these \b{transactions are 
               always local} \\ This means that the user will talk to \b{Transaction Manager}\\ that will handle the transaction and call the necessary \\functions on the \b{Resource Managers} (inside nodes).}\\
               \hl
-              \mc{\b{Two Phase Commit Protocol} \\ \pic{220608-13} \\ \pic{220608-14}}\\
+              \mc{\b{Two Phase Commit Protocol}}\\
+              \hl
+              \mc{\fpic{220608-13} \\ \pic{220608-14}}\\
               \hl
               \mc{\b{case TM failed/restart:} \\ > if the TM crashes before the commit message -> abort \\ > if the TM crashes after RM respond ready -> block RM \\ this is one of the main problems btw...}\\
               \hl
@@ -216,7 +221,7 @@
               \hl
               \mcc{\b{NoSQL: Key/Value Stores}}\\
               \hl
-              \mc{Why even NoSQL? -> fast, lots of data, webbased, scalable \\ RDBMS -> relational has the problem of complexity\\ it doesn't integrate seamlessly into programming languages \\ it therefore
+              \mc{Why even NoSQL? -> fast, lots of data, web-based, scalable \\ RDBMS -> relational has the problem of complexity\\ it doesn't integrate seamlessly into programming languages \\ it therefore
               doesn't make sense to use this as \\ something like a webstore. -> !!! OR MAPPING !!!}\\
               \hl
               \mc{\b{attributes of NoSQL:} \\ > easy to use API (http)    > made for big volumes of data \\ > provided as cloud storage   > not relational, schema free \\ > BASE instead of ACID   
@@ -234,7 +239,7 @@
             \end{tabular}
             \begin{tabular}[t]{|l|}
               \hl
-              \mc{\pic{220608-15}}\\
+              \mc{\fpic{220608-15}}\\
               \hl
               \mc{notable examples: Riak, Redis, Memcached, Berkeley DB \\ HamsterDB , Amazon DynamoDB, Project Voldemort}\\
               \hl
@@ -254,11 +259,11 @@
               \hl
               \mc{ >> JSON, partitioning via sharding, FOSS :) \\ >> own query language, Document Store (no Schema)}\\
               \hl
-              \mc{\pic{220608-16} \\ \pic{220608-17}} \\ 
+              \mc{\fpic{220608-16} \\ \pic{220608-17}} \\ 
               \hl
               \mc{\b{The documents are actually stored as BSON} \\ \b{the binary version of JSON with a bit more data.} \\ Also there are certain restriction on naming...}\\
               \hl
-              \mc{\pic{220608-18} \\ \pic{220608-19} \\ \pic{220608-20}}\\
+              \mc{\fpic{220608-18} \\ \pic{220608-19} \\ \pic{220608-20}}\\
               \hl
             \end{tabular}
             \begin{tabular}[t]{|l|}
@@ -294,14 +299,14 @@
               \mc{in general, only use references for things that make sense, \\ for example don't make a reference for a blog post \\ or for a persons gender etc. \\
               embed the small stuff, reference the big stuff}\\
               \hl
-              \mc{\pic{220608-25} \\ \pic{220608-26}\\ \pic{220608-27}}\\
+              \mc{\fpic{220608-25} \\ \pic{220608-26}\\ \pic{220608-27}}\\
               \hl
             \end{tabular}
           \end{tabular}
         \end{tiny}
       \end{flushleft}
     \end{table}
-  \pagebreak
+  \clearpage
     \begin{table}[ht!]
       \begin{flushleft}
         \begin{tiny}
@@ -310,41 +315,191 @@
               \hl
               \mcc{\b{MongoDB CRUD}}\\
               \hl
-              \mc{\pic{220608-28} \\ \pic{220608-29} \\ \pic{220608-30} \\ \pic{220608-31} \\ \pic{220608-32} \\ \pic{220608-33}}\\
-              \hl
-              \mc{}\\
-              \hl
-              \mc{}\\
+              \mc{\fpic{220608-28} \\ \pic{220608-29} \\ \pic{220608-30} \\ \pic{220608-31} \\ \pic{220608-32} \\ \pic{220608-33}}\\
               \hl
               \mcc{\b{NoSQL Graph Stores}}\\
               \hl
-              \mc{made for compact objects with typed aggregations \\ sometimes without schema -> implicit schema \\ or not uniform data}\\
+              \mc{made for compact objects with typed aggregations \\ sometimes without schema -> implicit schema \\ or not uniform data \\ 
+                \b{The idea of this database is that everything} \\ 
+              \b{is an aggregation, --> hence graphs.} \\ Notable examples are: \b{Neo4J}, FlockDB, InfiniteGraph \\ biggest gaining database system right now!}\\
               \hl
-              \mc{}\\
+              \mc{\b{Neo4J} \\ java.... ok fuck this trash \\ GPL3, embedded, disk based \\ \b{transaction based on MVCC, scalable} \\
+              \b{delarative}, SQL like, pattern matching (SPARQL) \\ Collection like Haskell/Python}\\
               \hl
-              \mc{}\\
-              \hl
-            \end{tabular}
-            \begin{tabular}[t]{|l|}
-              \hl
-              \mc{}\\
+              \mc{\fpic{220609-2} \pic{220609-1}}\\
               \hl
             \end{tabular}
             \begin{tabular}[t]{|l|}
               \hl
-              \mc{}\\
+              \mc{\fpic{220609-3} \\ after we match to a variable called email \\ we check for a chain of "replied\_to" \\ aka we check at least one and max 4 \\ 
+              then we get the person who sent \\ the mail and return the depth - 1 \\ also note that the arrow moves to the left \\
+            meaning the relation is towards the matching node \\ --> away from node <-- towards node}\\
+              \hl
+              \mc{\b{Node:} \\ >> set of labels (usually 1)\\ >> set of properties} \\ \b{Edge:} \\ >> Name , >> Node->Node direction \\ >> set of properties \\ \b{Property:} key/value of primitive types "name:Dashie" 
+              \\ \b{types:} Node, Edge, path, map, list, integer, floating point\\ boolean and string\\
+              \hl
+              \mc{\b{syntax:}\\ (var:Node)-[var:edge]->(var:Node)\\ (var:Node)<-[var:Edge]-(var:Node) \\ var may be empty but the ':' has to be written!!\\ -> [:ALIAS\_OF] \\ you also get the properties of a node by just
+              \\ typing in a variable name -> (varsInsideNode)\\ could be 1 variable, could be a list}\\
+              \hl
+              \mc{\b{Joins:} Because we can match multiple 'queries' \\ we don't have joins, instad we just \\ MATCH (query1) , (query2) <-Note the comma.}\\
+              \hl
+              \mc{\b{uses for Neo4J:} connected data, routing, dispatch, \\ location based services and recommendation engines. \\ \b{when not to use:} few egdes/interactions, update on all nodes \\ big data.. ??nice word}\\
+              \hl
+              \mcc{NoSQL Column 'Family' store}\\
+              \hl
+              \mc{These databases store a full row, within\\ a single cell of a column \\ |1 | Dashie | 85 | f| -> |1|name:Dashie level:85 sex:f } \\ the | symbol is to seperate columns\\
+              \hl
+              \mc{Notable column family stores: \\ BigTable (Google), HBase (Apache), Hypertable,\\ Cassandra (Apache) PNUTS (Yahoo)}\\
+              \hl
+              \mcc{\b{Cassandra}}\\
+              \hl
+              \mc{>> Keyspace: aka database within a Node \\ >> Node: data storage -> like document for MongoDB \\ >> Data Center: Collection of nodes \\ >> Cluster: collection of data centers  }\\
+              \hl
+              \mc{ \fpic{220609-6} \\ \pic{220609-4} \\ \pic{220609-5} \\ \pic{220609-7}}\\
+              \hl
+            \end{tabular}
+            \begin{tabular}[t]{|l|}
+              \hl
+              \mc{\fpic{220609-8} \\ \pic{220609-9}}\\
+              \hl
+              \mc{\b{Use cases:} \\>> Event logging (ex: error logging) \\ good since cassandra scales with writes. \\ >> Content management systems, Blogging platforms \\ -> good for handling post entries. \\ 
+              >> counters in web applications (ex: count visitors)}\\
+              \hl
+              \mc{\b{when not to use:} \\ >> ACID requirement \\ >> no aggregate functions available \\ >> prototypes, query changes can take time.}\\
+              \hl
+              \mcc{\b{Column Store}}\\
+              \hl
+              \mc{\b{OLTP:} Online Transaction Processing \\ >> low data volume | >> High volume of transactions \\ >> Typically normalized data | >> ACID compliance \\ >> high availability || >> \b{relational db (psql)} 
+              \\ >> data management optimized}\\
+              \hl
+              \mc{\b{OLAP:} Online Analytical Processing \\ >> high data volume | >> low transaction volume \\ >> denormalized data | >> \b{not necessarily} ACID compliant \\ >> usually don't need high availability} \\ 
+              >> read optimized system\\
+              \hl
+              \mc{Usually these two are separated, but recently there \\ have been efforts to combine those two \\ just like BASE and ACID are getting closer.}\\
+              \hl
+              \mc{\fpic{220609-10}}\\
+              \hl
+              \mc{\b{encoding and compression} \\ in databases it is the default to \\ \b{compress data when you have high selectivety }\\ -> male / female \\ instead of storing male/female in every column or row \\
+              we can instead compress this attribute in order to save space \\ \pic{220609-11} \\ the way this is done is by storing \\ 
+              the possibilities, aka male/female in another table. \\ This means that we can then reference the id of male or female.\\ 
+          \b{Note that this is all done implicitly,}\\ \b{nothing has to be defined.} \\ \pic{220609-12} }\\
+              \hl
+              \mc{\b{Column store advantages:} \\ >> better compression | >> less disk usage \\ >> automatic indexing | >> late materialization
+              \\ \b{Column stores disadvantages:}\\ >> bad writes | >> \b{!!! don't Select * from !!!} | >> \b{OLAP} }\\
+              \hl
+              \mc{\b{Row stores advantages:} \\ >> easy partitioning and parallization \\ >> good writes | >> seq row scans \\ \b{Row stores disadvantages:} \\ 
+              >> column read == read all rows... | >> more storage \\ >> early materialization | \b{OLTP}}\\
+              \hl
+              \mc{\b{late vs early materialization} \\ early means that everything has to be read first \\ while late means that we wait until the end of the query. \\ 
+              return just the column with nothing else.}\\
+              \hl
+              \mcc{\b{NoSQL In Memory Stores (IMDB)}}\\
+              \hl
+              \mc{this database stores its values \b{inside the RAM} \\ However, it still stores \b{regular Snapshots} of its system \\ on the regular disk, in order to prevent
+              data loss. \\ It also creates logs, to restore previous\\ states in case of a shutdown. Small note: the \b{pagefile}\\ is also loaded from the disk on startup}\\
+              \hl
+              \mc{\b{advantages:} >> fast read | >> ACID \\ >> indexing on the fly \\ >> no buffer for write to disk -> happens with snapshots \\ less power requirement due to less software\\ 
+              \b{disadvantages:} >> small storage...\\ >> the values are compressed to save storage -> slow writes}\\
               \hl
             \end{tabular}
           \end{tabular}
         \end{tiny}
       \end{flushleft}
     \end{table}
-  \pagebreak
+  \clearpage
     \begin{table}[ht!]
       \begin{flushleft}
         \begin{tiny}
           \begin{tabular}{lll}
             \begin{tabular}[t]{|l|}
+              \hl
+              \mcc{\b{MonetDB and NoSQL end}}\\
+              \hl
+              \mc{IMDB examples: SAP HANNA, Oracle TimesTen,\\ IBM SoliDB, \b{MonetDB}}\\
+              \hl
+              \mc{>> \b{Column oriented Database} | >> FOSS, written in C \\ >> \b{SQL,C,R scripts on database itself} \\ >> supports (application): C,C++,Java,Javascript,\\Perl,PHP,Python,R,Rust \\  
+              >> \b{used for Data mining, analysis and text search} \\ >> every column mapped to 1 file | >> columns are compressed \\ >> columns are automatically indexed \\ >> multi-core parallel execution of queries \\
+              >> data-manipulation language SQL 2003,\\ sql Explain, Xquery XML \\ >> \b{OLAP} | >> no secondary indexes (only automatic ones) \\ >> \b{ACID with Optimistic Concurrency Control -> OCC} \\ 
+              >> 100x faster than psql in TPC-H benchmark -> readonly }\\
+              \hl
+              \mc{so then, why not use NoSQL all the time? \\ \b{!NoSQL lacks multimodel databases!} \\ always just one -> document, key/value, graph, etc}\\
+              \hl
+              \mc{\b{Database benchmarking:} >> TPC.org, pgbench (psql) \\ >> timing | >> data usage | >> query types | >> data amount..}\\
+              \hl
+              \mc{\b{execution models:} \\ >> \b{volcano execution model:} row by row -> ex:psql \\ \b{vectorized execution model:} value by value -> ex:MonetDB}\\
+              \hl
+              \mcc{\b{Database as a Service (DBAAS)}}\\
+              \hl
+              \mc{Providers: Amazon AWS, Microsoft Azure, Google Cloud, ..}\\
+              \hl
+              \mcc{\b{Pagnation Paging}}\\
+              \hl
+              \mc{this is essentially just an offset -> where x > 10000}\\
+              \hl
+              \mcc{\b{GraphQL}}\\
+              \hl
+              \mc{>> declarative query language over the web \\ >> schema with types | >> description of data via API \\ >> one endpoint for interaction \\ >> easy to develop API | >> clients can request data \\
+              >> \b{Query and Data manipulation language (DML)} \\ >> \b{Data-Type-System (DDL)} \\ >> \b{supported by all big databases (psql)} \\ >> \b{results represent JSON docs but uses edges and nodes}}\\
+              \hl
+              \mc{In the end GraphQL handles input from the user \\ towards a database like PSQL or others \\ it is in itself not a database!!}\\
+              \hl
+              \mc{\fpic{220609-13}}\\
+              \hl
+              \mc{\b{schema-first vs code-first:} \\ schema first allows for better and faster integration \\ however it is obviously more complicated to execute.}\\
+              \hl
+              \mcc{\b{PostGraphile: GraphQL and PSQL}}\\
+              \hl
+              \mc{>> library for integrating PSQL into GraphQL \\ >> PSQL database, NodeJS http-server, GraphQL webAPI \\ 
+              >> integrates GraphiQL (GUI tool to write queries) \\ schema first!}\\
+              \hl
+              \mc{\fpic{220609-14} \\ and here the query as an example: \\ \pic{220609-15}}\\
+              \hl
+              \mc{>> the default creation of createUser etc can be disabled \\ you can also redefine what the table returns on query\\
+              ex: user , userByRowId, allUsers, allUsersList \\ keep in mind that the first 2 return 1 user\\ the other return a list \\ the third one can also be used to \\ 
+              get more info about the nodes and egdes \\ see "pagnierung above"}\\
+              \hl
+              \mc{\b{best practices:} >> don't create nullable fields \\ >> use mutations -> convert long types to mutations}\\
+              \hl
+              \mc{\b{GraphQL vs SQL} >> GrapQL is very limited | >> controlled \\ >> expandable}\\
+              \hl
+            \end{tabular}
+            \begin{tabular}[t]{|l|}
+              \hl
+              \mc{here an example for CRUD functions \\ \fpic{220609-16}}\\
+              \hl
+              \mcc{\b{OR MAPPER}}\\
+              \hl
+              \mc{Application -> Persistance API -> JPA Provider -> \\ JDBC API -> JDBC Driver -> Database}\\
+              \hl
+              \mc{>> start with @ entity | >> inheritance and interfaces possible \\>> can be astract | >> no constructor arguments (unless private) \\ >> needs primary key |>> class may not be final \\
+              >> fields should be private or protected}\\
+              \hl
+              \mc{\fpic{220609-17} \\ \b{the red line are optional, if the names in} \\ \b{the java object and in the db are the same !!}\\ supported datatypes: primitive types, wrapper types \\
+              strings, enums, date, serializable classes\\ supported relations: collection, set, list, map of entities \\ 
+              }\\
+              \hl
+              \mc{\b{execute statements} \\ \pic{220609-18} \\ !!this is the base, we always need to call this!! }\\
+              \hl
+              \mc{\b{insert} \\  \pic{220609-19}}\\
+              \hl
+              \mc{\b{delete} \\ \pic{220609-20}}\\
+              \hl
+              \mc{\b{update} \\ \pic{220609-21}}\\
+              \hl
+              \mc{\b{query} \\ \pic{220609-22}}\\
+              \hl
+              \mc{further type details can be specified as such: \\ \pic{220609-23}}\\
+              \hl
+              \mc{\b{Field Access \& Property Acess} \\ in OR mapping you don't need to specify setId or get Id \\ they are automatically created. -> Field Access \\ Should you still create them -> Property Access
+              \\ for field access the @id must be above the variable declaration \\ for the property access must to be above the getID() function.}\\
+              \hl
+              \mc{\b{order of mapping:}\\ XML / user defined mapping / default mapping}\\
+              \hl
+              \mc{}\\
+              \hl
+              \mc{}\\
+              \hl
+              \mc{}\\
               \hl
               \mc{}\\
               \hl
@@ -353,6 +508,169 @@
               \hl
               \mc{}\\
               \hl
+        \mc{easiest way to convert PSQL to JSON is a temporary table. \\ \pic{220608-9} \\ you can also directly \b{select json\_build\_object }\\ or \b{select json\_build\_object(jsonb\_agg(tmp))} \\ 
+        also note the jsonb\_agg(trim (proj.bezeichnung)) \\ for simplicity, the joins on the picture are removed.}\\
+        \hl
+        \mc{The jsonb agg is necessary for aggregation \\ otherwise the join wouldn't work for JSON.}\\
+        \hl
+        \mc{\pic{220608-10} \\ \pic{220608-11}}\\
+        \hl
+        \mcc{\b{JSON | SQL}}\\
+        \hl
+            \end{tabular}
+          \end{tabular}
+        \end{tiny}
+      \end{flushleft}
+    \end{table}
+  \end{flushleft} 
+\end{document}
+            \end{tabular}
+            \begin{tabular}[t]{|l|}
+              \hl
+              \mc{}\\
+              \hl
+        \mc{easiest way to convert PSQL to JSON is a temporary table. \\ \pic{220608-9} \\ you can also directly \b{select json\_build\_object }\\ or \b{select json\_build\_object(jsonb\_agg(tmp))} \\ 
+        also note the jsonb\_agg(trim (proj.bezeichnung)) \\ for simplicity, the joins on the picture are removed.}\\
+        \hl
+        \mc{The jsonb agg is necessary for aggregation \\ otherwise the join wouldn't work for JSON.}\\
+        \hl
+        \mc{\pic{220608-10} \\ \pic{220608-11}}\\
+        \hl
+        \mcc{\b{JSON | SQL}}\\
+        \hl
+            \end{tabular}
+          \end{tabular}
+        \end{tiny}
+      \end{flushleft}
+    \end{table}
+  \end{flushleft} 
+\end{document}
+            \end{tabular}
+            \begin{tabular}[t]{|l|}
+              \hl
+              \mc{}\\
+              \hl
+        \mc{easiest way to convert PSQL to JSON is a temporary table. \\ \pic{220608-9} \\ you can also directly \b{select json\_build\_object }\\ or \b{select json\_build\_object(jsonb\_agg(tmp))} \\ 
+        also note the jsonb\_agg(trim (proj.bezeichnung)) \\ for simplicity, the joins on the picture are removed.}\\
+        \hl
+        \mc{The jsonb agg is necessary for aggregation \\ otherwise the join wouldn't work for JSON.}\\
+        \hl
+        \mc{\pic{220608-10} \\ \pic{220608-11}}\\
+        \hl
+        \mcc{\b{JSON | SQL}}\\
+        \hl
+            \end{tabular}
+          \end{tabular}
+        \end{tiny}
+      \end{flushleft}
+    \end{table}
+  \end{flushleft} 
+\end{document}
+            \end{tabular}
+            \begin{tabular}[t]{|l|}
+              \hl
+              \mc{}\\
+              \hl
+        \mc{easiest way to convert PSQL to JSON is a temporary table. \\ \pic{220608-9} \\ you can also directly \b{select json\_build\_object }\\ or \b{select json\_build\_object(jsonb\_agg(tmp))} \\ 
+        also note the jsonb\_agg(trim (proj.bezeichnung)) \\ for simplicity, the joins on the picture are removed.}\\
+        \hl
+        \mc{The jsonb agg is necessary for aggregation \\ otherwise the join wouldn't work for JSON.}\\
+        \hl
+        \mc{\pic{220608-10} \\ \pic{220608-11}}\\
+        \hl
+        \mcc{\b{JSON | SQL}}\\
+        \hl
+            \end{tabular}
+          \end{tabular}
+        \end{tiny}
+      \end{flushleft}
+    \end{table}
+  \end{flushleft} 
+\end{document}
+            \end{tabular}
+            \begin{tabular}[t]{|l|}
+              \hl
+              \mc{}\\
+              \hl
+        \mc{easiest way to convert PSQL to JSON is a temporary table. \\ \pic{220608-9} \\ you can also directly \b{select json\_build\_object }\\ or \b{select json\_build\_object(jsonb\_agg(tmp))} \\ 
+        also note the jsonb\_agg(trim (proj.bezeichnung)) \\ for simplicity, the joins on the picture are removed.}\\
+        \hl
+        \mc{The jsonb agg is necessary for aggregation \\ otherwise the join wouldn't work for JSON.}\\
+        \hl
+        \mc{\pic{220608-10} \\ \pic{220608-11}}\\
+        \hl
+        \mcc{\b{JSON | SQL}}\\
+        \hl
+            \end{tabular}
+          \end{tabular}
+        \end{tiny}
+      \end{flushleft}
+    \end{table}
+  \end{flushleft} 
+\end{document}
+            \end{tabular}
+            \begin{tabular}[t]{|l|}
+              \hl
+              \mc{}\\
+              \hl
+        \mc{easiest way to convert PSQL to JSON is a temporary table. \\ \pic{220608-9} \\ you can also directly \b{select json\_build\_object }\\ or \b{select json\_build\_object(jsonb\_agg(tmp))} \\ 
+        also note the jsonb\_agg(trim (proj.bezeichnung)) \\ for simplicity, the joins on the picture are removed.}\\
+        \hl
+        \mc{The jsonb agg is necessary for aggregation \\ otherwise the join wouldn't work for JSON.}\\
+        \hl
+        \mc{\pic{220608-10} \\ \pic{220608-11}}\\
+        \hl
+        \mcc{\b{JSON | SQL}}\\
+        \hl
+            \end{tabular}
+          \end{tabular}
+        \end{tiny}
+      \end{flushleft}
+    \end{table}
+  \end{flushleft} 
+\end{document}
+            \end{tabular}
+            \begin{tabular}[t]{|l|}
+              \hl
+              \mc{}\\
+              \hl
+        \mc{easiest way to convert PSQL to JSON is a temporary table. \\ \pic{220608-9} \\ you can also directly \b{select json\_build\_object }\\ or \b{select json\_build\_object(jsonb\_agg(tmp))} \\ 
+        also note the jsonb\_agg(trim (proj.bezeichnung)) \\ for simplicity, the joins on the picture are removed.}\\
+        \hl
+        \mc{The jsonb agg is necessary for aggregation \\ otherwise the join wouldn't work for JSON.}\\
+        \hl
+        \mc{\pic{220608-10} \\ \pic{220608-11}}\\
+        \hl
+        \mcc{\b{JSON | SQL}}\\
+        \hl
+            \end{tabular}
+          \end{tabular}
+        \end{tiny}
+      \end{flushleft}
+    \end{table}
+  \end{flushleft} 
+\end{document}
+            \end{tabular}
+            \begin{tabular}[t]{|l|}
+              \hl
+              \mc{}\\
+              \hl
+        \mc{easiest way to convert PSQL to JSON is a temporary table. \\ \pic{220608-9} \\ you can also directly \b{select json\_build\_object }\\ or \b{select json\_build\_object(jsonb\_agg(tmp))} \\ 
+        also note the jsonb\_agg(trim (proj.bezeichnung)) \\ for simplicity, the joins on the picture are removed.}\\
+        \hl
+        \mc{The jsonb agg is necessary for aggregation \\ otherwise the join wouldn't work for JSON.}\\
+        \hl
+        \mc{\pic{220608-10} \\ \pic{220608-11}}\\
+        \hl
+        \mcc{\b{JSON | SQL}}\\
+        \hl
+            \end{tabular}
+          \end{tabular}
+        \end{tiny}
+      \end{flushleft}
+    \end{table}
+  \end{flushleft} 
+\end{document}
             \end{tabular}
             \begin{tabular}[t]{|l|}
               \hl
