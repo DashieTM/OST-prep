@@ -382,7 +382,7 @@
               \mc{\b{encoding and compression} \\ in databases it is the default to \\ \b{compress data when you have high selectivety }\\ -> male / female \\ instead of storing male/female in every column or row \\
               we can instead compress this attribute in order to save space \\ \pic{220609-11} \\ the way this is done is by storing \\ 
               the possibilities, aka male/female in another table. \\ This means that we can then reference the id of male or female.\\ 
-          \b{Note that this is all done implicitly,}\\ \b{nothing has to be defined.} \\ \pic{220609-12} }\\
+              \b{Note that this is all done implicitly,}\\ \b{nothing has to be defined.} \\ \pic{220609-12} }\\
               \hl
               \mc{\b{Column store advantages:} \\ >> better compression | >> less disk usage \\ >> automatic indexing | >> late materialization
               \\ \b{Column stores disadvantages:}\\ >> bad writes | >> \b{!!! don't Select * from !!!} | >> \b{OLAP} }\\
@@ -419,14 +419,14 @@
               \hl
               \mc{>> \b{Column oriented Database} | >> FOSS, written in C \\ >> \b{SQL,C,R scripts on database itself} \\ >> supports (application): C,C++,Java,Javascript,\\Perl,PHP,Python,R,Rust \\  
               >> \b{used for Data mining, analysis and text search} \\ >> every column mapped to 1 file | >> columns are compressed \\ >> columns are automatically indexed \\ >> multi-core parallel execution of queries \\
-              >> data-manipulation language SQL 2003,\\ sql Explain, Xquery XML \\ >> \b{OLAP} | >> no secondary indexes (only automatic ones) \\ >> \b{ACID with Optimistic Concurrency Control -> OCC} \\ 
+              >> data-manipulation language SQL 2003,\\ sql Explain, Xquery XML \\ >> \b{OLAP} | >> no secondary indexes (only automatic ones) \\ >> \b{ACID/Optimistic Concurrency Control} -> OCC \\ 
               >> 100x faster than psql in TPC-H benchmark -> readonly }\\
               \hl
               \mc{so then, why not use NoSQL all the time? \\ \b{!NoSQL lacks multimodel databases!} \\ always just one -> document, key/value, graph, etc}\\
               \hl
               \mc{\b{Database benchmarking:} >> TPC.org, pgbench (psql) \\ >> timing | >> data usage | >> query types | >> data amount..}\\
               \hl
-              \mc{\b{execution models:} \\ >> \b{volcano execution model:} row by row -> ex:psql \\ \b{vectorized execution model:} value by value -> ex:MonetDB}\\
+              \mc{\b{execution models:} \\ >> \b{volcano execution model:} row by row -> ex:psql \\ \b{vectorized execution model:} value by value ->MonetDB}\\
               \hl
               \mcc{\b{Database as a Service (DBAAS)}}\\
               \hl
@@ -439,7 +439,7 @@
               \mcc{\b{GraphQL}}\\
               \hl
               \mc{>> declarative query language over the web \\ >> schema with types | >> description of data via API \\ >> one endpoint for interaction \\ >> easy to develop API | >> clients can request data \\
-              >> \b{Query and Data manipulation language (DML)} \\ >> \b{Data-Type-System (DDL)} \\ >> \b{supported by all big databases (psql)} \\ >> \b{results represent JSON docs but uses edges and nodes}}\\
+              >> \b{Query and Data manipulation language (DML)} \\ >> \b{Data-Type-System (DDL)} \\ >> \b{supported by all big databases (psql)} \\ >> results represent JSON docs but uses edges and nodes}\\
               \hl
               \mc{In the end GraphQL handles input from the user \\ towards a database like PSQL or others \\ it is in itself not a database!!}\\
               \hl
@@ -460,7 +460,7 @@
               \hl
               \mc{\b{best practices:} >> don't create nullable fields \\ >> use mutations -> convert long types to mutations}\\
               \hl
-              \mc{\b{GraphQL vs SQL} >> GrapQL is very limited | >> controlled \\ >> expandable}\\
+              \mc{\b{GraphQL vs SQL} >> GrapQL is very limited \\ >> controlled | >> expandable}\\
               \hl
             \end{tabular}
             \begin{tabular}[t]{|l|}
@@ -495,16 +495,33 @@
               \hl
               \mc{\b{order of mapping:}\\ XML / user defined mapping / default mapping}\\
               \hl
-              \mc{}\\
+              \mc{\b{One-To-One} \\ \pic{220609-24}}\\
               \hl
-              \mc{}\\
+              \mc{\b{Bi-One-To-One} \\ this is an \b{optional ADDITION} to above \\ it just creates a manual mapping for the bankcustomer \\ \pic{220609-25}}\\
               \hl
-              \mc{}\\
+              \mc{\b{Inverse One-To-One} \\ \pic{220609-26}}\\
               \hl
-              \mc{}\\
+              \mc{\b{For all many to x} \\ \pic{220609-28} \\ instead of private something = new ..}\\
+              \mc{\b{Many-To-One} -> change the @OneToOne with @ManyToOne} \\
+              \hl
+              \mc{\b{Bi-Many-To-One}\\ -> change the second @OneToOne with @OneToMany }\\
               \hl
             \end{tabular}
             \begin{tabular}[t]{|l|}
+              \hl
+              \mc{\b{Many-To-Many} \\ \pic{220609-27}}\\
+              \hl
+              \mc{\b{Bi-Many-To-Many} -> Bi-OneToOne with @ManyToMany}\\
+              \hl
+              \mc{\b{Fetch Types} \\ Eager -> default OneToOne/ManyToOne entity loaded directly \\ Lazy -> default OneToMany/ManyToMany load only on access \\ @relation(fetch = FetchType.LAZY/EAGER for override)}\\
+              \hl
+              \mc{\b{O/R Mapping Variants} \\ >> Top Down Code first | >> Bottom up DB first \\ >> Inside-out Mapping first | >> Outside in DB Code together}\\
+              \hl
+              \mc{\fpic{220609-30}}\\
+              \hl
+              \mc{}\\
+              \hl
+              \mc{}\\
               \hl
               \mc{}\\
               \hl
@@ -524,172 +541,3 @@
     \end{table}
   \end{flushleft} 
 \end{document}
-            \end{tabular}
-            \begin{tabular}[t]{|l|}
-              \hl
-              \mc{}\\
-              \hl
-        \mc{easiest way to convert PSQL to JSON is a temporary table. \\ \pic{220608-9} \\ you can also directly \b{select json\_build\_object }\\ or \b{select json\_build\_object(jsonb\_agg(tmp))} \\ 
-        also note the jsonb\_agg(trim (proj.bezeichnung)) \\ for simplicity, the joins on the picture are removed.}\\
-        \hl
-        \mc{The jsonb agg is necessary for aggregation \\ otherwise the join wouldn't work for JSON.}\\
-        \hl
-        \mc{\pic{220608-10} \\ \pic{220608-11}}\\
-        \hl
-        \mcc{\b{JSON | SQL}}\\
-        \hl
-            \end{tabular}
-          \end{tabular}
-        \end{tiny}
-      \end{flushleft}
-    \end{table}
-  \end{flushleft} 
-\end{document}
-            \end{tabular}
-            \begin{tabular}[t]{|l|}
-              \hl
-              \mc{}\\
-              \hl
-        \mc{easiest way to convert PSQL to JSON is a temporary table. \\ \pic{220608-9} \\ you can also directly \b{select json\_build\_object }\\ or \b{select json\_build\_object(jsonb\_agg(tmp))} \\ 
-        also note the jsonb\_agg(trim (proj.bezeichnung)) \\ for simplicity, the joins on the picture are removed.}\\
-        \hl
-        \mc{The jsonb agg is necessary for aggregation \\ otherwise the join wouldn't work for JSON.}\\
-        \hl
-        \mc{\pic{220608-10} \\ \pic{220608-11}}\\
-        \hl
-        \mcc{\b{JSON | SQL}}\\
-        \hl
-            \end{tabular}
-          \end{tabular}
-        \end{tiny}
-      \end{flushleft}
-    \end{table}
-  \end{flushleft} 
-\end{document}
-            \end{tabular}
-            \begin{tabular}[t]{|l|}
-              \hl
-              \mc{}\\
-              \hl
-        \mc{easiest way to convert PSQL to JSON is a temporary table. \\ \pic{220608-9} \\ you can also directly \b{select json\_build\_object }\\ or \b{select json\_build\_object(jsonb\_agg(tmp))} \\ 
-        also note the jsonb\_agg(trim (proj.bezeichnung)) \\ for simplicity, the joins on the picture are removed.}\\
-        \hl
-        \mc{The jsonb agg is necessary for aggregation \\ otherwise the join wouldn't work for JSON.}\\
-        \hl
-        \mc{\pic{220608-10} \\ \pic{220608-11}}\\
-        \hl
-        \mcc{\b{JSON | SQL}}\\
-        \hl
-            \end{tabular}
-          \end{tabular}
-        \end{tiny}
-      \end{flushleft}
-    \end{table}
-  \end{flushleft} 
-\end{document}
-            \end{tabular}
-            \begin{tabular}[t]{|l|}
-              \hl
-              \mc{}\\
-              \hl
-        \mc{easiest way to convert PSQL to JSON is a temporary table. \\ \pic{220608-9} \\ you can also directly \b{select json\_build\_object }\\ or \b{select json\_build\_object(jsonb\_agg(tmp))} \\ 
-        also note the jsonb\_agg(trim (proj.bezeichnung)) \\ for simplicity, the joins on the picture are removed.}\\
-        \hl
-        \mc{The jsonb agg is necessary for aggregation \\ otherwise the join wouldn't work for JSON.}\\
-        \hl
-        \mc{\pic{220608-10} \\ \pic{220608-11}}\\
-        \hl
-        \mcc{\b{JSON | SQL}}\\
-        \hl
-            \end{tabular}
-          \end{tabular}
-        \end{tiny}
-      \end{flushleft}
-    \end{table}
-  \end{flushleft} 
-\end{document}
-            \end{tabular}
-            \begin{tabular}[t]{|l|}
-              \hl
-              \mc{}\\
-              \hl
-        \mc{easiest way to convert PSQL to JSON is a temporary table. \\ \pic{220608-9} \\ you can also directly \b{select json\_build\_object }\\ or \b{select json\_build\_object(jsonb\_agg(tmp))} \\ 
-        also note the jsonb\_agg(trim (proj.bezeichnung)) \\ for simplicity, the joins on the picture are removed.}\\
-        \hl
-        \mc{The jsonb agg is necessary for aggregation \\ otherwise the join wouldn't work for JSON.}\\
-        \hl
-        \mc{\pic{220608-10} \\ \pic{220608-11}}\\
-        \hl
-        \mcc{\b{JSON | SQL}}\\
-        \hl
-            \end{tabular}
-          \end{tabular}
-        \end{tiny}
-      \end{flushleft}
-    \end{table}
-  \end{flushleft} 
-\end{document}
-            \end{tabular}
-            \begin{tabular}[t]{|l|}
-              \hl
-              \mc{}\\
-              \hl
-        \mc{easiest way to convert PSQL to JSON is a temporary table. \\ \pic{220608-9} \\ you can also directly \b{select json\_build\_object }\\ or \b{select json\_build\_object(jsonb\_agg(tmp))} \\ 
-        also note the jsonb\_agg(trim (proj.bezeichnung)) \\ for simplicity, the joins on the picture are removed.}\\
-        \hl
-        \mc{The jsonb agg is necessary for aggregation \\ otherwise the join wouldn't work for JSON.}\\
-        \hl
-        \mc{\pic{220608-10} \\ \pic{220608-11}}\\
-        \hl
-        \mcc{\b{JSON | SQL}}\\
-        \hl
-            \end{tabular}
-          \end{tabular}
-        \end{tiny}
-      \end{flushleft}
-    \end{table}
-  \end{flushleft} 
-\end{document}
-            \end{tabular}
-            \begin{tabular}[t]{|l|}
-              \hl
-              \mc{}\\
-              \hl
-        \mc{easiest way to convert PSQL to JSON is a temporary table. \\ \pic{220608-9} \\ you can also directly \b{select json\_build\_object }\\ or \b{select json\_build\_object(jsonb\_agg(tmp))} \\ 
-        also note the jsonb\_agg(trim (proj.bezeichnung)) \\ for simplicity, the joins on the picture are removed.}\\
-        \hl
-        \mc{The jsonb agg is necessary for aggregation \\ otherwise the join wouldn't work for JSON.}\\
-        \hl
-        \mc{\pic{220608-10} \\ \pic{220608-11}}\\
-        \hl
-        \mcc{\b{JSON | SQL}}\\
-        \hl
-            \end{tabular}
-          \end{tabular}
-        \end{tiny}
-      \end{flushleft}
-    \end{table}
-  \end{flushleft} 
-\end{document}
-            \end{tabular}
-            \begin{tabular}[t]{|l|}
-              \hl
-              \mc{}\\
-              \hl
-        \mc{easiest way to convert PSQL to JSON is a temporary table. \\ \pic{220608-9} \\ you can also directly \b{select json\_build\_object }\\ or \b{select json\_build\_object(jsonb\_agg(tmp))} \\ 
-        also note the jsonb\_agg(trim (proj.bezeichnung)) \\ for simplicity, the joins on the picture are removed.}\\
-        \hl
-        \mc{The jsonb agg is necessary for aggregation \\ otherwise the join wouldn't work for JSON.}\\
-        \hl
-        \mc{\pic{220608-10} \\ \pic{220608-11}}\\
-        \hl
-        \mcc{\b{JSON | SQL}}\\
-        \hl
-            \end{tabular}
-          \end{tabular}
-        \end{tiny}
-      \end{flushleft}
-    \end{table}
-  \end{flushleft} 
-\end{document}
-
