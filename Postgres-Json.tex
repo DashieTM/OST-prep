@@ -1,0 +1,30 @@
+\documentclass{article}
+\usepackage{array, makecell}
+\usepackage{graphicx}
+\usepackage[left=0mm, right=0mm, top=0mm, bottom=0mm]{geometry}
+\usepackage[document]{ragged2e}
+\usepackage[T1]{fontenc}
+\newcommand{\hl}{\hline}
+\newcommand{\mc}{\makecell[l]}
+  \newcommand{\mcc}{\makecell[c]}
+\newcommand{\pic}{\includegraphics[scale=0.3]}
+\newcommand{\fpic}{\vspace{-0.05in} \\ \includegraphics[scale=0.3]}
+\graphicspath{{./Pictures/}}
+\renewcommand{\b}{\textbf}
+\begin{document}
+  \begin{table}[t]
+    \begin{tabular}[t]{|c|}
+        \hl
+        \mc{easiest way to convert PSQL to JSON is a temporary table. \\ \pic{220608-9} \\ you can also directly \b{select json\_build\_object }\\ or \b{select json\_build\_object(jsonb\_agg(tmp))} \\ 
+        also note the jsonb\_agg(trim (proj.bezeichnung)) \\ for simplicity, the joins on the picture are removed.}\\
+        \hl
+        \mc{The jsonb\_agg is necessary for aggregation \\ otherwise the join wouldn't work for JSON.}\\
+        \hl
+        \mc{\fpic{220608-10} \\ \pic{220608-11}}\\
+        \hl
+        \mcc{\b{JSON | SQL}}\\
+        \hl
+    \end{tabular}
+  \end{table}
+\end{document}
+

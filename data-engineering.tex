@@ -472,13 +472,14 @@
               \mc{Application -> Persistance API -> JPA Provider -> \\ JDBC API -> JDBC Driver -> Database}\\
               \hl
               \mc{>> start with @ entity | >> inheritance and interfaces possible \\>> can be astract | >> no constructor arguments (unless private) \\ >> needs primary key |>> class may not be final \\
-              >> fields should be private or protected}\\
+              >> fields should be private or protected | >> Read commited!}\\
               \hl
               \mc{\fpic{220609-17} \\ \b{the red line are optional, if the names in} \\ \b{the java object and in the db are the same !!}\\ supported datatypes: primitive types, wrapper types \\
               strings, enums, date, serializable classes\\ supported relations: collection, set, list, map of entities \\ 
               }\\
               \hl
-              \mc{\b{execute statements} \\ \pic{220609-18} \\ !!this is the base, we always need to call this!! }\\
+              \mc{\b{execute statements} \\ \pic{220609-18} \\ !!this is the base, we always need to call this!! \\ note that entity managers are independent \\ 
+              comparing the same result from 2 entity managers \\ will not be considered equal}\\
               \hl
               \mc{\b{insert} \\  \pic{220609-19}}\\
               \hl
@@ -519,21 +520,34 @@
               \hl
               \mc{\fpic{220609-30}}\\
               \hl
-              \mc{}\\
+              \mc{\b{Generated Ids} \\ \pic{220609-31} \\ This is the same as SERIAL in SQL \\ \pic{220609-32} \\ \pic{220609-33}}\\
               \hl
-              \mc{}\\
+              \mc{There is also the option for cascade, both persist and delete \\ \pic{220609-34}  
+              \pic{220609-37}}\\
               \hl
-              \mc{}\\
+              \mc{\b{Aggregation and Composition} \\ \pic{220609-35}} \\ \pic{220609-36}\\
               \hl
-        \mc{easiest way to convert PSQL to JSON is a temporary table. \\ \pic{220608-9} \\ you can also directly \b{select json\_build\_object }\\ or \b{select json\_build\_object(jsonb\_agg(tmp))} \\ 
-        also note the jsonb\_agg(trim (proj.bezeichnung)) \\ for simplicity, the joins on the picture are removed.}\\
-        \hl
-        \mc{The jsonb agg is necessary for aggregation \\ otherwise the join wouldn't work for JSON.}\\
-        \hl
-        \mc{\pic{220608-10} \\ \pic{220608-11}}\\
-        \hl
-        \mcc{\b{JSON | SQL}}\\
-        \hl
+              \mc{for bidirectional relation,\b{MANUALLY sync ANY updates}.\\they are NOT automatic!!} \\ 
+              \hl
+              \mc{\b{inheritance strategy} \\ Single Table \\ \pic{220609-38} \\ Joined Table \\ 
+              \pic{220609-39} \\ Multi Table \\ \pic{220609-40} \\ child tables (multi table without 
+              discriminator) \\ \pic{220609-41}}\\
+              \hl
+              \mc{\b{JPQL} Query language optimized for OR} \\ essentially the same other than this \\
+              \pic{220609-42}\\
+              \hl
+              \mc{dynamic queries: \\ \pic{220609-43}}\\
+              \hl
+              \mc{Predefined query \\ \pic{220609-44}}\\
+              \hl
+              \mc{Locktype: either pessimistic or optimistic \\ \pic{220609-45}}\\
+              \hl
+              \mc{merge, add to existing or create new \\ \pic{220609-46}} \\
+              \hl
+              \mc{refresh entity manager \\ \pic{220609-47}}\\
+              \hl
+              \mc{JSON to PSQL in seperate file. OPTIONAL!}\\
+              \hl
             \end{tabular}
           \end{tabular}
         \end{tiny}
