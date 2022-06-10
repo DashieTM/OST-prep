@@ -4,6 +4,8 @@
 \usepackage{graphicx}
 \usepackage{array, makecell}
 \usepackage{verbatimbox}
+\usepackage{noto-mono}
+\usepackage{lmodern}
 \usepackage[T1]{fontenc}
 \usepackage{tabularray}
 \usepackage{tabulary}
@@ -18,10 +20,10 @@
 \graphicspath{{./Pictures/}}
 \begin{document}
 \begin{flushleft}
-  \begin{table}[ht!]
+  \begin{table}
   \begin{flushleft}
     \begin{tiny}
-      \begin{tabular}{lll}
+      \begin{tabular}{ccc}
         \begin{tabular}[t]{|l|}
         \hl
         \mcc{\b{Functions in PGPLSQL}} \\
@@ -70,6 +72,7 @@
         \mc{hstore / map:\\ \pic{220608-4} \\ \pic{220608-5} \\ \pic{220608-6}\\ hstore supports GIST/GIN indexing}\\
         \hl
       \end{tabular}
+      \hspace{-0.7em}
       \begin{tabular}[t]{|l|}
         \hl
         \mc{\fpic{220607-1} \\ also note that type\%rowtype is used like this: \\ r ang\%rowtype -> for r in select * from ang;}\\
@@ -104,6 +107,7 @@
         \mc{Stored Procedures are really helpful for security \\ They have all the prviliges, but only \\ allow the user to do what the \\ creator has predefined.}\\
         \hl
       \end{tabular}
+      \hspace{-0.6em}
       \begin{tabular}[t]{|l|}
         \hl
         \mc{\fpic{220608-1}}\\
@@ -237,6 +241,7 @@
               consistent after end of transactions.\\ }\\
               \hl
             \end{tabular}
+            \hspace{-0.6em}
             \begin{tabular}[t]{|l|}
               \hl
               \mc{\fpic{220608-15}}\\
@@ -266,6 +271,7 @@
               \mc{\fpic{220608-18} \\ \pic{220608-19} \\ \pic{220608-20}}\\
               \hl
             \end{tabular}
+            \hspace{-0.7em}
             \begin{tabular}[t]{|l|}
               \hl
               \mcc{\b{sharding}}\\
@@ -329,6 +335,7 @@
               \mc{\fpic{220609-2} \pic{220609-1}}\\
               \hl
             \end{tabular}
+            \hspace{-0.6em}
             \begin{tabular}[t]{|l|}
               \hl
               \mc{\fpic{220609-3} \\ after we match to a variable called email \\ we check for a chain of "replied\_to" \\ aka we check at least one and max 4 \\ 
@@ -358,6 +365,7 @@
               \mc{ \fpic{220609-6} \\ \pic{220609-4} \\ \pic{220609-5} \\ \pic{220609-7}}\\
               \hl
             \end{tabular}
+            \hspace{-0.6em}
             \begin{tabular}[t]{|l|}
               \hl
               \mc{\fpic{220609-8} \\ \pic{220609-9}}\\
@@ -463,6 +471,7 @@
               \mc{\b{GraphQL vs SQL} >> GrapQL is very limited \\ >> controlled | >> expandable}\\
               \hl
             \end{tabular}
+            \hspace{-0.7em}
             \begin{tabular}[t]{|l|}
               \hl
               \mc{here an example for CRUD functions \\ \fpic{220609-16}}\\
@@ -508,6 +517,7 @@
               \mc{\b{Bi-Many-To-One}\\ -> change the second @OneToOne with @OneToMany }\\
               \hl
             \end{tabular}
+            \hspace{-0.8em}
             \begin{tabular}[t]{|l|}
               \hl
               \mc{\b{Many-To-Many} \\ \pic{220609-27}}\\
