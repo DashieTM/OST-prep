@@ -1,38 +1,126 @@
-
 \documentclass{article}
-\usepackage[left=-1.5mm, right=-1.5mm, top=-1.5mm, bottom=-1.5mm]{geometry}
+\usepackage[left=-1.5mm, right=-1.5mm, top=-1mm, bottom=-1.5mm]{geometry}
 \usepackage[document]{ragged2e}
 \usepackage{graphicx}
+\usepackage{amsmath, mathtools, nccmath, amssymb}
+\usepackage[dvipsnames]{xcolor}
 \usepackage{array, makecell}
 \usepackage[T1]{fontenc}
 \usepackage{noto-sans}
-\newcommand{\mc}{\makecell[{{l}}]}
+\renewcommand\cellalign{cl}
+\renewcommand\theadalign{lc}
+\newcommand{\ns}{\\ \vspace{-0.03in}}
+\newcommand{\mc}[1]{\makecell[cl]{\vspace{-0.065in} \\ #1}}
 \newcommand{\mcc}{\makecell[{{c}}]}
 \newcommand{\mcr}{\makecell[{{r}}]}
 \newcommand{\pic}{\includegraphics[scale=0.3]}
-\newcommand{\fpic}{\vspace{-0.05in} \\ \includegraphics}
+\newcommand{\form}[1]{\vspace{-0.03in}\\ \small{\textcolor{Red}{\(#1\)}} \\ \vspace{-0.03in}}
+\newcommand{\noskipform}[1]{\small{\textcolor{Red}{\(#1\)}}}
+\newcommand{\fpic}{\vspace{-0.05in} \\ \includegraphics[scale=0.3]}
 \renewcommand{\b}{\textbf}
-\renewcommand{\arraystretch}{1.5}
+\renewcommand{\r}[1]{\textcolor{Red}{#1}}
+%\renewcommand{\arraystretch}{1.5}
 \graphicspath{{./Pictures/}}
 \begin{document}
-  \begin{flushleft}
     \begin{table}[ht!]
-      \begin{flushleft}
         \begin{tiny}
           \begin{tabular}{ccc}
-            \begin{tabular}[t]{|p{6.72cm}|}
+          \begin{tabular}[t]{|@{\hskip1pt}p{6.9cm}|}
+              \hline
+              \mc{\b{Number Base Case} \\ \(N= d_n R^n + d_1 R^1 + d_0 R^0 \) \\ the d specifies the Number system -> \(d_2\) == binary \\ 
+              can also be written as \(R_2\) \\ 
+              This can also be used to expand numbers: \\ \(N_{10} 255 = 2 * 10^2 + 5 * 10^1 + 5 * 10^0 \) \\ \(N_2 110 = 1 * 2^2 + 1 * 2^1 + 0 * 2^0 => N_{10} 6\)}\\
+              \hline
+              \mc{\b{Quantities:} \\ \b{N} -> natural numbers  | |  \b{Z} -> full numbers \\  \b{Q} -> rational numbers | | \b{R} -> real numbers}\\
+              \hline
+              \mc{\b{Common number systems:} \\ Decimal: \(N_{10} = n * 10^n .. 0 * 10^0\) \\ \b{Binary:} \(N_2 = n * 2^n .. 0 * 2^0\) \\
+                \(2^{10}=1024, 2^9=512, 2^8=256, 2^7=128, 2^6=64,\) \\  \(2^5=32, 2^4=16,2^3=8, 2^2=4, 2^1=2, 2^0=1\) \\ \b{Hexadecimal:} \(N_16 = n * n^{16} .. 0 * 16^0\) \\ 
+              notation: 0 1 2 3 4 5 6 7 8 9 A B C D E F \\ \(16^5=1048576, 16^4=65536, 16^3=4096, 16^2=256,\) \\  \(16^1=16, 16^0=1\) }\\
+              \hline
+              \mc{\b{Modulo} \\ 8 mod 4 = (8) -> 0 , 8 mod 3 = (6) -> 2 , 8 mod 5 = (5) -> 3 \\ if x<y in x mod y then the result will always be x! \\ 
+              any negative numbers can be considered as NOTnegative\\ aka only absolute values! modulo deals with |x| \\ many programming languages actually do not follow this! \\
+              they have their own implementation of modulo. \\ 5 \(\equiv\) 3 mod 2 -> as 5 mod 2 = 1 and 3 mod 2 = 1 }\\
+              \hline
+              \mc{\b{Codeword length} \\ \b{Byte = 8 bit} || \b{Word = 16 or 32 bit} \\ TCP packet = 1024 bit }\\
+              \hline
+              \mc{ \b{Cyclic group} \\ \pic{220610-19} \\ \pic{220610-18}} \\ WHAT THE FUCK \\
+              \hline
+              \mc{\b{Result Quantity} the result of all possible outcomes \\ it is denoted with: \(\Omega\) \\ A single element of the result list is: \(\omega\)  -> \(\omega \in  \Omega \) \\ 
+              The list of results is \(|\Omega|\) \\ Example Dice roll: \(\Omega = \{1,2,3,4,5,6\}\) }\\
+              \hline
+              \mc{\small{Probability: \textcolor{Red}{\(P(A) = \dfrac{\text{best results}}{\text{all results}}= \dfrac{|A|}{|\Omega|} = \dfrac{|A|}{n}\)}} \\
+              So what is the probability of rolling a 6? \\ 
+              \(P(\text{desired number to roll}) = \dfrac{\text{only 1 good result!}}{\text{6 possible results}} = \dfrac{1}{6}\) \\ hence the chance is 1 in 6 \\ Why this complicated method?
+              You can modify desired results! \\ just change the A in P(A)!}\\
+              \hline
+              \mc{\b{Inverse Probability: P(inverse) = 1 - P(A)} \\ dice -> \(1 - \dfrac{1}{6} = \dfrac{5}{6}\) \ns }\\
+              \hline
+              \mc{\b{Addition rule:}\\ \form{P(A\cup B) = P(A) + P(B) - P(A\cap B)} \\ !!The last part is needed, as otherwise the number \\ would exceed the possible states!! \\ \vspace{-0.05in}\\
+              \r{\(P(A\cup B \cup C) = P(A) + P(B) + P(C) - P(A\cap B) - P(A\cap C)\)} \\ \textcolor{Red}{\(- P(B\cap C) + P(A\cap B\cap C)\)}}\\
+              \hline
+              \mc{\b{Amount of possibilities:} \\ \b{ordered probes with replication:} \\ 2 coins, head and tail, possibilities? \b{k}=head/tail=2 \b{n}=coins=2 \\ \form{\Omega = n^k = 2^2} \\
+              \b{ordered probes without replication:} \\ 5 dices. How many combinations? \\  dice numbers = \b{n} = 6 (1-6), dice amount = \b{k} = 5 
+              \\ possibilities = \(\Omega = \dfrac{n!}{(n-k)!} = 
+              \Omega = \dfrac{6!}{(6-5)!} = 720\) \\ Or this: \\ \form{\Omega = \Pi^{n-k+1}_{n} n = \Pi^{6-5+1}_{6} 6 = 2*3...5*6 = 720} \\
+              \b{unordered probes wihout replication:} \\ 25 players, each should only play once with the other. \\ \(\Omega = \dfrac{n!}{k!(n-k)!}\) -> \(\dfrac{25!}{2!(25-2)!}\) -> 
+              \(\dfrac{\text{too big}}{\text{too big}} = 300 \) \\
+              as you can see the bottom is a BIG calculation, so \\ \form{ \Omega = \dfrac{\Pi^{n-k+1}_{n}n}{k!} \text{->} \dfrac{\Pi^{25-2+1}_{25}25}{2!}
+              \text{->} \dfrac{24*25}{2} = 300 } \\ Note that \b{k} can also be defined as the \\ length of the tuple we want to receive. \\ -> (Player,Player) - > 2}\\
+              \hline
+              \mc{\b{Source to Sink Information} \\ \pic{220610-20} }\\
+              \hline
+              \mc{\small{\b{Entropy}} \\ \footnotesize{information content} \\ this essentially just us how many bits are needed \\ 
+              \b{k} is base state count -> bit = 2 \\ and \b{N} is the full number of states \\ 
+            example: list {True,False,True,False} 4 states total, base 2. \\ \form{H_0 = log_k(N) [k] \text{ -> } H_0 = log_2(4) [bit] = 2} }\\
+              \hline
+            \end{tabular}
+            \hspace{-0.07in}
+            \begin{tabular}[t]{@{\hskip1pt}p{6.9cm}|}
+              \hline
+              \mc{\footnotesize{information flow} \\ essentially information content over time \\ \form{H^*_0 = \dfrac{log_2(N)}{\tau}[\dfrac{bit}{s}]} \\ 
+              \footnotesize{information quantity} \\ \form{I(x_k) = -log_2(P(x_k))[bit]} \\ 
+              \footnotesize{Entropy} \\ \(\text{Probability} * \text{information content}\) \\ \form{H(X) = \Sigma^N_{k=1} P(x_k) * I(x_k) [\dfrac{bit}{symbol}] } \\ where X is the list of symbols
+              \\ \footnotesize{Sink Redundance / Code Reduncance} \\ \begin{tabular}{@{\hskip1pt}m{4cm}m{2cm}}\vspace{-0.15in}\noskipform{R_Q = H_0 - H(X) [\dfrac{bit}{symbol}]}
+              \noskipform{R_c = L - H(X) [\dfrac{bit}{symbol}]} & 
+              \vspace{-0.25in}\pic{220610-21} \end{tabular} \\ 
+              \footnotesize{Code Word Length} \\ \form{L(x_k) = \text{rounded}(I(x_k))[bit]} \\
+              \footnotesize{Median Code Word Length} \\ \form{L = \Sigma^N_{k=1}P(x_k) * L(x_k) [\dfrac{bit}{symbol}] } \\ 
+              \footnotesize{Entropy of the entire Code} \\ \form{H_c(X) = \Sigma^N_{k=1} P(x_k) * L(x_k) [\dfrac{bit}{symbol}]} \\ \footnotesize{\(H_c\) can be a real number -> \(H_c \in  \mathbb{R} \)}
+              }\\
+              \hline
+              \mc{\fpic{220610-22}}\\
+              \hline
+              \mc{\footnotesize{Sink without memory} \\ \form{P(x_k,y_k) = P(x_k) + P(y_i)} \\ \footnotesize{Sink with memory} \\ \form{P(x_k,y_i) = P(x_k) + P(x_k|y_i)} \\
+              \footnotesize{Entropy without memory} \\ \form{H(H,Y) = \Sigma^N_{x_k} \Sigma^N_{y_i} P(x_k,y_i)*(-log_2(P(x_k,y_i))} \\
+              \footnotesize{Entropy with memory} \\ \form{H(H,Y) = \Sigma^N_{x_k} \Sigma^N_{y_i} P(x_k) * }\\ \vspace{-0.1in}\form{P(x_k,y_i)*(-log_2(P(x_k) * P(x_k|y_i))}
+              }\\
+              \hline
+              \mc{\footnotesize{Encoding of Symbols} \\ \pic{220610-23} \\ \pic{220610-24} \\ continue this pattern until every symbol has a code \\ note the extra 0 on every step }\\
+              \hline
+              \mc{\footnotesize{Run Length Encoding RLE/RLC} \\ \pic{220610-25}}\\
+              \hline
+              \mc{\b{Encoder and Decoder} \\ You need to either choose 1 or 0 as the starting \\ bit. After that the decoder can print out the correct code.}\\
+              \hline
+              \mc{\b{Chiffre text} \\ You can "encrypt" your data by shifting the codes by a certain amount. \\ In the caesar chiffre this is done with the number 4. a -> e\\ 
+              Please do not use this, use RSA or other algorithms.}\\
+              \hline
+              \mc{}\\
+              \hline
+              \mc{}\\
+              \hline
+              \mc{}\\
+              \hline
+              \mc{}\\
+              \hline
+              \mc{}\\
+              \hline
+              \mc{}\\
               \hline
               \mc{}\\
               \hline
             \end{tabular}
             \hspace{-0.07in}
-            \begin{tabular}[t]{p{6.72cm}|}
-              \hline
-              \mc{}\\
-              \hline
-            \end{tabular}
-            \hspace{-0.07in}
-            \begin{tabular}[t]{p{6.72cm}|}
+            \begin{tabular}[t]{@{\hskip1pt}p{6.9cm}|}
               \hline
               \mc{}\\
               \hline
@@ -40,26 +128,24 @@
           \end{tabular}
           \hfill
         \end{tiny}
-      \end{flushleft}
     \end{table}
     \pagebreak
     \begin{table}[ht!]
-      \begin{flushleft}
         \begin{tiny}
           \begin{tabular}{ccc}
-            \begin{tabular}[t]{|p{6.72cm}|}
+            \begin{tabular}[t]{|@{\hskip1pt}p{6.9cm}|}
               \hline
               \mc{}\\
               \hline
             \end{tabular}
             \hspace{-0.07in}
-            \begin{tabular}[t]{p{6.72cm}|}
+            \begin{tabular}[t]{@{\hskip1pt}p{6.9cm}|}
               \hline
               \mc{}\\
               \hline
             \end{tabular}
             \hspace{-0.07in}
-            \begin{tabular}[t]{p{6.72cm}|}
+            \begin{tabular}[t]{@{\hskip1pt}p{6.9cm}|}
               \hline
               \mc{}\\
               \hline
@@ -67,26 +153,24 @@
           \end{tabular}
           \hfill
         \end{tiny}
-      \end{flushleft}
     \end{table}
     \pagebreak
     \begin{table}[ht!]
-      \begin{flushleft}
         \begin{tiny}
           \begin{tabular}{ccc}
-            \begin{tabular}[t]{|p{6.72cm}|}
+            \begin{tabular}[t]{|@{\hskip1pt}p{6.9cm}|}
               \hline
               \mc{}\\
               \hline
             \end{tabular}
             \hspace{-0.07in}
-            \begin{tabular}[t]{p{6.72cm}|}
+            \begin{tabular}[t]{@{\hskip1pt}p{6.9cm}|}
               \hline
               \mc{}\\
               \hline
             \end{tabular}
             \hspace{-0.07in}
-            \begin{tabular}[t]{p{6.72cm}|}
+            \begin{tabular}[t]{@{\hskip1pt}p{6.9cm}|}
               \hline
               \mc{}\\
               \hline
@@ -94,26 +178,24 @@
           \end{tabular}
           \hfill
         \end{tiny}
-      \end{flushleft}
     \end{table}
     \pagebreak
     \begin{table}[ht!]
-      \begin{flushleft}
         \begin{tiny}
           \begin{tabular}{ccc}
-            \begin{tabular}[t]{|p{6.72cm}|}
+            \begin{tabular}[t]{|@{\hskip1pt}p{6.9cm}|}
               \hline
               \mc{}\\
               \hline
             \end{tabular}
             \hspace{-0.07in}
-            \begin{tabular}[t]{p{6.72cm}|}
+            \begin{tabular}[t]{@{\hskip1pt}p{6.9cm}|}
               \hline
               \mc{}\\
               \hline
             \end{tabular}
             \hspace{-0.07in}
-            \begin{tabular}[t]{p{6.72cm}|}
+            \begin{tabular}[t]{@{\hskip1pt}p{6.9cm}|}
               \hline
               \mc{}\\
               \hline
@@ -121,7 +203,5 @@
           \end{tabular}
           \hfill
         \end{tiny}
-      \end{flushleft}
     \end{table}
-  \end{flushleft}
 \end{document}

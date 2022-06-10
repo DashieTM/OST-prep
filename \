@@ -2,42 +2,47 @@
 \usepackage[left=-1.5mm, right=-1.5mm, top=-1mm, bottom=-1.5mm]{geometry}
 \usepackage[document]{ragged2e}
 \usepackage{graphicx}
-\usepackage{amsmath, mathtools, nccmath, amssymb}
-\usepackage[dvipsnames]{xcolor}
+\usepackage{amsmath}
 \usepackage{array, makecell}
 \usepackage[T1]{fontenc}
 \usepackage{noto-sans}
-\renewcommand\cellalign{cl}
-\renewcommand\theadalign{lc}
-\newcommand{\ns}{\\ \vspace{-0.03in}}
-\newcommand{\mc}[1]{\makecell[cl]{\vspace{-0.065in} \\ #1}}
+\newcommand{\mc}{\makecell[{{l}}]}
 \newcommand{\mcc}{\makecell[{{c}}]}
 \newcommand{\mcr}{\makecell[{{r}}]}
 \newcommand{\pic}{\includegraphics[scale=0.3]}
-\newcommand{\form}[1]{\vspace{-0.03in}\\ \small{\textcolor{Red}{\(#1\)}} \\ \vspace{-0.03in}}
-\newcommand{\noskipform}[1]{\small{\textcolor{Red}{\(#1\)}}}
-\newcommand{\fpic}{\vspace{-0.05in} \\ \includegraphics[scale=0.3]}
+\newcommand{\fpic}{\vspace{-0.05in} \\ \includegraphics}
 \renewcommand{\b}{\textbf}
-\renewcommand{\r}[1]{\textcolor{Red}{#1}}
-%\renewcommand{\arraystretch}{1.5}
+%\renewcommand{\arraystretch}{1.75}
 \graphicspath{{./Pictures/}}
 \begin{document}
+  \begin{flushleft}
     \begin{table}[ht!]
+      \begin{flushleft}
         \begin{tiny}
           \begin{tabular}{ccc}
-          \begin{tabular}[t]{|@{\hskip1pt}p{6.9cm}|}
+          \begin{tabular}[t]{|@{\hskip1pt}m{6.72cm}|}
+              \hline
+              \mc{\b{Number Base Case} \\ \[\textstyle N = d_n R^n + d_1 R^1 + d_0 R^0 \] \\ the d specifies the Number system -> \[\textstyle d_2\] == binary \\ 
+              can also be written as \[\textstyle R_2\] \\ This can also be 
+            used to expand numbers: \\ \[\text{ N_1_0 255 = 2 * 10^2 + 5 * 10^1 + 5 * 10^0 }\] \\ \[\text{ N_2 110 = 1 * 2^2 + 1 * 2^1 + 0 * 2^0 => N_{10} 6}\]}\\
+              \hline
+              \mc{\b{Quantities:} \\ \b{N} -> natural numbers  | |  \b{Z} -> full numbers \\  \b{Q} -> rational numbers | | \b{R} -> real numbers}\\
+              \hline
+              \mc{\b{Common number systems:} \\ Decimal: \[\text{ N_{10} = n * 10^n .. 0 * 10^0 }\] \\ Binary: \[\text{ N_2 = n * 2^n .. 0*2^0}\] \\
+                \[\text{2^{10} 1024, 2^9 512, 2^8 256, 2^7 128, 2^6 64, 2^5 32, 2^4 16,
+          2^3 8, 2^2 4, 2^1 2, 2^0 1}\]}\\
+              \hline
+              \mc{dhsdjfks}\\
+              \hline
+            \end{tabular}
+            \hspace{-0.07in}
+            \begin{tabular}[t]{p{6.72cm}|}
               \hline
               \mc{}\\
               \hline
             \end{tabular}
             \hspace{-0.07in}
-            \begin{tabular}[t]{@{\hskip1pt}p{6.9cm}|}
-              \hline
-              \mc{}\\
-              \hline
-            \end{tabular}
-            \hspace{-0.07in}
-            \begin{tabular}[t]{@{\hskip1pt}p{6.9cm}|}
+            \begin{tabular}[t]{p{6.72cm}|}
               \hline
               \mc{}\\
               \hline
@@ -45,24 +50,26 @@
           \end{tabular}
           \hfill
         \end{tiny}
+      \end{flushleft}
     \end{table}
     \pagebreak
     \begin{table}[ht!]
+      \begin{flushleft}
         \begin{tiny}
           \begin{tabular}{ccc}
-            \begin{tabular}[t]{|@{\hskip1pt}p{6.9cm}|}
+            \begin{tabular}[t]{|p{6.72cm}|}
               \hline
               \mc{}\\
               \hline
             \end{tabular}
             \hspace{-0.07in}
-            \begin{tabular}[t]{@{\hskip1pt}p{6.9cm}|}
+            \begin{tabular}[t]{p{6.72cm}|}
               \hline
               \mc{}\\
               \hline
             \end{tabular}
             \hspace{-0.07in}
-            \begin{tabular}[t]{@{\hskip1pt}p{6.9cm}|}
+            \begin{tabular}[t]{p{6.72cm}|}
               \hline
               \mc{}\\
               \hline
@@ -70,24 +77,26 @@
           \end{tabular}
           \hfill
         \end{tiny}
+      \end{flushleft}
     \end{table}
     \pagebreak
     \begin{table}[ht!]
+      \begin{flushleft}
         \begin{tiny}
           \begin{tabular}{ccc}
-            \begin{tabular}[t]{|@{\hskip1pt}p{6.9cm}|}
+            \begin{tabular}[t]{|p{6.72cm}|}
               \hline
               \mc{}\\
               \hline
             \end{tabular}
             \hspace{-0.07in}
-            \begin{tabular}[t]{@{\hskip1pt}p{6.9cm}|}
+            \begin{tabular}[t]{p{6.72cm}|}
               \hline
               \mc{}\\
               \hline
             \end{tabular}
             \hspace{-0.07in}
-            \begin{tabular}[t]{@{\hskip1pt}p{6.9cm}|}
+            \begin{tabular}[t]{p{6.72cm}|}
               \hline
               \mc{}\\
               \hline
@@ -95,24 +104,26 @@
           \end{tabular}
           \hfill
         \end{tiny}
+      \end{flushleft}
     \end{table}
     \pagebreak
     \begin{table}[ht!]
+      \begin{flushleft}
         \begin{tiny}
           \begin{tabular}{ccc}
-            \begin{tabular}[t]{|@{\hskip1pt}p{6.9cm}|}
+            \begin{tabular}[t]{|p{6.72cm}|}
               \hline
               \mc{}\\
               \hline
             \end{tabular}
             \hspace{-0.07in}
-            \begin{tabular}[t]{@{\hskip1pt}p{6.9cm}|}
+            \begin{tabular}[t]{p{6.72cm}|}
               \hline
               \mc{}\\
               \hline
             \end{tabular}
             \hspace{-0.07in}
-            \begin{tabular}[t]{@{\hskip1pt}p{6.9cm}|}
+            \begin{tabular}[t]{p{6.72cm}|}
               \hline
               \mc{}\\
               \hline
@@ -120,5 +131,7 @@
           \end{tabular}
           \hfill
         \end{tiny}
+      \end{flushleft}
     \end{table}
+  \end{flushleft}
 \end{document}
