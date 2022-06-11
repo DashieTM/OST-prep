@@ -78,8 +78,8 @@
             \begin{tabular}[t]{|@{\hskip1pt}p{6.9cm}|}
               \hline
               \mc{\footnotesize{information flow} \\ essentially information content over time \\ \form{H^*_0 = \dfrac{log_2(N)}{\tau}[\dfrac{bit}{s}]} \\ 
-              \footnotesize{information quantity} \\ \form{I(x_k) = -log_2(P(x_k))[bit]} \\ 
-              \footnotesize{Entropy} \\ \(\text{Probability} * \text{information content}\) \\ \form{H(X) = \Sigma^N_{k=1} P(x_k) * I(x_k) [\dfrac{bit}{symbol}] } \\ where X is the list of symbols
+              \footnotesize{information quantity / Surprise} \\ \form{I(x_k) = -log_2(P(x_k))[bit]} \\ 
+              \footnotesize{Entropy (Surprise per element)} \\ 0 means no symbols. 1 means perfect balance 50-50 \\ \form{H(X) = \Sigma^N_{k=1} P(x_k) * I(x_k) [\dfrac{bit}{symbol}] } \\ where X is the list of symbols
               \\ \footnotesize{Sink Redundance / Code Reduncance} \\ \begin{tabular}{@{\hskip1pt}m{4cm}m{2cm}}\vspace{-0.15in}\noskipform{R_Q = H_0 - H(X) [\dfrac{bit}{symbol}]}
               \noskipform{R_c = L - H(X) [\dfrac{bit}{symbol}]} & 
               \vspace{-0.25in}\pic{220610-21} \end{tabular} \\ 
@@ -91,7 +91,8 @@
               \mc{\fpic{220610-22}}\\
               \hline
               \mc{\footnotesize{Sink without memory} \\ \form{P(x_k,y_k) = P(x_k) + P(y_i)} \\ \footnotesize{Sink with memory} \\ \form{P(x_k,y_i) = P(x_k) + P(x_k|y_i)} \\
-              \footnotesize{Entropy without memory} \\ \form{H(H,Y) = \Sigma^N_{x_k} \Sigma^N_{y_i} P(x_k,y_i)*(-log_2(P(x_k,y_i))} \\
+              \footnotesize{Entropy without memory / Combined Entropy} \\ \form{H(H,Y) = \Sigma^N_{x_k} \Sigma^N_{y_i} P(x_k,y_i)*(-log_2(P(x_k,y_i))} \\
+              or: \(H(X,Y) = H(X) + H(Y) \) \\
               \footnotesize{Entropy with memory} \\ \form{H(H,Y) = \Sigma^N_{x_k} \Sigma^N_{y_i} P(x_k) * }\\ \vspace{-0.1in}\form{P(x_k,y_i)*(-log_2(P(x_k) * P(x_k|y_i))}
               }\\
               \hline
@@ -109,6 +110,36 @@
             \end{tabular}
             \hspace{-0.07in}
             \begin{tabular}[t]{@{\hskip1pt}p{6.9cm}|}
+              \hline
+              \mc{\footnotesize{Conditional Entropy -> Entropy of Y given X} \\  
+              \form{H(Y|X) = \Sigma^N_{k=1} \Sigma^N_{i=1} P(x_k,y_i) * (-log_2(\frac{P(x_k,y_i)}{P(x_k)}))} \\ 
+              \footnotesize{Chain Rule} \\ \form{H(Y|X) = H(X,Y) - H(X) \text{ || } H(Y \backslash X)} \\ 
+              \footnotesize{Bayes Rule} \\ \form{H(Y|X) = H(X|Y) - H(X) + H(Y) \text{ || } H(Y\backslash X)} \\
+              \pic{Entropy} \\
+              \footnotesize{Transinformation} \\ likelyhood of information being correct at arrival. \\ 
+              \form{T = H(X) - H(X|Y) \text{ || } H(Y) - H(Y|X)} \form{\text{or: }|(X;Y)}
+              }\\
+              \hline
+              \mc{\footnotesize{distance to next valid codeword} \\ \form{Min_{i,j}(d(x_i,x_j))} \\
+                \footnotesize{error detection distance / Hamming distance} \\ the amount of bits that differ from input to output \\ 
+                \form{h=Min_{i,j}(d(x_i,x_j))} \\
+                \footnotesize{detection distance even/uneven} \\ \form{h=2e+2 \text{ || } h=2e+1}
+                \footnotesize{error correction distance even/uneven} \\ \form{e = \dfrac{h - 2}{2} \text{ || } \dfrac{h - 1}{2}}
+              }\\
+              \hline
+              \mc{}\\
+              \hline
+              \mc{}\\
+              \hline
+              \mc{}\\
+              \hline
+              \mc{}\\
+              \hline
+              \mc{}\\
+              \hline
+              \mc{}\\
+              \hline
+              \mc{}\\
               \hline
               \mc{}\\
               \hline
