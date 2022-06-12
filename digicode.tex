@@ -120,28 +120,24 @@
               \form{T = H(X) - H(X|Y) \text{ || } H(Y) - H(Y|X)} \form{\text{or: }|(X;Y)}
               }\\
               \hline
-              \mc{\footnotesize{distance to next valid codeword} \\ \form{Min_{i,j}(d(x_i,x_j))} \\
-                \footnotesize{error detection distance / Hamming distance} \\ the amount of bits that differ from input to output \\ 
-                \form{h=Min_{i,j}(d(x_i,x_j))} \\
-                \footnotesize{detection distance even/uneven} \\ \form{h=2e+2 \text{ || } h=2e+1}
-                \footnotesize{error correction distance even/uneven} \\ \form{e = \dfrac{h - 2}{2} \text{ || } \dfrac{h - 1}{2}}
+              \mc{\footnotesize{Hamming distance / distance to next valid codeword} \\ \form{h =Min_{i,j}(d(x_i,x_j))} \\
+                \footnotesize{error detection distance} \\ the amount of bits that differ from input to output \\ 
+              \form{e^*=h-1} \\
+                \footnotesize{error correction distance for h even} \\ \form{h=2e+2 \text{ -> } e = \dfrac{h - 2}{2}}
+                \footnotesize{error correction distance for h uneven} \\ \form{h=2e+1 \text{ -> } e = \dfrac{h - 1}{2}}\\
+                  Consider the valid input either 111 or 000. \\  The Hamming distance \b{h} is therefore 3 bits. \\ The detection distance \b{ \( e^* \) } is 3 - 1 \\
+                  Due to h being uneven, the correction distance \b{e} is \(\dfrac{h - 1}{2}\) \\ which results in 1.
               }\\
               \hline
-              \mc{}\\
+              \mc{\footnotesize{tighly packed coderoom} \\ n = dimension of code \vspace{-0.05in}\\ m = dimension of messages \noskipform{2^m * \Sigma^e_{w=0} (^n_w) \leq 2^n}\\
+                k = dimension of control -> n = m + k \\ The code is considered to be tightly packed \\ if the equation has the result 2. aka == not smaller. \\ \pic{220611-2}
+              }\\
               \hline
-              \mc{}\\
-              \hline
-              \mc{}\\
-              \hline
-              \mc{}\\
-              \hline
-              \mc{}\\
-              \hline
-              \mc{}\\
-              \hline
-              \mc{}\\
-              \hline
-              \mc{}\\
+              \mc{\footnotesize{Hamming Codes} \\ The hamming code is very easy to implement \\ \form{\Sigma_i x_i * \overrightarrow{\rm P_i} \equiv \overrightarrow{\rm 0} mod 2} \\
+              \footnotesize{The syndrome} \noskipform{\overrightarrow{\rm Z} = \Sigma_i x_i * \overrightarrow{\rm P_i} mod 2} \\ 
+              \pic{220612-1} \\ \pic{220612-2} \\
+              note that the 001 010 100 of the parity checks are \\ simply the unit vector \(\overrightarrow{\rm 0}\) !!!
+              }\\
               \hline
             \end{tabular}
           \end{tabular}
@@ -153,6 +149,11 @@
         \begin{tiny}
           \begin{tabular}{ccc}
             \begin{tabular}[t]{|@{\hskip1pt}p{6.9cm}|}
+              \hline
+              \mc{
+              \footnotesize{parity checks needed:} \\ \form{par = log_2(\text{bit amount of code})} \\
+              \footnotesize{1101 = 4 bits -> 3 parity checks} \\ \footnotesize{as 4 can be displayed by 3 bits -> 100}
+              }\\
               \hline
               \mc{}\\
               \hline
