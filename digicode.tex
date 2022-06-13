@@ -130,7 +130,7 @@
               }\\
               \hline
               \mc{\footnotesize{tighly packed coderoom} \\ n = dimension of code \vspace{-0.05in}\\ m = dimension of messages \noskipform{2^m * \Sigma^e_{w=0} (^n_w) \leq 2^n}\\
-                k = dimension of control -> n = m + k \\ The code is considered to be tightly packed \\ if the equation has the result 2. aka == not smaller. \\ \pic{220611-2}
+                k = dimension of control -> n = m + k \\ The code is considered to be tightly packed \\ if the equation has the result 2. aka == not smaller. \\ %\pic{220611-2}
               }\\
               \hline
               \mc{\footnotesize{Hamming Codes} \\ The hamming code is very easy to implement \\ \form{\Sigma_i x_i * \overrightarrow{\rm P_i} \equiv \overrightarrow{\rm 0} mod 2} \\
@@ -167,16 +167,97 @@
               \hline
               \mc{\footnotesize{Input - Output ratio for convolutional codes} \\ \form{R=\dfrac{input}{output} \text{ in example } R=\dfrac{1}{2}} }\\
               \hline
+              \mc{\footnotesize{hamming code extension} \\ \pic{220613-17}}\\
+              \hline
               \mc{\footnotesize{RSA} \\ 
               }\\
               \hline
               \mc{\footnotesize{RINKEL DONE}}\\
               \hline
+              
             \end{tabular}
             \hspace{-0.07in}
             \begin{tabular}[t]{@{\hskip1pt}p{6.9cm}|}
               \hline
-              \mc{}\\
+              \mc{\footnotesize{potence system} \\ decimal binary and hexadecimal are all built the same way \\ 
+              \form{W_a(z) = \Sigma^{n-1}_{i=0} z_i * a^i = z_{n-1} * a^{n-1} + }
+              \form{z_{n-2} * a^{n-2} + ... + z_1 * a^1 + z_0 * a^0}
+              }\\
+              \hline
+              \mc{\footnotesize{Terms in the binary form}}\\ 
+              \hline
+              \mc{\scriptsize{Bit = 1} set bit }\\ 
+              \hline
+              \mc{\scriptsize{Bit = 0} cleared bit} \\
+              \hline
+              \mc{\scriptsize{LSB} Least Significant Bit, rightmost bit, bit 0}\\
+              \hline
+              \mc{\scriptsize{MSB} Most Significant Bit, leftmost bit, bit (n-1)}\\
+              \mc{\scriptsize{!!Note that this is for little-endian!!} \\ \scriptsize{big-endian is 
+              the opposite!!}}\\
+              \hline
+              \mc{\scriptsize{Nibble} a 4 bit binary number\\ bigger numbers get grouped into nibbles
+              -> 1101 0101} \\
+              \hline
+              \mc{\scriptsize{Octett} a binary number with 8 bit}\\
+              \hline
+              \mc{\scriptsize{byte} 8 bit}\\
+              \hline
+              \mc{Note, in binary the leading 0s will still be written, \\ in order to indicate
+              how big the memory allocation is.}\\
+              \hline
+              \mc{\scriptsize{indices in bits} in order to change single bits in a number, \\ 
+              we can use the array notation. b=1010 b[3]=1 b=1011}\\
+              \hline
+              \mc{\scriptsize{amount of numbers to display} \\ binary: \(2^n\) numbers -> n=bits\\
+              The amount of numbers to double every increase of potence.\\
+              Note: There are no broken binary numbers. It's always \(2^n\) \\ 
+              with n being an integer!!
+              }\\
+              \hline
+              \mc{\footnotesize{prefixes} \\ \pic{220613-1} \\ 
+                \scriptsize{suffixes: \textcolor{Red}{\(\text{binary:} 1011_b, \text{hex:} 1011_h \)}}\\
+              \pic{220613-2}
+              }\\
+              \hline
+              \mc{\footnotesize{Hex} }\\
+              \mc{\scriptsize{1 hex decimal is a Nibble, 4 bit}}\\
+              \mc{\scriptsize{2 hex decimals are a byte}\\
+              this is why bits are grouped into nibbles and bytes.}\\
+              \mc{\scriptsize{Notation: 12 34 -> 0001 0010 0011 0100} \\
+              just like with binary, we write the leading 0s for the memory size.}\\
+              \mc{\scriptsize{biggest number possible with n bit:} \\ 
+              \pic{220613-3}
+              }\\
+              \hline
+              \mc{\footnotesize{Logical Operations} \\ \scriptsize{It is a function from n bits to 1 bit -> bool} \\ 
+              \form{f: \mathbb{B}_n \text{ -> } \mathbb{B} \text{ || } f :: [a] \text{ -> } Bool}} \\
+              \mc{\scriptsize{parameter: variable to use inside the function}} \\ 
+              \mc{\scriptsize{argument: specific value used in a specific use} \\
+              can also be described as fixed values. Note f(a,b) = a + g(a,b) \\ in this function
+              the a and b in f are parameters, \\but in g they are arguments !!
+              }\\
+              \hline
+              \mc{\scriptsize{Unary function: a function with 1 parameter}}\\
+              \mc{\scriptsize{Binary function: a function with 2 parameters}}\\
+              \mc{\scriptsize{Ternary function: a function with 3 parameters}}\\
+              \mc{\scriptsize{n-ary function: a function with n parameters}}\\
+              \mc{\scriptsize{Nullary function: function with zero parameters}}\\
+              \hline
+              \mc{\scriptsize{There are exactly 4 unary functions (with bits!)} \\ 
+                \scriptsize{F(X) = 0 -> False || T(X) = 1 -> True}\\
+                \scriptsize{id(x) = x, just like haskell id... }\\ 
+                \scriptsize{not(x) = \( \not x\) }\\
+              }\\
+              \hline
+              \mc{\scriptsize{There are 16 binary functions}}\\
+              \mc{\scriptsize{Disjunction: OR \(x \lor v \)}}\\ 
+              \mc{\scriptsize{Conjunction: AND \(x \land v\)}}\\
+              \mc{\scriptsize{The others are made with unary, nullary or the 2 above}\\
+              \pic{220613-4} \\ \pic{220613-5}\\
+              note that some are actually unary or nullary,\\ 
+              aka they don't actually do anything with the parameters.
+              }\\
               \hline
             \end{tabular}
           \end{tabular}
@@ -184,22 +265,152 @@
         \end{tiny}
     \end{table}
     \pagebreak
-    \begin{table}[ht!]
+    \begin{table}[t]
         \begin{tiny}
           \begin{tabular}{ccc}
             \begin{tabular}[t]{|@{\hskip1pt}p{6.9cm}|}
               \hline
-              \mc{}\\
+              \mc{\scriptsize{NAND: the basis of modern computers} \\ 
+              it is easy to create with transistors.\\
+              It only results in False if both inputs are true,\\
+              hence the name Not-AND.\\
+              \scriptsize{mathematical notation:} \noskipform{\text{NAND} = x | y = \overline{x \land v}}\\
+              \scriptsize{all base operations can be made with NAND} \\ 
+              \pic{220613-6}
+              }\\
+              \hline
+              \mc{\scriptsize{NOR} \\
+              NOR is only true when neither of the inputs are true. \\ 
+              aka NOR = 1 if x==0 \&\& y==0
+              \form{ \overline{x \lor v}}
+              \scriptsize{Just like with NAND, all functions} \\ \scriptsize{ can be made with NOR}}\\
+              \hline
+              \mc{\scriptsize{XOR: exclusive or} \\ 
+              The XOR is true if only one input is true.\\
+              \form{ x \oplus y} \\ 
+              }\\
+              \hline
+              \mc{\scriptsize{Addition of bits.} \\ 
+                \pic{220613-7}\\
+                \scriptsize{\textcolor{Red}{AND signifies the overflow of bits. 1 0 <- 1 1}}\\
+                \scriptsize{\textcolor{Red}{XOR signifies the addition of bits. 0 OR 1}}\\
+              }\\
+              \hline
+              \mc{\scriptsize{Literal: variable or negation of variable: \(x_1 , \overline{x_2}\)}}\\
+              \mc{\scriptsize{Conjunction-term: conjunction of literals \(x_1 x_2=x_1 \land x_2 \) }
+              \vspace{-0.1in}}\\
+              \mc{\scriptsize{Disjunction-term: disjunction of literals \(x_1 \lor x_2\)}}\\
+              \mc{\scriptsize{Minterm: conjunction with ALL parameters of a function} 
+              \vspace{-0.1in}}\\
+              \mc{\scriptsize{Maxterm: disjunction with ALL parameters of a function}}\\
+              \hline
+              \mc{\scriptsize{Disjunctive Normalform DNF} \\ 
+              \scriptsize{a disjunction of conjunctions. \(x_1 x_2 \lor \overline{x_1 x_2}\)}\\
+              Functions are often displayed as DNF, since this format \\ requires only 3 symbols:
+              \(\lor \land \lnot \) \\ 
+              \scriptsize{The canonical DNF C-DNF: a DNF with all parameters} \\
+              the canonical DNF is often used to display the true false table.\\
+              The C-DNF is then often simplified to get the end result\\
+              \pic{220613-8} \\ \pic{220613-9}\\
+              note that DNF has nothing to do with the ferrari engine.\\
+              }\\
+              \hline
+              \mc{logical function only return 1 or 0. In order to\\ return an entire number, we
+              would have to map this function. \\ luckily there are several predefined mapped functions \\
+              -- nor(x) invert all bits in x \\ 
+              -- and(x,y) check the individual bits of x,y with and\\
+              -- or(x,y) check the individual bits of x,y with or\\ 
+              -- nor(x,y) check the individual bits of x,y with nor\\  
+              }\\ 
+              \hline
+              \mc{\scriptsize{Bitwise operations in java...} \\ \pic{220613-10} \\
+              \scriptsize{ || and \&\& are evaluations} \\ note that with || and \&\&, if the first
+              evaluation is enough \\to determine the result, the second one won't be executed.\\
+              a=False, b=True -> a \&\& b -> a is false, therefore result false.
+              }\\
+              \hline
+              \mc{\scriptsize{Variable sizes in java} \\ \scriptsize{int = 32 bit} \\ 
+              \scriptsize{short = 16 bit} \\ \scriptsize{byte = 8 bit} \\ \scriptsize{long 64 bit} \\
+              Please note that these should only be used when, \\ you either save significant memory,
+              or the integer isn't big enough.}\\
+              \hline
+              \mc{\scriptsize{multiplying a binary number} \\ 
+              you have to multiply every single bit and add the corresponding 0s. \\ 
+              \pic{220613-11} \\ 
+              \pic{220613-12}
+              }\\
+              \hline
+              \mc{\scriptsize{\textcolor{Red}{Multiplication with potences is just a leftshift!!}} \\
+              \scriptsize{\textcolor{Red}{\(2^4 * 101 = \) add 4 0s to 101 -> 101'0000}}}\\
               \hline
             \end{tabular}
             \hspace{-0.07in}
             \begin{tabular}[t]{@{\hskip1pt}p{6.9cm}|}
               \hline
-              \mc{}\\
+              \mc{\scriptsize{\textcolor{Red}{Division with potences is a rightshift!!}} \\ 
+              \scriptsize{\textcolor{Red}{\(\dfrac{1`0111}{2^3} =\) remove 3 bits from 1`0111 -> 101}}\\
+              }\\
+              \hline
+              \mc{\scriptsize{Left \& Rightshift java} \\ 
+                \scriptsize{logical right: a \r{> > >} x -> 101 \r{> > >} 1 -> 010}\\
+                \scriptsize{logical left: a \r{< < <} x -> 101 \r{< < <} 2 -> 1`0100}\\
+                \scriptsize{arithmic right: a \r{>>} x -> 101 \r{>>} 1 -> 110}\\
+                \scriptsize{arithmic left: a \r{<<} x -> 101 \r{<<} 2 -> 1`0111}\\
+                \scriptsize{the >>> and <<< add the MSB value instead of 0} \\
+                \scriptsize{The reason for this is unsigned and signed!!}
+              }\\
+              \hline
+              \mc{\scriptsize{Reading a bit} \\ \pic{220613-13}}\\
+              \hline
+              \mc{\scriptsize{Setting a bit} \\ \pic{220613-14}}\\
+              \hline
+              \mc{\scriptsize{Deleting a bit} \\ \pic{220613-15}}\\
+              \hline
+              \mc{\scriptsize{\r{Combine these with right and left shift!}} \\ 
+                  \scriptsize{read: b \& (1 << n) >>> n} 000(b AND 11111...)\\
+              \scriptsize{set: (b | (1 << n))} b OR 11111...\\
+              \scriptsize{delete: b \& ~(1 << n)} b AND not 11111..\\
+              \pic{220613-16}
+              }\\
+              \hline
+              \mc{\footnotesize{Addition and Subtraction} \\ 
+                \scriptsize{Addition: } \hspace{0.55in} \scriptsize{Subtraction: (Zweierkomplement)} \\
+                \pic{220613-18} \pic{220613-19} \\ \pic{220613-20} \\
+              }\\
+              \hline
+              \mc{\footnotesize{Signed \& Unsigned} }\\ 
+              \mc{\scriptsize{Unsigned: only positive integers!}}\\
+              \mc{\scriptsize{Signed: MSB 0 = positive, MSB 1 = negative }\\
+              \scriptsize{the rest is a regular binary number.}\\
+              note: This is something you simply need to know.\\ 
+              It isn't included in some encoding!!\\
+              \pic{220613-21} \\ \pic{220613-22} \\
+              \scriptsize{note the difference in positive and negative} \\ 
+              \scriptsize{in the signed category! size constraints!} \\ 
+              \pic{220613-23} \\
+              \scriptsize{Note -1 is 1111`1111. Negative numbers are}\\
+              \scriptsize{calculated: 0 - number}\\
+              This means an overflow on unsigned ints will lead \\ to it being 0 again.\\
+              On signed ints, it will drop to negative maximum.\\
+              \scriptsize{Special cases in signed:}\\
+              \scriptsize{\(2^{n-1}\) max -> always negative as MSB = 1}\\
+              \scriptsize{Max : 100000000...}\\
+              \scriptsize{0 -> can't be negative as this bit is used for \(2^{n-1}\) }
+              }\\
               \hline
             \end{tabular}
             \hspace{-0.07in}
             \begin{tabular}[t]{@{\hskip1pt}p{6.9cm}|}
+              \hline
+              \mc{\footnotesize{Inversion} \\ 
+                \form{N(b+1) > 2^n - 1 - b > 2^n == 0}
+                \form{0-1 = -1 > 11111... > -1 - b = \overline{b}}\\
+                Okay, the idea is that -1 is the number with all bits set to 1 \\
+                This means that no matter what you do, you can't have overflow.\\
+                In fact this means that b can be inverted by subtracting it to -1.\\
+                \pic{220613-24}
+              }\\
+              \hline
               \hline
               \mc{}\\
               \hline
