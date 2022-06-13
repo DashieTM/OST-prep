@@ -395,12 +395,42 @@
               \scriptsize{Special cases in signed:}\\
               \scriptsize{\(2^{n-1}\) max -> always negative as MSB = 1}\\
               \scriptsize{Max : 100000000...}\\
-              \scriptsize{0 -> can't be negative as this bit is used for \(2^{n-1}\) }
+            \scriptsize{0 -> can't be negative as this bit is used for \(2^{n-1}\) }}\\
+            \hline
+              \mc{\scriptsize{Note that when increasing memory for signed values,} \\
+              \scriptsize{you need to use the >> operators to copy the MSB.} \\
+              \scriptsize{increasing memory for -1 -> 4 bit to 8 bit} \\ 
+              \scriptsize{0000`1111 = 15 !! WRONG !! -> 1111`1111 = -1!!}\\
+              }\\
+              \hline
+              \mc{\scriptsize{For signed left shift, check if you have spare memory} \\ 
+              \scriptsize{left shift without checking might result in loss of MSB!}\\
+              \scriptsize{4 bit max: 1001 < < < 2 = 0100 !! prefix changed !!}\\
+              }\\
+              \hline
+              \mc{\scriptsize{multiplication: series of left shifts.} \\ 
+              \mc{\scriptsize{1101 * 110 = 11`0100 + 1`1010 = 100`1110}\\
+              10 -> add 1 zero, 100 -> add 2 zero, get the sum of both \\ 
+              \scriptsize{Size increase: max double -> \(x^2\)}  \\
+              110 * 110 -> 1100 + 1`1000 = 11`1000 (3 to 6 bits) \\
+            }\\
               }\\
               \hline
             \end{tabular}
             \hspace{-0.07in}
             \begin{tabular}[t]{@{\hskip1pt}p{6.9cm}|}
+              \hline
+              \mc{\pic{220613-28} \\ \scriptsize{Note that we don't need to care about signed, if } \\
+              \scriptsize{we do not overwrite the MSB!}}\\
+              \hline
+              \mc{\scriptsize{Division} \\ 
+              should be avoided, slow operation compared to others \\ 
+              32 bit -> 20 times as long as multiplication \\ 
+              64 bit -> 80 times as long as multiplication \\ 
+              -- can be replaced with right shift for potences \\ see /10 for decimal numbers.\\
+              signed and unsigned division are completely different \\
+              \pic{220613-29}
+            }\\
               \hline
               \mc{\footnotesize{Inversion} \\ 
                 \form{N(b+1) > 2^n - 1 - b > 2^n == 0}
@@ -411,6 +441,24 @@
                 \pic{220613-24}
               }\\
               \hline
+              \mc{\scriptsize{Unsigned in java} \\
+              You can't declare unsigned integer etc, instead you just use the \\ 
+              unsigned functions. \\
+              \pic{220613-25}}\\
+              \hline
+              \mc{\scriptsize{Java comparators} \\ \pic{220613-26}}\\
+              \hline
+              \mc{Beause processors are super fast in addition an subtraction, \\
+              we can simplify equality checks by using these 2 operations.\\
+              -- example unsigned, check if a < b: \\ \pic{220613-26} \\
+              c is the carry bit, and it is only set to 1 if a < b!!\\
+              -- example signed: \\ \pic{220613-27}\\
+              -- the check for all 0 or 1 is also fast -> AND...\\
+              In java we only work with the signed interpretation by default \\ 
+              use the before mentioned special functions for unsigned!\\
+              }\\
+              \hline
+              \mc{}\\
               \hline
               \mc{}\\
               \hline
