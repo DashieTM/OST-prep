@@ -1,0 +1,185 @@
+\documentclass{article}
+\usepackage[left=-1.5mm, right=-1.5mm, top=-1mm, bottom=-1.5mm]{geometry}
+\usepackage[document]{ragged2e}
+\usepackage{graphicx}
+\usepackage{amsmath, mathtools, nccmath, amssymb}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{array, makecell}
+\usepackage{moresize}
+\usepackage[T1]{fontenc}
+\usepackage{noto-sans}
+\renewcommand\cellalign{cl}
+\renewcommand\theadalign{lc}
+\newcommand{\ns}{\\ \vspace{-0.03in}}
+\newcommand{\mc}[1]{\makecell[cl]{\vspace{-0.065in} \\ #1}}
+\newcommand{\mcc}{\makecell[{{c}}]}
+\newcommand{\mcr}{\makecell[{{r}}]}
+\newcommand{\pic}{\includegraphics[scale=0.3]}
+\newcommand{\form}[1]{\vspace{-0.03in}\\ \small{\textcolor{Red}{\(#1\)}} \\ \vspace{-0.03in}}
+\newcommand{\noskipform}[1]{\small{\textcolor{Red}{\(#1\)}}}
+\newcommand{\fpic}{\vspace{-0.05in} \\ \includegraphics[scale=0.3]}
+\newcommand{\dx}[1]{\scriptsize{\(\dfrac{d}{dx}#1\)}}
+\newcommand{\dxs}[1]{\ssmall{\(\dfrac{d}{dx}#1\)}}
+\newcommand{\dxo}{\dfrac{d}{dx}}
+\renewcommand{\b}{\textbf}
+\renewcommand{\r}[1]{\textcolor{Red}{#1}}
+%\renewcommand{\arraystretch}{1.5}
+\graphicspath{{./Pictures/}}
+\begin{document}
+    \begin{table}[ht!]
+        \begin{tiny}
+          \begin{tabular}{ccc}
+          \begin{tabular}[t]{|@{\hskip1pt}p{9cm}|}
+              \hline
+              \mc{\footnotsize{Derivation Rules} \\
+              \dx{(x^a) = a * x^{a-1} \text{ given: } x,a \in \mathbb{R} \text{ \& } x > 0}\\\\
+              \ssmall{subexamples:}\\
+              \dxs{x = 1 \to \dxo(x^1) = 1 * x^{1-1}}\\
+              \dxs{x^2 = 2x \to \dxo(x^2) = 2 * x^{2-1}}\\
+              \dxs{\dfrac{1}{x} = -\dfrac{1}{x^2} \to \dxo(x^{-1} = -1 * x^{-1-1})}\\
+              \dxs{\sqrt{x} = \frac{1}{2 * \sqrt{x}} \to \dxo(x^{\frac{1}{2}}) = \frac{1}{2 * x^{\frac{1}{2}}}}\\
+              \dx{(c) = 0 \text{ given: } c \in \mathbb{R} \text{ \& c is constant \& \r{c != factor}} }\\\\
+              \dx{(e^x) = e^x}\\\\
+              \dx{(a^x) = ln(a) * a^x \text{ because: } e^{x * ln(a)} = a^x }\\\\
+              \dx{(ln(x)) = \frac{1}{x}}\\\\
+              \dx{log_b(x) = \frac{1}{ln(b) * x } \to \text{special case for} \dxo(\frac{ln(x)}{ln(b)})}\\\\
+              \dx{sin(x) = cos(x)}\\\\
+              \dx{cos(x) = -sin(x)}\\\\
+              \dx{tan(x) = \frac{1}{cos^2(x)}}\\\\
+              \dx{tan(x) = 1 + tan^2(x)}\\\\
+              \dx{(ax) = a \to \dxo(ax) = a * 1 \to \text{ we derive x NOT a!!}}\\\
+              \dx{(3x) = a \to \dxo(3x) = 3 * 1 \to \text{ 3 is a factor!}}\\\\
+              }\\
+              \hline
+              \mc{\footnotsize{All of these derive from:} \\
+                \form{f'(a) = \lim_{h\to0} \frac{f(a+h) - f(a)}{h}}\\
+              }\\
+              \hline
+              \mc{\footnotesize{Sum Rule} \\
+              \form{(f + g)' = f' + g'}\\
+              }\\
+              \hline
+              \mc{\footnotesize{Difference Rule} \\ 
+              \form{(f - g)' = f' - g'}\\
+              }\\
+              \hline
+              \mc{\footnotesize{Product Rule} \\ 
+              \form{(f * g)' = f * g' + f' * g }\\
+              }\\
+              \hline
+              \mc{\footnotesize{Quotient Rule} \\ 
+              \form{\left(\dfrac{f(x)}{g(x)}\right)' =\dfrac{f' * g - f * g' }{g^2}}\\
+              }\\
+              \hline
+              \mc{\footnotesize{Chain Rule} \\ 
+              \form{[f(g(x))]' = f'(g(x)) * g'(x)}\\
+              \scriptsize{Example:}\\
+              \form{\dxo\sqrt{x^2 + 1} = (x^2 + 1)^{\frac{1}{2}} = \frac{1}{2} * (x^2 + 1)^{-\frac{1}{2}} * 2x}
+              \form{\frac{1}{2} * \frac{1}{\sqrt{x^2 + 1}} * 2x = \frac{2x}{2 * \sqrt{x^2 + 1}} = \frac{x}{\sqrt{x^2 + 1}}}\\
+              \scriptsize{Note: \((x^2 + 1)\) is g(x), while f is the exponent function}\\
+              \scriptsize{More examples:}\\
+              \form{\dxo sin(x^2) = sin(x^2)' * (x^2)' = cos(x^2) * 2x}\\
+              \form{\dxo sin^2(x) = \dxo(sin(x))^2 = 2 * sin(x) * cos(x)}\\
+              \form{\dxo \left(\dfrac{x - 1}{x + 1}\right)^2 = 2 * \left(\dfrac{x - 1}{x + 1}\right) * \left(\dfrac{x - 1}{x + 1}\right)'}\\
+              \form{\dxo (x + 2)^3(x)^4 = (x + 2)^3 * ((x)^4)' + ((x + 2)^3)' * (x)^4 }
+              \form{((x + 2)^3)' = 3 * (x + 2)^2 * (x + 2)' = 3 * (x + 2)^2 * 1}\\
+              \form{\dxo sin(cos[tan(x)]) = cos(cos[tan(x)]) * -sin(tan(x)) * \dfrac{1}{cos^2(x)} }
+              }\\ 
+              \hline
+              \mc{}\\
+              \hline
+              \mc{}\\
+              \hline
+              \mc{}\\
+              \hline
+              \mc{}\\
+              \hline
+              \mc{}\\
+              \hline
+            \end{tabular}
+            \hspace{-0.07in}
+            \begin{tabular}[t]{|@{\hskip1pt}p{11.90cm}|}
+              \hline
+              \mc{}\\
+              \hline
+            \end{tabular}
+          \end{tabular}
+          \hfill
+        \end{tiny}
+    \end{table}
+    \pagebreak
+    \begin{table}[ht!]
+        \begin{tiny}
+          \begin{tabular}{ccc}
+            \begin{tabular}[t]{|@{\hskip1pt}p{6.9cm}|}
+              \hline
+              \mc{}\\
+              \hline
+            \end{tabular}
+            \hspace{-0.07in}
+            \begin{tabular}[t]{|@{\hskip1pt}p{6.9cm}|}
+              \hline
+              \mc{}\\
+              \hline
+            \end{tabular}
+            \hspace{-0.07in}
+            \begin{tabular}[t]{|@{\hskip1pt}p{6.9cm}|}
+              \hline
+              \mc{}\\
+              \hline
+            \end{tabular}
+          \end{tabular}
+          \hfill
+        \end{tiny}
+    \end{table}
+    \pagebreak
+    \begin{table}[ht!]
+        \begin{tiny}
+          \begin{tabular}{ccc}
+            \begin{tabular}[t]{|@{\hskip1pt}p{6.9cm}|}
+              \hline
+              \mc{}\\
+              \hline
+            \end{tabular}
+            \hspace{-0.07in}
+            \begin{tabular}[t]{|@{\hskip1pt}p{6.9cm}|}
+              \hline
+              \mc{}\\
+              \hline
+            \end{tabular}
+            \hspace{-0.07in}
+            \begin{tabular}[t]{|@{\hskip1pt}p{6.9cm}|}
+              \hline
+              \mc{}\\
+              \hline
+            \end{tabular}
+          \end{tabular}
+          \hfill
+        \end{tiny}
+    \end{table}
+    \pagebreak
+    \begin{table}[ht!]
+        \begin{tiny}
+          \begin{tabular}{ccc}
+            \begin{tabular}[t]{|@{\hskip1pt}p{6.9cm}|}
+              \hline
+              \mc{}\\
+              \hline
+            \end{tabular}
+            \hspace{-0.07in}
+            \begin{tabular}[t]{|@{\hskip1pt}p{6.9cm}|}
+              \hline
+              \mc{}\\
+              \hline
+            \end{tabular}
+            \hspace{-0.07in}
+            \begin{tabular}[t]{|@{\hskip1pt}p{6.9cm}|}
+              \hline
+              \mc{}\\
+              \hline
+            \end{tabular}
+          \end{tabular}
+          \hfill
+        \end{tiny}
+    \end{table}
+\end{document}

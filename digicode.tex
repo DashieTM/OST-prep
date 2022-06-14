@@ -120,7 +120,7 @@
               \form{T = H(X) - H(X|Y) \text{ || } H(Y) - H(Y|X)} \form{\text{or: }|(X;Y)}
               }\\
               \hline
-              \mc{\footnotesize{Hamming distance / distance to next valid codeword} \\ \form{h =Min_{i,j}(d(x_i,x_j))} \\
+              \mc{\footnotesize{Hamming distance / distance to next valid codeword} \\ \form{h =Min_{i,j}(d(x_i,x_j)) \text{ -> } h = \text{message points} + 1} \\
                 \footnotesize{error detection distance} \\ the amount of bits that differ from input to output \\ 
               \form{e^*=h-1} \\
                 \footnotesize{error correction distance for h even} \\ \form{h=2e+2 \text{ -> } e = \dfrac{h - 2}{2}}
