@@ -20,7 +20,7 @@
 \renewcommand{\b}{\textbf}
 \renewcommand{\r}[1]{\textcolor{Red}{#1}}
 %\renewcommand{\arraystretch}{1.5}
-\graphicspath{{./Pictures/}}
+\graphicspath{{/home/dashie/Templates/Screenshots/}}
 \begin{document}
     \begin{table}[ht!]
         \begin{tiny}
@@ -130,7 +130,7 @@
               }\\
               \hline
               \mc{\footnotesize{tighly packed coderoom} \\ n = dimension of code \vspace{-0.05in}\\ m = dimension of messages \noskipform{2^m * \Sigma^e_{w=0} (^n_w) \leq 2^n}\\
-                k = dimension of control -> n = m + k \\ The code is considered to be tightly packed \\ if the equation has the result 2. aka == not smaller. \\ %\pic{220611-2}
+                k = dimension of control -> n = m + k \\ The code is considered to be tightly packed \\ if the equation has the result 2. aka == not smaller. \\ \pic{220611-2}
               }\\
               \hline
               \mc{\footnotesize{Hamming Codes} \\ The hamming code is very easy to implement \\ \form{\Sigma_i x_i * \overrightarrow{\rm P_i} \equiv \overrightarrow{\rm 0} mod 2} \\
@@ -169,15 +169,38 @@
               \hline
               \mc{\footnotesize{hamming code extension} \\ \pic{220613-17}}\\
               \hline
-              \mc{\footnotesize{RSA} \\ 
+              \mc{\pic{220614-1} \\ \pic{220614-2}}\\
+              \hline
+              \mc{\footnotesize{\r{RSA: !!Check Github for another PDF!!}} \\ 
               }\\
               \hline
               \mc{\footnotesize{RINKEL DONE}}\\
               \hline
-              
+              \mc{\r{due to space constraints, something form the last page:}}\\
+              \hline
+              \mc{\footnotesize{Floating Point Comparison}\\
+              Due to the limitation of floating point numbers,\\
+              checking for equality the regular way doesn't make sense\\
+              \pic{220614-51}\\
+              \r{This checks bit pattern!!}\\
+              Instead we check if it is approximately equal:\\
+              \pic{220614-52}\\
+              Problem with this: it's the absolute error\\
+              instead we can choose the relative error:\\
+              \pic{220614-53}\\
+              The Max makes sure the eps is based on the bigger number.\\
+              \\
+              There are still certain problems: \\ 
+              calculations close to 0 might result in the \\ 
+              relative error of 1, which is actually not an error \\
+              once again rounding errors....\\
+              }\\
+              \hline
+              \mc{\footnotesize{\r{BE AWARE OF FLOATING ERRORS!!}}}\\
+              \hline
             \end{tabular}
             \hspace{-0.07in}
-            \begin{tabular}[t]{@{\hskip1pt}p{6.9cm}|}
+            \begin{tabular}[t]{|@{\hskip1pt}p{6.9cm}|}
               \hline
               \mc{\footnotesize{potence system} \\ decimal binary and hexadecimal are all built the same way \\ 
               \form{W_a(z) = \Sigma^{n-1}_{i=0} z_i * a^i = z_{n-1} * a^{n-1} + }
@@ -265,7 +288,7 @@
         \end{tiny}
     \end{table}
     \pagebreak
-    \begin{table}[t]
+    \begin{table}[ht!]
         \begin{tiny}
           \begin{tabular}{ccc}
             \begin{tabular}[t]{|@{\hskip1pt}p{6.9cm}|}
@@ -345,7 +368,7 @@
               \hline
             \end{tabular}
             \hspace{-0.07in}
-            \begin{tabular}[t]{@{\hskip1pt}p{6.9cm}|}
+            \begin{tabular}[t]{|@{\hskip1pt}p{6.9cm}|}
               \hline
               \mc{\scriptsize{\textcolor{Red}{Division with potences is a rightshift!!}} \\ 
               \scriptsize{\textcolor{Red}{\(\dfrac{1`0111}{2^3} =\) remove 3 bits from 1`0111 -> 101}}\\
@@ -418,7 +441,7 @@
               \hline
             \end{tabular}
             \hspace{-0.07in}
-            \begin{tabular}[t]{@{\hskip1pt}p{6.9cm}|}
+            \begin{tabular}[t]{|@{\hskip1pt}p{6.9cm}|}
               \hline
               \mc{\pic{220613-28} \\ \scriptsize{Note that we don't need to care about signed, if } \\
               \scriptsize{we do not overwrite the MSB!}}\\
@@ -458,9 +481,19 @@
               use the before mentioned special functions for unsigned!\\
               }\\
               \hline
-              \mc{}\\
+              \mc{\footnotesize{Character Encoding} \\ 
+              \scriptsize{A character is encoded via a bijectional function} \\
+              \form{E'(z_0 .. z_{n-1})= f(E(z_0) .. E(z_{n-1}))}\\
+              The formula must obviously be known by both parties, as the \\ 
+              text can't be decoded otherwise.
+              }\\
               \hline
-              \mc{}\\
+              \mc{\scriptsize{ASCII}  \\ 
+                \scriptsize{\( 2^7 = 128 -> 7 bit\)} \\ 
+              \scriptsize{-- uses both printable characters and } \\
+              \scriptsize{    nonprintable control characters} \\ 
+              \scriptsize{-- introduction 1963, enacted by US president 1968}\\
+              \\}\\
               \hline
             \end{tabular}
           \end{tabular}
@@ -473,20 +506,425 @@
           \begin{tabular}{ccc}
             \begin{tabular}[t]{|@{\hskip1pt}p{6.9cm}|}
               \hline
-              \mc{}\\
+              \mc{\pic{220614-3} \\ 
+                \scriptsize{\(00_h\) \textbackslash{}0 NULL: marker for End of text}\\
+                \scriptsize{\(08_h\) \textbackslash{}b Backspace}\\
+                \scriptsize{\(09_h\) \textbackslash{}t Tabspace}\\
+                \scriptsize{\(0A_h\) \textbackslash{}n Line Feed, Newline}\\
+                \scriptsize{\(0D_h\) \textbackslash{}r Carriage Return}\\
+              }\\
+              \hline
+              \mc{\scriptsize{Problems with ASCII} \\ 
+              --  Just another standard of many, even if it's the first \\
+              --  Egnlish only, other languages can't to be encoded in ASCII\\
+              -> hence no ä ö ü ...\\
+              }\\
+              \hline
+              \mc{\scriptsize{Extensions for ASCII / Codepage} \\ 
+              ASCII can be extended since it only uses 7 bit of the \\ 
+              available 8. This means that the 8th bit can be used \\ 
+              for other characters like ä.\\
+              \scriptsize{range: \(80_h \text{ to } \text{FF}_h\)}\\
+              \scriptsize{Extension announced with MSB = 1}\\
+              \scriptsize{No extension MSB = 0}\\
+              \scriptsize{Extended ASCII remains compatible to regular ASCII}\\
+              \scriptsize{Many different Codepages defined in ISO.}\\
+              Codepages have the problem that the sender and receiver \\ 
+              need to again know what codepage is being used, since \\ 
+              otherwise the receiver might not be able to decode \\
+              certain characters properly.
+              }\\
+              \hline
+              \mc{\footnotesize{Unicode} \\ 
+              \scriptsize{UTF-8 (Standard) UTF-16 UTF-32}\\
+              \scriptsize{max 17 · 64K - 2K = 1M + 62K = 1,112,064 Code-Points}\\
+              \scriptsize{work in progress}\\
+              }\\
+              \hline
+              \mc{\scriptsize{Codepoints(CP): Number of a character}\\
+              \scriptsize{CodeUnit(CU): Unit for displaying encoded character}\\
+              \scriptsize{UTF-32 -- all CP displayed with one CU}\\
+              \scriptsize{UTF-16 -- all CP displayed with 1-2 CUs}\\
+              \scriptsize{UTF-8  -- all CP displayed with 1-4 CUs}\\
+              UTF-16 and 32 need to check for endianness \\ 
+              since they are above 8 bit.\\
+              \scriptsize{UTF-32 is limited to 21 bit!!} \\ 
+              Rest often used for other things.
+              }\\
+              \hline
+              \mc{\scriptsize{UTF-8}\\
+              \scriptsize{UTF-8 it itself another ASCII extension}\\
+              \scriptsize{UTF-8 -> 7 bit for characters }\\
+              \scriptsize{\r{max 4 Bytes chained together -> 4x UTF-8 block}}\\
+              \pic{220614-6} \\ \pic{220614-7} \\ \pic{220614-8} \\
+              }\\
+              \hline
+              \mc{\scriptsize{UTF-16} \\ 
+              \scriptsize{\r{max 4 Bytes chained together -> 2x UTF-16 block}}\\
+            \pic{220614-9}\\}\\ 
               \hline
             \end{tabular}
             \hspace{-0.07in}
-            \begin{tabular}[t]{@{\hskip1pt}p{6.9cm}|}
+            \begin{tabular}[t]{|@{\hskip1pt}p{6.9cm}|}
               \hline
-              \mc{}\\
+              \mc{\pic{220614-10} \\ \pic{220614-11}\\
+                \scriptsize{\(U_1 (D800 \leq U_1 \geq \text{DBFF})\) is the high surrogate}\\
+                \scriptsize{\(U_0 (DC00 \leq U_0 \geq \text{DFFF})\) is the low surrogate}\\
+              \scriptsize{codepoints above \(10000_h\) are supplementary codepoints}\\
+              \scriptsize{codepoints c with \(\text{p0000}_h \leq c \leq \text{pFFFF}_h \) are on plane p}\\
+              \scriptsize{p = 0 is the basic multilingual plane -> 1 UTF-16 block}\\
+              \scriptsize{\(1 \leq p \leq 16\) are the supplementary planes}\\
+              }\\
+              \hline
+              \mc{\scriptsize{UTF-32} \\
+              \scriptsize{first 11 bits used for other things}\\
+              \scriptsize{Big-Endian by default -> convert for little endian}\\
+              \scriptsize{21 significant bits}\\
+              \scriptsize{max 4 bytes -> ONLY 1 UTF-32 block}\\
+              Most used internally in programming languages \\ 
+              and or applications.\\
+              }\\
+              \hline
+              \mc{\scriptsize{Byte-Order-Mark (BOM) \(\text{FEFF}_h\)} \\ 
+              If this is at the start of a file, \\
+              then you can read the encoding from it: \\
+              \pic{220614-12}\\
+              }\\
+              \hline
+              \mc{\scriptsize{Encoding examples}\\
+              \pic{220614-13}}\\
+              \hline
+              \mc{\footnotesize{Enian(ness)} \\ 
+              \scriptsize{Big-endian and Little-endian}\\
+              \scriptsize{Big-endian -> MSB leftmost bit, LSB rightmost bit}\\
+              \scriptsize{Little-endian -> MSB rightmost bit, LSB leftmost bit}\\
+              \pic{220614-4}\\
+              Important since for example Intel processors have 1 Byte \\ 
+              as the smallest adressable unit. This means you need \\ 
+              to know the Endian of that byte, as you otherwise \\ 
+              wouldn't be certain if you hit the LSB or the MSB first.\\
+              }\\
+              \hline
+              \mc{\scriptsize{Endian Problem} \\ 
+                \scriptsize{\r{Little-endian is objectively better}}\\
+              example: accessing the first 8 bits from a 16 bit number.\\
+              It would make sense to only request the 8 bits, but \\ 
+              this doesn't work for big Endian as\\
+              it ends with the smallest number. \\
+              \pic{220614-5} \\
+              For little endian, the access could have been smaller -> 8 bit.\\
+              Thank fibonacci for fucking up his translation of numbers.\\
+              }\\
+              \hline
+              \mc{\scriptsize{Endian Problem solution}\\
+              \scriptsize{-- shift to Mixed or Middle endian} \\
+              \scriptsize{-- Acceptance of both Endians}\\
+              These solutions are needed since it is unlikely that \\
+              there will unity with endianness.
+              }\\
+              \hline
+              \mc{\scriptsize{Encoding in Java} \\ 
+              \scriptsize{Char receives a UTF-16 Code Unit}\\
+              \scriptsize{Strings are an object with length and CodePoints}\\
+              This is different from C where you have to iterate \\ 
+              to find the NULL symbol 0x00. Java uses more memory \\
+              but it is faster to check length etc.\\
+              \pic{220614-14} \\ \pic{220614-15} \\
+              Certain operations are not permitted on Strings directly\\
+              such as + - delete, insert, replace etc\\ 
+              as they would change the string, and a string is immutable!\\
+              \scriptsize{To mitigate this problem, use buffers and Stringbuilder}\\
+              }\\
+              \hline
+              \mc{\scriptsize{ByteBuffer, CharBuffer, IntBuffer}\\ 
+              \scriptsize{contains: array, capacity, limit and pos}\\
+              -- array is the storage for the type -> char, int \\ 
+              -- capacity is the size of the entire buffer, it is immutable\\
+              -- limit is the amount of changeable elements inside the buffer\\
+              -- pos is the relative position for read and write operations\\
+              }\\
               \hline
             \end{tabular}
             \hspace{-0.07in}
-            \begin{tabular}[t]{@{\hskip1pt}p{6.9cm}|}
+            \begin{tabular}[t]{|@{\hskip1pt}p{6.9cm}|}
               \hline
-              \mc{}\\
+              \mc{\ \pic{220614-16}\\ \pic{220614-17}}\\
               \hline
+              \mc{\scriptsize{InputStreams} \\ 
+              \scriptsize{Sequential processing of bytes}\\
+              int read() -> 0-255 per byte \\ 
+              int read(byte[] d, int s , int c) amount of read bytes \\ 
+              int read(byte[] d)\\ 
+              all of these function return -1 for exceptions\\
+              \scriptsize{FileInputStream}\\
+              reads data via functions from the operating system.\\
+              should only be used in combination with read(byte[], ...) \\
+              as it would be extremely slow otherwise.\\
+              \scriptsize{BufferedInputStream}\\
+              reads data form another Stream and bufferes it.\\
+              very fast read()\\
+              if size is unknown then other streams should be used.\\
+              \pic{220614-18}\\
+              \scriptsize{InputStreamReader} \\ 
+              read form an InputStream \\ 
+              has to convert bytes into chars\\
+              It uses a decoder d as specified: \\
+              \pic{220614-19}\\
+              \scriptsize{Charsets in Java} \\ 
+              Charset.newDecoder() or Charset.newEncoder() \\
+              create decoder or encoder.\\
+              static SortedMap<String,Charset> Charset.availableCharsets()\\
+              returns all available Charsets for this VM.\\
+              \scriptsize{FileReader (extends FileInputStream)}\\
+              -- just calls super(FileInputStream)
+              -- only available with default encoder\\
+              -- for more encoders you have to call FileInputStream manually\\
+              \scriptsize{BufferedReader}\\
+              -- reads data blockwise from a reader and buffers it\\
+              check BufferedInputStream for similarity \\ 
+              String readLine(): gives all chars until next line\\
+              \pic{220614-20}\\
+              }\\
+              \hline
+              \mc{\scriptsize{Streams and Resource-Leaks}\\
+              Because most Streams need resources from the OS, \\
+              we need to close these streams again. Otherwise leak!\\
+              The try is for possible exceptions, obviously\\
+              \pic{220614-21}\\
+              or the simplified and more safe way (\r{Try-With-Resources}): \\
+              (em.close can cause exception!)\\
+              \pic{220614-22}\\
+              -- types have to extend the closeable type. \\ 
+              -- resources are automatically closed in the opposite manner\\
+              -- try with resources guarantees safe closing.\\
+              }\\
+              \hline
+              \mc{\scriptsize{Units in Programming languages} 
+              Obviously there is no type of km, or kg..\\
+              We therefore use comments to signify the km or kg for humans\\
+              Keep in mind that this means we also have to implement the \\
+              conversion ourselves, as the computer doesn't know you want \\ 
+              to calculate meters + kilometers!!\\
+              \pic{220614-23}}\\
+              \hline       
+              \mc{\scriptsize{Fixed Point Numbers: Integers with Commas!}\\
+              \pic{220614-24}\\
+              adding K to K then converting is very easy:\\
+              \pic{220614-25}\\
+              even adding a single bit is not that hard\\
+              however note the ending 5.000... oof \\
+              \pic{220614-26} \\
+              }\\
+              \hline
+            \end{tabular}
+          \end{tabular}
+          \hfill
+        \end{tiny}
+    \end{table}
+    \pagebreak
+    \begin{table}[ht!]
+        \begin{tiny}
+          \begin{tabular}{ccc}
+            \begin{tabular}[t]{|@{\hskip1pt}p{6.9cm}|}
+              \hline
+              \mc{This can still be displayed, but: \\
+              \pic{220614-27}\\
+              5.001 can't be displayed, only the one on the left and right.\\
+              Inaccuracy due to integer limitations! \\
+              \scriptsize{only multiples of \(2^{-10}\) can be displayed}\\
+              }\\
+              \hline
+              \mc{\scriptsize{Biggest number in Klotz} \\ 
+              \pic{220614-28}\\
+              Note that \(\Sigma_{k=0}^31\) due to Integer being max 32 bit!\\
+              \scriptsize{Cut Numbers after comma} \\ 
+              \pic{220614-29} \\
+              \scriptsize{Cut Numbers before comma} \\ 
+              \pic{220614-30} \\
+              \pic{220614-31} \\ 
+              \pic{220614-32}
+              }\\
+              \hline
+              \mc{\footnotesize{Floating Point Numbers} \\\\ 
+              \scriptsize{\r{prefix MSB s: 1 bit}}\\
+              \scriptsize{\r{Significand z: BitString of number}} \\ 
+              \scriptsize{\r{Exponent a: float -> 8, double -> 11}}\\
+              \scriptsize{\r{Encoded Exponent k: explained below}}\\
+              \scriptsize{\r{bias b: \(-(2^{e-1} -1)\)}}\\
+              \scriptsize{\r{precision p: float -> 24, double -> 53}}\\
+              \pic{220614-33} \\
+              \scriptsize{Different forms of floating point numbers:} \\ 
+              \pic{220614-34}
+              }\\
+              \hline
+              \mc{\scriptsize{Normalized Numbers} \\ 
+              \pic{220614-35} \\ 
+              \scriptsize{\r{The hidden bit is NOT an actual bit!!}}\\
+              \scriptsize{\r{It is used inside the formula for calculation!}}\\
+              }\\
+              \hline
+              \mc{\scriptsize{Encoding of Exponents} \\ 
+              \scriptsize{The bitpatterns 0..0 and 1...1 are not valid exponents}\\
+              \scriptsize{\r{The exponent is encoded as k = a - b, b = \(-(2^{e-1} -1)\)}}\\ \vspace{-0.03in} \\
+              \scriptsize{\(\text{-> } k \in [1,2^e - 2]\) }\\
+              \scriptsize{\(\text{-> } a \in [-(2^{e-1} - 2), 2^{e-1} - 1] = [-(b - 1), b]\)}\\
+              -- for float : \( b = 2^{8-1} - 1 = 127 \land a \in [-126, 127] \)\\
+              -- for double : \( b = 2^{11 - 1} - 1 = 1023 \land a \in [-1022,1023] \)\\
+              }\\
+              \hline
+              \mc{\scriptsize{Value of a floating point number} \\ 
+                \form{W(x) = (-1)^s * 2^{k+b} * (1 + (z * 2^{-(p-1)}))}\\
+                \scriptsize{Example: Note z is the variable here, not the significand} \\ 
+                \pic{220614-36}\\
+                \scriptsize{Special Values:} \\ 
+                \pic{220614-37} \\ 
+              }\\
+              \hline
+            \end{tabular}
+            \hspace{-0.07in}
+            \begin{tabular}[t]{|@{\hskip1pt}p{6.9cm}|}
+              \hline
+              \mc{\pic{220614-38} \\ 
+              }\\
+              \hline
+              \mc{\footnotesize{Rounding Modes} \\ 
+              \scriptsize{mathematical operations are done before rounding!}} \\ 
+              \hline
+              \mc{\scriptsize{Round to nearest:} \\
+              \r{submode 1: Ties to Even:} round to an even number, LSB = 0\\
+              0.1 -> 0, 1.1 -> 2.0, 3.2 -> 2.0 \\
+              -- cancels itself out over time\\
+              -- better when numbers with 0.1 are added\\
+              -- \r{default variant}\\
+              \r{submode 2: Ties away from Zero} \\ 
+              Round to next number 1.1 -> 2.0}\\
+              \hline
+              \mc{\scriptsize{Round toward Zero:} truncate -> 1.5325 -> 1.0}\\
+              \hline
+              \mc{\scriptsize{Round toward +Infinity:} Ceiling 1.1 -> 2.0}\\
+              \hline
+              \mc{\scriptsize{Round toward -Infinity:} Floor, 1.9 -> 1.0}\\
+              \hline
+              \mc{\scriptsize{Rounding errors} \\ 
+              \pic{220614-39}\\
+              \scriptsize{This error can now be quantified:} \\ 
+              first we display a real number x as a floating point number\\
+              \form{W(x) \text{ -> } x\in \mathbb{R} }\\
+              \scriptsize{The absolut error \r{E} is:} \\ 
+              \form{E(x) = |W(x) - x| }\\
+              \scriptsize{The relative error \r{e} is:}\\
+              \form{e(x) = \left|\dfrac{E(x)}{x}\right| = \left|\dfrac{R(x) - x}{x} \right|}\\
+              \scriptsize{For the number from before, an example:} \\ 
+              \pic{220614-40}\\
+              \pic{220614-41}
+              }\\
+              \hline
+              \mc{\scriptsize{Machine Epsilon: \(\epsilon\) The biggest possible error} \\
+              \form{\epsilon = 2^{-24} = 2^{-2}} \\ 
+              The smallest number \(\epsilon \), so that \(1 + \epsilon > 1 \)\\
+              Note: the worst error is therefore always the flip of a highest bit\\
+              In this case the flip of \(2^{-23}\) to 1 after \(2^{-24}\) was rounded.\\ 
+              }\\
+              \hline
+              \mc{\scriptsize{In Programming languages the epsilon is defined as:}\\
+              \scriptsize{the distance from 1 to the next smallest number \(2^{-23}\)}\\
+              Therefore the biggest error is often \\
+              a slight bit bigger than we have defined \\ 
+              \pic{220614-42}\\}\\
+              \hline
+              \mc{\scriptsize{Float and Double in Java} \\ 
+              \scriptsize{double default when using . -> 0.5 }\\
+              optionally defined with d -> 0.5d\\
+              \scriptsize{float -> 0.5f f is necessary!}\\
+            }\\
+            \hline
+          \mc{\footnotesize{Addition of floating point numbers }\\
+            \scriptsize{1. check prefix, if different do subtraction} \\
+            \scriptsize{2. set prefix for result -> 0 or 1}\\
+            \scriptsize{3. if exponents are different, shift smaller number to right}\\
+            \r{First shift a single 1 -> hidden bit !} \\
+            \r{Shift the rest with 0s}\\
+            \scriptsize{4. do addition just like with integers} \\ 
+            \scriptsize{5. (if carry == 1) normalize result}\\
+            \r{increment exponent by one}\\
+            \r{shift significand to the right by 1}\\
+            \pic{220614-43}\\
+        }\\
+            \hline
+            
+            \end{tabular}
+            \hspace{-0.07in}
+            \begin{tabular}[t]{|@{\hskip1pt}p{6.9cm}|}
+              \hline
+              \mc{\footnotesize{Guard digits} \\ 
+              \scriptsize{-- just as hidden as the hidden bit} \\ 
+              \scriptsize{-- implemented in hardware not software}\\ 
+              \scriptsize{-- essentially a flag for rounding!}\\
+              \pic{220614-44} \\ 
+              \pic{220614-45}
+            }\\
+            \hline
+            \mc{\footnotesize{Special cases for floating point numbers}
+              \scriptsize{\(\pm 0\) -> a = 0 .. 0 \& z = 0 .. 0}\\
+              \scriptsize{subnormal number -> a = 0 .. 0 \& z NOT 0 .. 0}\\
+              \scriptsize{\(\pm \infty\) -> a = 1 .. 1 \& z = 0 .. 0}\\
+              \scriptsize{NaN -> a = 1 .. 1 \& z NOT 0 .. 0}\\
+              The reason we want things such as infinity is this: \\
+              \pic{220614-46}\\
+              We either check for overflows the entire time! \\ 
+              Or we just continue calculation with infinity \\ 
+              And then at THE END we check if it's infinite \\ 
+              \pic{220614-47}
+            }\\
+            \hline
+            \mc{\footnotesize{Calculation with \(\infty \)}
+              \scriptsize{exchange \(\infty \) with x and define: \(\lim{x\to\infty} \)}\\
+              \scriptsize{if the limit exists, the result is the limit}\\
+              \scriptsize{if the limit doesn't exist, result is NaN}\\
+              \pic{220614-48}\\
+            }\\
+            \hline
+            \mc{\footnotesize{Calculation with NaN}\\
+            \scriptsize{\r{ALL OPERATION WITH NaN RESULT IN NaN!}}\\
+            \scriptsize{Other operations might also result in NaN:}\\
+            \pic{220614-49}\\
+            There are also some implementations for exceptions inside floating points:\\
+            qNaN: propagates exception\\
+            sNaN: throws exception\\
+            }\\
+            \hline
+            \mc{\footnotesize{+0/-0}\\
+            \scriptsize{+0 is the underflow for positive numbers}\\
+            \scriptsize{-0 is the underflow for negative numbers}\\
+            This is important since certain functions like log\\
+            are only defined for positive numbers, \\
+            therefore we need a positive 0.\\
+            Should we have a rounded down negative number\\
+            then we would still want a negative 0 \\
+            otherwise it would suddenly be considered to be positive.\\
+            }\\
+            \hline
+            \mc{\footnotesize{Subnormal Numbers} \\
+            \scriptsize{No hidden bit! Used when the exponent is too small} \\ 
+            \form{V(x) = (-1)^s * 2^{-(b-1)} * z * 2^{p-1}}\\
+            Often used as a gradual underflow \\
+            or for semi results during a calculation\\
+            \pic{220614-50}\\
+            }\\
+            \hline
+            \mc{\footnotesize{Integers as Floating Point Numbers}\\
+            \form{G(x) = 2^{k-b} * 1}\\
+            Regular numbers obviously don't need comma shifting!!\\
+            \scriptsize{16million + 1 is the smallest number that can't be displayed}\\
+            -- a=23 only integers can be displayed\\
+            -- a=24 only even numbers can be displayed\\
+            -- a=25 only numbers divisible by 4 can be displayed\\
+            -- a=26 only numbers divisible by 8 can be displayed\\
+            -- \(a \pm 23 \) only numbers divisible by \(2^{a-23}\) can be displayed
+            }\\
+            \hline
+            \mc{\footnotesize{check page 2 for floating point comparison!}}\\
+            \hline
             \end{tabular}
           \end{tabular}
           \hfill
