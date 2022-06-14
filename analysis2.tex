@@ -29,9 +29,9 @@
     \begin{table}[ht!]
         \begin{tiny}
           \begin{tabular}{ccc}
-          \begin{tabular}[t]{|@{\hskip1pt}p{9cm}|}
+          \begin{tabular}[t]{|@{\hskip1pt}p{10cm}|}
               \hline
-              \mc{\footnotsize{Derivation Rules} \\
+              \mc{\footnotesize{Derivation Rules} \\
               \dx{(x^a) = a * x^{a-1} \text{ given: } x,a \in \mathbb{R} \text{ \& } x > 0}\\\\
               \ssmall{subexamples:}\\
               \dxs{x = 1 \to \dxo(x^1) = 1 * x^{1-1}}\\
@@ -39,10 +39,15 @@
               \dxs{\dfrac{1}{x} = -\dfrac{1}{x^2} \to \dxo(x^{-1} = -1 * x^{-1-1})}\\
               \dxs{\sqrt{x} = \frac{1}{2 * \sqrt{x}} \to \dxo(x^{\frac{1}{2}}) = \frac{1}{2 * x^{\frac{1}{2}}}}\\
               \dx{(c) = 0 \text{ given: } c \in \mathbb{R} \text{ \& c is constant \& \r{c != factor}} }\\\\
-              \dx{(e^x) = e^x}\\\\
-              \dx{(a^x) = ln(a) * a^x \text{ because: } e^{x * ln(a)} = a^x }\\\\
+              \dx{(e^x) = e^x \to \dxo(e^x) = ln(e) * e^x * x' = 1 * 1 * e^x}\\\\
+              \dx{(a^x) = ln(a) * a^x \to \dxo(a^x) = x' * ln(x) * a^x \text{ because: } e^{x * ln(a)} = a^x }\\\\
+              \ssmall{Note for this rule:}\\
+              \ssmall{\( \dxo(2^{2x + 1}) = ln(2x + 1) * 2^{2x + 1} * (2x + 1)' = ln(2x + 1) * 2^{2x + 1} * 2  \)}\\\\
               \dx{(ln(x)) = \frac{1}{x}}\\\\
               \dx{log_b(x) = \frac{1}{ln(b) * x } \to \text{special case for} \dxo(\frac{ln(x)}{ln(b)})}\\\\
+              \ssmall{this is the case because of base change in lograrithmic functions!}\\
+              \ssmall{\( log_a(x) = \dfrac{ln(x)}{ln(a)} = \dfrac{log_c(x)}{log_c(a)} \to \dxo log_a(x) = \dfrac{ln(x)}{ln(a)} -> \dxo ln(x) = \dfrac{\dfrac{1}{x}}{ln(a)} = \dfrac{1}{ln(a) * x}\)}\\
+              \ssmall{c can be any number!}\\\\
               \dx{sin(x) = cos(x)}\\\\
               \dx{cos(x) = -sin(x)}\\\\
               \dx{tan(x) = \frac{1}{cos^2(x)}}\\\\
@@ -51,7 +56,7 @@
               \dx{(3x) = a \to \dxo(3x) = 3 * 1 \to \text{ 3 is a factor!}}\\\\
               }\\
               \hline
-              \mc{\footnotsize{All of these derive from:} \\
+              \mc{\footnotesize{All of these derive from:} \\
                 \form{f'(a) = \lim_{h\to0} \frac{f(a+h) - f(a)}{h}}\\
               }\\
               \hline
@@ -86,19 +91,35 @@
               \form{\dxo sin(cos[tan(x)]) = cos(cos[tan(x)]) * -sin(tan(x)) * \dfrac{1}{cos^2(x)} }
               }\\ 
               \hline
-              \mc{}\\
-              \hline
-              \mc{}\\
-              \hline
-              \mc{}\\
-              \hline
-              \mc{}\\
-              \hline
-              \mc{}\\
-              \hline
             \end{tabular}
             \hspace{-0.07in}
-            \begin{tabular}[t]{|@{\hskip1pt}p{11.90cm}|}
+            \begin{tabular}[t]{|@{\hskip1pt}p{10.90cm}|}
+              \hline
+              \mc{\footnotesize{Implicit Differentiation} \\ 
+                \dx{(x^2 + y^2 = 9) \to 2x + \dfrac{d}{dx}((y)^2) * \dfrac{dy}{dx}(y) = 0 \to 2x + (2y * y') = 0 \to y' = \dfrac{-2x}{2y}}\\\\
+                \scriptsize{!! Remember that this is only necessary if y needs to be derived !!}\\
+              }\\
+              \hline
+              \mc{\footnotesize{Higher Derivatives} \\ 
+              \scriptsize{The best idea for higher derivatives is distance s, velocity v and acceleration a.}\\
+              \scriptsize{\(\dfrac{d}{dt}(s(t)) = v(t) = s'(t) \text{ || } \dfrac{d}{dt}(v(t)) = a(t) = s''(t) = v'(t) \)}\\\\
+              \scriptsize{\r{This is why the acceleration on earth -> gravity is constant!! HOLY FUCK}}
+              }\\
+              \hline
+              \mc{\footnotesize{Taking Derivations higher than 3} \\ 
+              \scriptsize{\(1:f' \to 2:f'' \to 3:f''' \to \r{4:f^{(4)}} \to \r{n:f^{(n)}}\)}}\\\\
+              \hline
+              \mc{}\\
+              \hline
+              \mc{}\\
+              \hline
+              \mc{}\\
+              \hline
+              \mc{}\\
+              \hline
+              \mc{}\\
+              \hline
+              \mc{}\\
               \hline
               \mc{}\\
               \hline
