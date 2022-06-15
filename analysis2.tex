@@ -16,13 +16,16 @@
 \newcommand{\mcr}{\makecell[{{r}}]}
 \newcommand{\pic}{\includegraphics[scale=0.3]}
 \newcommand{\form}[1]{\vspace{-0.03in}\\ \small{\textcolor{Red}{\(#1\)}} \\ \vspace{-0.03in}}
+\newcommand{\forms}[1]{\vspace{-0.01in}\\ \scriptsize{\textcolor{Red}{\(#1\)}\\ \vspace{-0.01in}}}
 \newcommand{\noskipform}[1]{\small{\textcolor{Red}{\(#1\)}}}
 \newcommand{\fpic}{\vspace{-0.05in} \\ \includegraphics[scale=0.3]}
-\newcommand{\dx}[1]{\scriptsize{\(\dfrac{d}{dx}#1\)}}
+\newcommand{\dx}[1]{\scriptsize{\textcolor{Red}{\(\dfrac{d}{dx}#1\)}}}
 \newcommand{\dxs}[1]{\ssmall{\(\dfrac{d}{dx}#1\)}}
 \newcommand{\dxo}{\dfrac{d}{dx}}
 \renewcommand{\b}{\textbf}
 \renewcommand{\r}[1]{\textcolor{Red}{#1}}
+\newcommand{\lims}[1]{\lim\limits_{#1}}
+\newcommand{\atb}[1]{\int_a^b #1 \,dx}
 %\renewcommand{\arraystretch}{1.5}
 \graphicspath{{./Pictures/}}
 \begin{document}
@@ -57,7 +60,7 @@
               }\\
               \hline
               \mc{\footnotesize{All of these derive from:} \\
-                \form{f'(a) = \lim_{h\to0} \frac{f(a+h) - f(a)}{h}}\\
+                \form{f'(a) = \lims{h\to0} \frac{f(a+h) - f(a)}{h}}\\
               }\\
               \hline
               \mc{\footnotesize{Sum Rule} \\
@@ -109,19 +112,56 @@
               \mc{\footnotesize{Taking Derivations higher than 3} \\ 
               \scriptsize{\(1:f' \to 2:f'' \to 3:f''' \to \r{4:f^{(4)}} \to \r{n:f^{(n)}}\)}}\\\\
               \hline
-              \mc{}\\
+              \mc{\footnotesize{Related Rates}\\
+              \scriptsize{In a Sphere, the rate of change of V is \(100cm^3/s\)}\\
+              \scriptsize{calculate the rate of change in r = 25cm given rate of change in V}\\
+              \scriptsize{\(\dfrac{dV}{dt} = 100cm^3/s\) , \(r=25cm\)}\\
+              \form{\dfrac{dV}{dt} = (4 * \pi * r^2) * \dfrac{dr}{dt} \to \dfrac{dr}{dt} = \dfrac{100cm^2/s}{4 * \pi * (25cm)^2} = \dfrac{dr}{dt} =  \dfrac{1}{25 * \pi}cm/s}\\
+              }\\
               \hline
-              \mc{}\\
+              \mc{\footnotesize{Local Maximum and Minimum}\\
+              \scriptsize{The \r{first} derivative of local maximum and minimum MUST be 0!}\\
+              \scriptsize{This includes turning points, aka slope is just 0!}\\\\
+              \scriptsize{Local Minimum \r{lMin}:}\\
+              \form{f''(x) > 0 \to \text{ given f(x) = 0}}\\
+              \scriptsize{OR}\\
+              \form{f'(lMin - 1) < 0 \text{ \&\& } f'(lMin) = 0 \text{ \&\& } f'(lMin + 1) \geq 0}\\
+              \scriptsize{Essentially the minimum is where the slope goes from negative to positive}\\
+              \scriptsize{with the turning point being the minimum with slope 0}\\\\
+              \scriptsize{Local Maximum \r{lMax}:}\\
+              \form{f''(x) < 0 \to \text{ given f(x) = 0}}\\
+              \scriptsize{OR}\\
+              \form{f'(lMax - 1) \geq 0 \text{ \&\& } f'(lMax) = 0 \text{ \&\& } f'(lMax + 1) < 0}\\
+              \scriptsize{Essentially the maximum is where the slope goes from positive to negative}\\
+              \scriptsize{with the turning point being the maximum with slope 0}\\\\
+              \scriptsize{Absolute minimum and maximum will never be exceeded -> sine absolute-max = 1}\\
+              }\\
               \hline
-              \mc{}\\
+              \mc{\footnotesize{Inflection Point}\\
+              \scriptsize{This is the point where the function stops its increase or decrease in slope.}\\
+              \scriptsize{Therefore it is the second derivative and is equal to 0}\\
+              \pic{220615-1}\\
+              }\\
               \hline
-              \mc{}\\
+              \mc{\footnotesize{Use of Maxima}\\
+              \scriptsize{Building a fence adjacent to a river. length l = 2x + y!}\\
+              \scriptsize{Given length of 2400m how big do x and y need to be for the maximum area A?}\\
+              \form{l = y + 2x \to y = 2400m - 2x \to A = (2400m - 2x) * x }\\
+              \scriptsize{Remember when you had to use the UI function on the calculator? Yeah, no more!}\\
+              \form{Max \to f'(A) = f'((244m - 2x) * x = 0 \to x = \dfrac{2400m}{4} = 600m \to y = 1200m}
+              }\\
               \hline
-              \mc{}\\
-              \hline
-              \mc{}\\
-              \hline
-              \mc{}\\
+              \mc{\footnotesize{Limits:}\\
+              \scriptsize{The limit expresses that a variable is approaching a value}\\
+              \form{\lims{x\to\infty} \text{x approaching infinity}}\\
+              \scriptsize{This is often used when trying to determine functions that might give an invalid result at x}\\
+              \scriptsize{\(f(x)=\dfrac{x - 1}{x^2 - 1} \to f(1)=?? \)}\\
+              \scriptsize{With limit we can say what we would expect the value to be, if the function would continue as before}\\
+              \scriptsize{aka what is the value of f(1) if the function would not show this abnormality?}\\
+              \scriptsize{\(\lims{x\to1}f(1)=0.5\)}\\\\
+              \scriptsize{This also applies to functions that go to infinity, or functions that are constant for a range.}\\
+              \pic{220615-2} \\ 
+              }\\
               \hline
             \end{tabular}
           \end{tabular}
@@ -132,21 +172,112 @@
     \begin{table}[ht!]
         \begin{tiny}
           \begin{tabular}{ccc}
-            \begin{tabular}[t]{|@{\hskip1pt}p{6.9cm}|}
+            \begin{tabular}[t]{|@{\hskip1pt}p{10cm}|}
               \hline
-              \mc{}\\
+              \mc{\pic{220615-3}\\
+              \scriptsize{Limit Rules}\\
+              \scriptsize{Addition:}\\
+              \form{\lims{x\to a}[f(x) + g(x)] = \lims{x\to a} f(x) + \lims{x\to a} g(x)}\\
+              \scriptsize{Subtraction:}\\
+              \form{\lims{x\to a}[f(x) - g(x)] = \lims{x\to a} f(x) - \lims{x\to a} g(x)}\\
+              \scriptsize{Multiplication:}\\
+              \form{\lims{x\to a}[f(x) * g(x)] = \lims{x\to a} f(x) * \lims{x\to a} g(x)}\\
+              \scriptsize{Division:}\\
+              \form{\lims{x\to a}\left[\dfrac{f(x)}{g(x)}\right] = \dfrac{\lims{x\to a} f(x)}{\lims{x\to a} g(x)} \to \text{ given lim != 0}}\\
+              \scriptsize{Multiplication by constant:}\\
+              \form{\lims{x\to a}[c * f(x)] = c * \lims{x\to a}f(x) \to \text{ given c is constant} }\\
+              \scriptsize{Exponent:}\\
+              \form{\lims{x\to a}[f(x)]^2 = [\lims{x\to a} f(x)]^2}\\
+              \scriptsize{Root:}\\
+              \form{\lims{x\to a}\sqrt[n]{[f(x)]} = \sqrt[n]{\lims{x\to a} f(x)}}\\
+              \scriptsize{x to a:}\\
+              \form{\lims{x\to a}(x) = a}\\
+              \scriptsize{x to a with exponent:}\\
+              \form{\lims{x\to a}(x^n) = a^n}\\
+              \scriptsize{x to a with root:}\\
+              \form{\lims{x\to a}(\sqrt[n]{x}) = \sqrt[n]{a}}\\
+              \scriptsize{limit of a constant:}\\
+              \form{\lims{x\to a}(c) = c \to \text{ given c is constant}}\\\\
+              \scriptsize{Examples:}\\
+              \form{\lims{x\to -2}\left(\dfrac{x^3 + 2x^2 - 1}{5 - 3x}\right) = \dfrac{\lims{x\to -2}(x^3 + 2x^2 - 1)}{\lims{x\to -2}(5 -3x)}}
+              \form{\dfrac{\lims{x\to -2}(x^3) + \lims{x\to -2}
+              (2x^2) - \lims{x\to -2}(1)}{\lims{x\to -2}(5) - \lims{x\to -2}(3x)}  = \dfrac{-8 + 8 - 1}{5 + 6} = -\dfrac{1}{11}}\\
+              \scriptsize{Sometimes we need to eliminate terms in order to move on}\\\\
+              \scriptsize{limit and differntiation -> \r{L'Hospital's Rule:}}\\\\
+              \scriptsize{\r{If either the left side -> \(\dfrac{f(x)}{g(x)}\) is indeterminate}}\\
+              \scriptsize{\r{then we can use this rule! Otherwise it doesn't work, and doesn't make sense!}}\\\\
+              \form{\lims{x\to a}\left(\dfrac{f(x)}{g(x)}\right) = \lims{x\to a}\left(\dfrac{f'(x)}{g'(x)}\right)}\\
+              \scriptsize{Examples:}\\
+              \form{\lims{x\to 0}\left(\dfrac{sin x}{x}\right) = \lims{x\to 0}\left(\dfrac{cos x}{1}\right) = \lims{x\to 0}(cos(x)) = 1 }\\
+              \pic{220615-4}\\ 
+              }\\
               \hline
             \end{tabular}
             \hspace{-0.07in}
-            \begin{tabular}[t]{|@{\hskip1pt}p{6.9cm}|}
+            \begin{tabular}[t]{|@{\hskip1pt}p{10.9cm}|}
               \hline
-              \mc{}\\
+              \mc{\pic{220615-5}\\ \pic{220615-6} \\ 
+              }\\
               \hline
-            \end{tabular}
-            \hspace{-0.07in}
-            \begin{tabular}[t]{|@{\hskip1pt}p{6.9cm}|}
+              \mc{\footnotesize{Reforming terms for L'Hospital} \\ 
+              \scriptsize{reforming a product}\\
+              \pic{220615-7}\\ 
+              \scriptsize{reforming an exponent with logarithm}\\
+              \pic{220615-8} \\}\\
               \hline
-              \mc{}\\
+              \mc{\footnotesize{Infinity calculation rules} \\
+                {\begin{tabular}[t]{|c|c|c|}
+              \hline
+              \mc{\forms{\infty + c = \infty}} &
+              \mc{\forms{\infty + \infty = \infty}} &
+              \mc{\forms{\infty - \infty = NaN}} \\
+              \hline
+              \mc{\forms{\infty * c = \infty \to c \neq 0}} &
+              \mc{\forms{\infty * \infty = \infty}} &
+              \mc{\forms{\infty * 0 = NaN} }\\
+              \hline
+              \mc{\forms{\dfrac{c}{0} = \pm \infty \to c \neq 0}}&
+              \mc{\forms{\dfrac{c}{\infty} = 0}}&
+              \mc{\forms{\dfrac{\infty}{c} = \infty \to c \neq 0}}\\
+              \hline
+              \mc{\forms{\dfrac{\infty}{0} = \infty}}&
+              \mc{\forms{\dfrac{0}{0} = NaN}}&
+              \mc{\forms{\dfrac{\infty}{\infty} = NaN}}\\
+              \hline
+              \mc{\forms{0^c \to c > 0 \backslash{} (c = 1) = 0}}&
+              \mc{\forms{0^0 = \text{1 or NaN}}}&
+              \mc{\forms{\infty^0 = NaN}}\\
+              \hline
+              \mc{\forms{0^c \to c < 0 = \infty}}&
+              \mc{\forms{k^{\infty} \to k > 1 = \infty}}&
+              \mc{\forms{k^{\infty} \ to 0 < k < 1 = 0}}\\
+              \hline
+              \mc{\forms{0^{\infty} = 0}}&
+              \mc{\forms{\infty^{\infty} = \infty}}&
+              \mc{\forms{1^{\infty} = NaN}}\\
+              \hline
+              \end{tabular}}
+              }\\\\
+              \hline
+              \mc{\small{\r{Integration}}}\\
+              \hline
+              \mc{\footnotesize{Similarity to limit}\\
+              \scriptsize{Just like limit, you can do it by intuition, by simply adding}\\
+              \scriptsize{more and more rectangles into a function to get the area of said function.}\\
+              \pic{220615-9} \\ \pic{220615-10}\\
+              \scriptsize{But just like with limit, there is a more elegant and generalized way. -> \r{\(\int_{a}^{b} x \,dx\)}}\\
+              }\\
+              \hline
+              \mc{\footnotesize{Definite Integrals and Integral Terms} \\ 
+              \form{\int_a^b f(x) \,dx = F(b) - F(a)}\\
+              \scriptsize{-- The weird symbol is called integral sign}\\
+              \scriptsize{-- The a and b are the upper and lower limits respectively}\\
+              \scriptsize{-- f(x) is the integrand, the function to be integrated}\\
+              \scriptsize{-- \r{F(a) or F(b) is the antiderivative -> opposite calculation to derivation}}\\
+              \scriptsize{-- dx is the infinitesimal, no real use, but is required for notation}\\\\
+              \scriptsize{An integral with specific limits -> range is called a \r{Definite Integral}\\
+              \scriptsize{\r{Here the range is a to b}}}\\
+              }\\
               \hline
             \end{tabular}
           \end{tabular}
@@ -157,21 +288,63 @@
     \begin{table}[ht!]
         \begin{tiny}
           \begin{tabular}{ccc}
-            \begin{tabular}[t]{|@{\hskip1pt}p{6.9cm}|}
+            \begin{tabular}[t]{|@{\hskip1pt}p{10cm}|}
+                \hline
+                \mc{\footnotesize{Indefinite Integrals} \\ 
+                \scriptsize{Since we can't put in values with infinite integrals, we instead}\\
+                \scriptsize{just evaluate the antiderivative F(x), which in itself is yet another function}\\
+                \form{\int f(x) \, dx = F(x) + C \to \text{ look at that, the holy constant C}}\\
+                \scriptsize{\r{Note that the C always has to be written, as the integral function}}\\
+                \scriptsize{\r{covers a range of values with F(x) plus some constant! Hence + C!}}\\\\
+                \scriptsize{hence we can also go back again -> reversibility of integrals and derivations}\\
+                \scriptsize{In other words, we differentiate the antiderivative!}\\
+                \form{F'(x) = f(x) \to [F(x) + C]' = f(x) \to \text{ C vanishes -> constant!}}\\
+                \scriptsize{One might ask now, why do we not consider it with definite integrals?}\\
+                \scriptsize{Check how the C would affect a - b:}\\
+                \form{\atb{x^2} = \left(\dfrac{b^3}{3} + C \right) - \left(\dfrac{a^3}{3} + C\right) = \dfrac{b^3}{3} - \dfrac{a^3}{3} \to C - C = 0 }\\
+                \scriptsize{as one can see, the C simply gets canceled.}\\
+              }\\
               \hline
-              \mc{}\\
+              \mc{\footnotesize{Integral Rules} \\
+              \scriptsize{The Integral of a to b is the same as the negative integral of b to a}\\
+              \form{\int^a_b x \,dx = - \int^b_a x \,dx}\\
+              \scriptsize{The Integral of a to a is 0 -> as the area would be 0. a - a = 0}\\
+              \form{\int_a^a x \,dx = 0}\\
+              \scriptsize{Since we are talking about areas, 2 areas in the same function add up:}\\
+              \pic{220615-11}\\ \vspace{-0.5in} \\ \hspace{1in} \noskipform{\int_a^b x \,dx + \int_b^c x \,dx = \int_a^c x \,dx}\\ \vspace{0.3in} \\
+              \scriptsize{If we integrate a constant, then the constant will multiple with x = 1: }\\
+              \form{\int_a^b c \,dx = c * (b - a) \to \int_1^5 3 \,dx = 3 * (5 - 1) = 12 \to \text{ given c is constant}}\\
+              \pic{220615-12}\\
+              \form{\int c * f(x) \,dx = c * \int f(x) \, dx \to \text{ given c is constant}}\\
+              \scriptsize{multiplying the integrand with a function can be done outside of the integral!}\\
+              \form{\int c * f(x) \,dx = c * \int f(x) \, dx}\\
+              \scriptsize{Sum of Integrals}\\
+              \form{\int [f(x) + g(x)] = \int f(x) + \int g(x)}\\
+              \scriptsize{Difference of Integrals}\\
+              \form{\int [f(x) - g(x)] = \int f(x) - \int g(x)}\\
+              \scriptsize{Integrals with y >= 0 and y < 0}\\
+              \pic{220615-13}\\
+              \scriptsize{Area of integrals with y below and above 0 at some point}\\
+              \pic{220615-14}\\
+              \scriptsize{often used:}\\
+              \form{\int x^n \, dx = \dfrac{x^{n+1}}{n + 1} + C}\\
+              \small{\r{And lastly the most important function!}}\\\\
+              \normalsize{\r{\(\dxo \int f(x) \, dx = f(x)\)}}\\\\
+              }\\
+              \hline
+              \mc{\footnotesize{Example for Integral calculation}\\
+              \form{\int_0^3 (x + 5) \,dx = F(3) - F(0) \to F(x) = (\dfrac{x^2}{2} + 5x)} }
+              \form{\to F(3) - F(0) = \left(\dfrac{3^2}{2} + 5 * 3 \right) - \left(\dfrac{0^2}{2} + 5 * 0\right) = \dfrac{39}{2} }\\
               \hline
             \end{tabular}
             \hspace{-0.07in}
-            \begin{tabular}[t]{|@{\hskip1pt}p{6.9cm}|}
+            \begin{tabular}[t]{|@{\hskip1pt}p{10.9cm}|}
               \hline
-              \mc{}\\
-              \hline
-            \end{tabular}
-            \hspace{-0.07in}
-            \begin{tabular}[t]{|@{\hskip1pt}p{6.9cm}|}
-              \hline
-              \mc{}\\
+              \mc{\normalsize{\r{Integrals do not have the product rule}} \\\\ 
+                \footnotesize{\r{This means that we need to find a different way to remove factors}}\\
+              \footnotesize{\r{In fact, Integrals can only be taken over sums and differences}}\\
+              \pic{220615-15}\\
+              }\\
               \hline
             \end{tabular}
           \end{tabular}
