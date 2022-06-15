@@ -346,10 +346,35 @@
               \pic{220615-15}\\
               }\\
               \hline
-              \mc{\normalsize{Subtitution Rule} \\ 
-              \scriptsize{This turns complicated nested integrands into smaller pieces}\\\\
-              \normalsize{\r{\(\int f[g(x) * g'(x)]\, dx = \int f(u) du \)}}\\
-              \normalsize{\r{\(\ u = g(x) \text{ || } du = g'(x) dx\)}}\\\\
+              \mc{\Large{Substitution Rule} \\ 
+              \scriptsize{This turns complicated nested integrands into smaller pieces}\\
+              \scriptsize{This is the correspondent technique to the chain rule!}\\\\
+              \Large{\r{\(\int f[g(x)] * g'(x)\, dx = \int f(u) du \)}}\\\\
+              \Large{\r{\(\ u = g(x) \text{ || } du = g'(x) dx\)}}\\\\
+              \pic{220615-16}\\
+              \scriptsize{Example:}\\
+              \form{\int 2x cos(x^2 + 1) \, dx \to 2x = g'(x) \to cos(x^2 + 1) = f[g(x)] \to (x^2 + 1) = g(x)}\\
+              \form{(x^2 + 1) = u \to (x^2 + 1)' = 2x \text{ this means we can use subtitution!}}\\
+              \form{\int cos(u) 2x \, dx = \int cos(u) \, du = sin(u) + C = sin(x^2 + 1) + C }\\
+              \scriptsize{Second example with factors}\\
+              \form{\int x^2 \sqrt{x^3 + 1} \, dx \to x^2 = g'(x) \to f(g(x)) = \sqrt{x^3 + 1} \to g(x) = (x^3 + 1)}\\
+              \form{(x^3 + 1)' = \dfrac{1}{3}x^2 \text{ note 1/3 is a factor, it can be removed from the term.}}\\
+              \form{\dfrac{1}{3}* \int \sqrt{u} * x^2 \, dx = \dfrac{1}{3} * \int u^{\frac{1}{2}} \, du = \dfrac{1}{3} * -\dfrac{x^{\frac{3}{2}}}{\frac{3}{2}} }\\
+              \form{\frac{1}{3} * \frac{2}{3} * u^{\frac{3}{2}} + C = \frac{2}{9} * (x^3 + 1)^{\frac{3}{2}} + C}\\
+              }\\
+              \hline\mc{\Large{Integration by Parts} \\ 
+              \scriptsize{This turns complicated nested integrands into smaller pieces}\\
+              \scriptsize{This is the correspondent technique to the product rule!}\\\\
+              \Large{\r{\(\int [f(x) * g'(x) + f'(x) * g(x)] \, dx = f(x) * g(x) \)}}\\\\
+              \Large{\r{\(\int [f(x) * g'(x)] \,dx + \int [f'(x) * g(x)] \, dx = f(x) * g(x) \)}}\\\\
+              \Large{\textcolor{Blue}{\(\int [f(x) * g'(x)] \, dx =  f(x) * g(x) - \int [f'(x) * g(x)] \, dx \)}}\\\\
+              \scriptsize{\r{Simply the opposite to the Product rule!!}}\\
+              \scriptsize{\r{Unlike the substitution method, this works for EVERY product!}}\\\\
+              \Large{\textcolor{Blue}{\(\int u \, dv = uv - \int v \, du \)}}\\\\
+              \scriptsize{The same as before, just with a simplified view.}\\
+              \scriptsize{Please note: this technique doesn't always simplify the term, sometimes}\\
+              \scriptsize{a different method is better!}\\
+              \pic{220615-17}\\ \pic{220615-18}\\
               }\\
               \hline
             \end{tabular}
@@ -361,19 +386,35 @@
     \begin{table}[ht!]
         \begin{tiny}
           \begin{tabular}{ccc}
-            \begin{tabular}[t]{|@{\hskip1pt}p{6.9cm}|}
+            \begin{tabular}[t]{|@{\hskip1pt}p{10cm}|}
+              \hline
+              \mc{\pic{220615-19}\\ \pic{220615-20} }\\
+              \hline
+              \mc{\scriptsize{Example Integration by Parts:} \\ 
+                \form{\int \dfrac{ln(x)}{x^2} \, dx \to ln(x) = f(x) \to x^2 = g'(x)}\\
+                \form{\int \dfrac{ln(x)}{x^2} \, dx = -\left(\dfrac{ln(x)}{x}\right) - \int \dfrac{1}{x} * -\dfrac{1}{x} }\\
+                \form{\int \dfrac{ln(x)}{x^2} \, dx = -\left(\dfrac{ln(x)}{x}\right) + \int \dfrac{1}{x^2}}\\
+                \form{\int \dfrac{ln(x)}{x^2} \, dx = -\left(\dfrac{ln(x)}{x}\right) - \dfrac{1}{x} + C}\\
+              }\\
+              \hline
+              \mc{\Large{Integration by Trigonometric Substitution}\\
+              \footnotesize{This can be done with the following 3 situations}\\\\
+              \Large{\r{\(\sqrt{a^2 - x^2} \text{ || } \sqrt{a^2 + x^2} \text{ || } \sqrt{x^2 - a^2}\)}}\\
+              \Large{\r{Where a can be any positive number}}\\\\
+              \pic{220615-21}\\ \pic{220615-22}\\
+              }\\
+              \hline
+              \mc{}\\
+              \hline
+              \mc{}\\
+              \hline
+              \mc{}\\
               \hline
               \mc{}\\
               \hline
             \end{tabular}
             \hspace{-0.07in}
-            \begin{tabular}[t]{|@{\hskip1pt}p{6.9cm}|}
-              \hline
-              \mc{}\\
-              \hline
-            \end{tabular}
-            \hspace{-0.07in}
-            \begin{tabular}[t]{|@{\hskip1pt}p{6.9cm}|}
+            \begin{tabular}[t]{|@{\hskip1pt}p{10.9cm}|}
               \hline
               \mc{}\\
               \hline
