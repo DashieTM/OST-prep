@@ -51,9 +51,9 @@
               \ssmall{this is the case because of base change in lograrithmic functions!}\\
               \ssmall{\( log_a(x) = \dfrac{ln(x)}{ln(a)} = \dfrac{log_c(x)}{log_c(a)} \to \dxo log_a(x) = \dfrac{ln(x)}{ln(a)} -> \dxo ln(x) = \dfrac{\dfrac{1}{x}}{ln(a)} = \dfrac{1}{ln(a) * x}\)}\\
               \ssmall{c can be any number!}\\\\
-              \dx{sin(x) = cos(x)}\\\\
-              \dx{cos(x) = -sin(x)}\\\\
-              \dx{tan(x) = \frac{1}{cos^2(x)}}\\\\
+              \dx{sin(x) = cos(x)} \hspace{0.5in} \dx{csc(x) = (-1) * csc(x) * cot(x)}\\\\
+              \dx{cos(x) = -sin(x)} \hspace{0.5in} \dx{sec(x) = sec(x) * tan(x) = }\\\\
+              \dx{tan(x) = \frac{1}{cos^2(x)}} \hspace{0.5in} \dx{cot(x) = (-1) * csc^2(x) }\\\\
               \dx{tan(x) = 1 + tan^2(x)}\\\\
               \dx{(ax) = a \to \dxo(ax) = a * 1 \to \text{ we derive x NOT a!!}}\\\
               \dx{(3x) = a \to \dxo(3x) = 3 * 1 \to \text{ 3 is a factor!}}\\\\
@@ -346,14 +346,15 @@
               \pic{220615-15}\\
               }\\
               \hline
-              \mc{\Large{Substitution Rule} \\ 
+              \mc{\Large{Substitution Rule \r{usually the best!}} \\ 
               \scriptsize{This turns complicated nested integrands into smaller pieces}\\
-              \scriptsize{This is the correspondent technique to the chain rule!}\\\\
+              \scriptsize{This is the correspondent technique to the chain rule! Note f(x) can be f(x) = x}\\\\
               \Large{\r{\(\int f[g(x)] * g'(x)\, dx = \int f(u) du \)}}\\\\
+              \Large{\r{OR: \(\int g(x) * g'(x)\, dx = \int u \, du \)}}\\\\
               \Large{\r{\(\ u = g(x) \text{ || } du = g'(x) dx\)}}\\\\
               \pic{220615-16}\\
               \scriptsize{Example:}\\
-              \form{\int 2x cos(x^2 + 1) \, dx \to 2x = g'(x) \to cos(x^2 + 1) = f[g(x)] \to (x^2 + 1) = g(x)}\\
+              \form{\int 2x * cos(x^2 + 1) \, dx \to 2x = g'(x) \to cos(x^2 + 1) = f[g(x)] \to (x^2 + 1) = g(x)}\\
               \form{(x^2 + 1) = u \to (x^2 + 1)' = 2x \text{ this means we can use subtitution!}}\\
               \form{\int cos(u) 2x \, dx = \int cos(u) \, du = sin(u) + C = sin(x^2 + 1) + C }\\
               \scriptsize{Second example with factors}\\
@@ -402,25 +403,165 @@
               \Large{\r{\(\sqrt{a^2 - x^2} \text{ || } \sqrt{a^2 + x^2} \text{ || } \sqrt{x^2 - a^2}\)}}\\
               \Large{\r{Where a can be any positive number}}\\\\
               \pic{220615-21}\\ \pic{220615-22}\\
+              \Large{SohCahToa / ChoShaCao}\\
+              \scriptsize{\(sin = \dfrac{opposite}{hypotenuse}\)}
+              \hspace{0.1in}
+              \scriptsize{\(cos = \dfrac{adjacent}{hypotenuse}\)}
+              \hspace{0.1in}
+              \scriptsize{\(tan = \dfrac{opposite}{adjacent}\)}\\\\
+              \scriptsize{\(csc = \dfrac{hypotenuse}{opposite}\)}
+              \hspace{0.1in}
+              \scriptsize{\(sec = \dfrac{hypotenuse}{adjacent}\)}
+              \hspace{0.1in}
+              \scriptsize{\(cot = \dfrac{adjacent}{opposite}\)}\\\\
+              \pic{220616-1}\\
+              \pic{220616-2}\\
               }\\
-              \hline
-              \mc{}\\
-              \hline
-              \mc{}\\
-              \hline
-              \mc{}\\
-              \hline
-              \mc{}\\
               \hline
             \end{tabular}
             \hspace{-0.07in}
             \begin{tabular}[t]{|@{\hskip1pt}p{10.9cm}|}
               \hline
-              \mc{}\\
+              \mc{\Large{\r{Steps for Integration by Trigonometric Substitution}}\\\\
+              \large{\r{1. Check if the term matches one of the 3 possible scenarios}}\\
+              \large{\r{2. Replace all x with one of the signatures}}\\
+              \large{\r{3. Replace the dx with d\(\Theta\) \(\dfrac{dx}{d\Theta}\) }}\\ 
+              \large{\r{-- This means taking the derivation of x }}\\
+              \large{\r{4. simplify and integrate, don't forget the + C}}\\
+              \large{\r{5. Put in the values of x into the triangle to get the result}}\\
+              \large{\r{6. Simplify if needed.}}\\
+              }\\
+              \hline
+              \mc{\Large{\r{Integral Lookup table}}\\
+              \pic{220616-3}\\
+              }\\
+              \hline
+              \mc{\Large{\r{Substitution without 2 functions}}\\
+              \pic{220616-4}\\
+              }\\
+              \hline
+              \mc{\scriptsize{}Another example as brainfuck:}\\
+              \pic{220616-5}\\
+              \hline
+              \mc{\Large{\r{Factor plays}} \\\\
+              \large{\r{\(\int x * sin(x^2) \, dx\)}}\\\\
+              \normalsize{This seems like there is no way to take the integral.}\\
+              \normalsize{However, look at x, we only need the factor 2 to make it work.}\\
+              \normalsize{How about we just slap a 1/2 infront to make up for the missing 2?}\\
+              \large{\r{!! \(\int x * sin(x^2) \, dx == \dfrac{1}{2} * \int 2x * sin(x^2) \, dx\) !!}}\\\\
+              \normalsize{Now we can just do regular substitution to get this:}\\\\
+              \large{\r{\( \dfrac{-cos(x^2)}{2} + C \)}}\\\\
+              }\\
+              \hline
+              \mc{\scriptsize{Another Example:} 
+                \form{\int x^3 * sin(x^2) \, dx}\\
+                \scriptsize{strategy: change term}\\
+                \form{\int x^2 * x * sin(x^2) \, dx}\\
+                \scriptsize{strategy: integral by parts}\\
+                \form{\int x^2 \to u * (x sin(x^2)) \to du = uv - \int v * du}\\
+                \scriptsize{strategy: integrate dv to v with strategy substitution and factor play}\\
+                \form{\r{\dfrac{1}{2}}\int \r{2} * x sin(x^2) \, dx = \dfrac{1}{2}-cos(x^2) }\\
+                \form{\int u * du = x^2 * \dfrac{-1}{2}cos(x^2) - \int 2x * \dfrac{-1}{2}cos(x^2) }\\
+              }\\
               \hline
             \end{tabular}
           \end{tabular}
-          \hfill
-        \end{tiny}
+        \hfill
+      \end{tiny}
+    \end{table}
+    \pagebreak
+    \begin{table}[ht!]
+        \begin{tiny}
+          \begin{tabular}{ccc}
+            \begin{tabular}[t]{|@{\hskip1pt}p{10cm}|}
+              \hline
+                \mc{
+                \scriptsize{strategy: integrate v du with strategy substitution and factor play}\\
+                \form{\int 2x * \dfrac{-1}{2}cos(x^2) = \int x * -cos(x^2)  = \r{\dfrac{1}{2}} \int \r{2}x * -cos(x^2) = \dfrac{-1}{2}sin(x^2) }\\
+                \form{\int u * du = \r{x^2 * \dfrac{-1}{2}cos(x^2) + \dfrac{1}{2}sin(x^2) \b{ + C }}}\\
+                \scriptsize{C is only necessary at the END of the integral.}\\
+                \scriptsize{Putting it in before isn't wrong, but there is no point!}\\
+                }\\
+                \hline
+                \mc{\footnotesize{Improper Integrals}\\
+                \scriptsize{These are integrals with strange ranges:}\\
+                \large{\r{\(\int_a^\infty f(x) \, dx\)}} \hspace{0.5in} \large{\r{\(\int_{-\infty}^b f(x) \, dx\)}}\\\\
+                \large{\r{\(\int_{-\infty}^\infty f(x) \, dx\)}} \hspace{0.5in} \large{\r{\(\int_a^b f(x) \, dx\)}}\\
+                \hspace{1.2in} \large{ contains a discontinuity}\\\\
+                \pic{220616-6}\\ \pic{220616-7} \\ \pic{220616-8}\\
+                }\\
+              \hline
+              \mc{\small{\r{Taylor Series}}\\\\
+              \large{\r{\(g(x) = \sum_{k=0}^\infty a_k (x - x_0)^k\)}}\\\\
+              \large{\r{\(a_k = \dfrac{g^{(k)}(x0)}{k!}\)}}\\\\
+              \footnotesize{The difference between a taylor series and a fourier series}\\
+              \footnotesize{is that a taylor series can be any polynomial, fourier is made of trig functions}
+              }\\\\
+              \hline
+              \mc{\Large{Fourier Series}\\\\
+                \footnotesize{First we need to understand why the fourier series even works}\\
+                \footnotesize{Every 90 degrees, the sin wave will be 0, -> sin(0), sin(90) ...}\\
+                \footnotesize{This is regardless of how fast the frequency is!.}\\
+                \footnotesize{So no matter what you multiply a sine wave with, 0 will be 0 90 will be 0}\\
+                \pic{220616-9}\\
+                \footnotesize{Adding to this, the fourier series can already be read out of this.}\\
+                \footnotesize{check the top of these sine waves, the maximum almost looks like }\\
+                \footnotesize{a rectangle, aka a -1 0 1 signal!!, with just 4 different sine waves!}\\\\
+                \Large{At last, the actual series:}\\\\
+                \Large{\r{\(s_N(x) = a_0 + \sum_{k=1}^\infty a_k \, cos(\omega k \, x) + b_k \, sin(\omega k \, x)\)}}\\\\
+              }\\
+              \hline
+            \end{tabular}
+            \hspace{-0.07in}
+            \begin{tabular}[t]{|@{\hskip1pt}p{10.9cm}|}
+              \hline
+              \mc{\footnotesize{Fourier Terms}\\\\
+              \footnotesize{\r{p = Period / primitive period (if possible)}}\\
+              \footnotesize{\r{\(\alpha\) = variable to multiply a period -> \(f(\alpha x)\) >> default 0}}\\\
+              \footnotesize{\r{p(new) = Calculated Period when \(a \geq 1\) ->\(\dfrac{p}{a}\)}}\\\\
+              \scriptsize{\r{smallest period == primitive period}}\\
+              \scriptsize{The fastest time that the function repeats itself -> sin(360)}\\
+              \scriptsize{\(f(x+p) = f(x) \to sin(x + 360) = sin(x) \) }\\
+              \scriptsize{Even every multiple of 360 gives the same period, just multiple times.}\\
+              \scriptsize{\(f(x+2p) = f(x) \to sin(x + 2 * 360) = sin(x + 720) = sin(x))\)}\\\\
+              \scriptsize{\r{Constant periodic function}}\\
+              \scriptsize{For a constant function, there is no primitive period.}\\
+              \scriptsize{I mean how, a constant doesn't change so the minimum period is 0....}\\
+              \scriptsize{for a constant function, every p > 0 is a valid period}\\\\
+              \scriptsize{\r{Multiplying a periodic function}}\\
+              \scriptsize{Take a look at sin(x), if we multiply x with a number, what happens to the period?}\\
+              \scriptsize{\(sin(2x) \to sin(2*0) = 0 \to sin(2 * 180) = sin(360) = 0\)}\\
+              \scriptsize{As you can see the period gets halved, it is now 180 instead of 360.}\\
+              \scriptsize{This can be calculated by the following}\\
+              \scriptsize{\r{\(f(\alpha x) \to f = \dfrac{p}{a} \to sin(2x) \to f = \dfrac{360}{2} = 180\)}}\\\\
+              \scriptsize{\r{Periodic Function Addition}}\\
+              \scriptsize{Adding a function with period p to another function with period p}\\
+              \scriptsize{results in another function with period p!}\\
+              \scriptsize{\r{\(h(x) = f(x) + g(x) \to pf = pg\)}}\\
+              \footnotesize{\r{This is also called a Linear Combination!}}\\\\
+              \scriptsize{\r{}}\\
+              \scriptsize{}\\
+              \scriptsize{\r{}}\\
+              \scriptsize{}\\
+              \scriptsize{\r{}}\\
+              \scriptsize{}\\
+              }\\
+              \hline
+              \mc{\foonotesize{Additionterms}\\
+              \large{\r{\(sin(x + y) = sin(x) * cos(y) \pm sin(y) * cos(x) \)}}\\
+              \large{\r{\(cos(x + y) = cos(x) * cos(y) \pm sin(y) * sin(x) \)}}\\
+              }\\
+              \hline
+              \mc{\normalsize{T-Periodic}\\\\
+              \large{\r{\( a_0 = \dfrac{1}{T} \int_0^T f(t) \, dt \)}}\\\\
+              \large{\r{\( a_1 = \dfrac{1}{T} \int_0^T f(t) cos(\omega lt) \, dt \)}}\\\\
+              \large{\r{\( b_1 = \dfrac{1}{T} \int_0^T f(t) sin(\omega lt) \, dt \)}}\\\\
+              \large{\r{\( \int_0^\infty (f(t) - S_N(t))^2 \, dt \to^{N\to \infty} 0 \)}}\\\\
+              }\\
+              \hline
+            \end{tabular}
+          \end{tabular}
+        \hfill
+      \end{tiny}
     \end{table}
 \end{document}
