@@ -5,6 +5,7 @@
 \usepackage{amsmath, mathtools, nccmath, amssymb}
 \usepackage[dvipsnames]{xcolor}
 \usepackage{array, makecell}
+\usepackage{moresize}
 \usepackage[T1]{fontenc}
 \usepackage{noto-sans}
 \renewcommand\cellalign{cl}
@@ -15,10 +16,16 @@
 \newcommand{\mcr}{\makecell[{{r}}]}
 \newcommand{\pic}{\includegraphics[scale=0.3]}
 \newcommand{\form}[1]{\vspace{-0.03in}\\ \small{\textcolor{Red}{\(#1\)}} \\ \vspace{-0.03in}}
+\newcommand{\forms}[1]{\vspace{-0.01in}\\ \scriptsize{\textcolor{Red}{\(#1\)}\\ \vspace{-0.01in}}}
 \newcommand{\noskipform}[1]{\small{\textcolor{Red}{\(#1\)}}}
 \newcommand{\fpic}{\vspace{-0.05in} \\ \includegraphics[scale=0.3]}
+\newcommand{\dx}[1]{\scriptsize{\textcolor{Red}{\(\dfrac{d}{dx}#1\)}}}
+\newcommand{\dxs}[1]{\ssmall{\(\dfrac{d}{dx}#1\)}}
+\newcommand{\dxo}{\dfrac{d}{dx}}
 \renewcommand{\b}{\textbf}
 \renewcommand{\r}[1]{\textcolor{Red}{#1}}
+\newcommand{\lims}[1]{\lim\limits_{#1}}
+\newcommand{\atb}[1]{\int_a^b #1 \,dx}
 %\renewcommand{\arraystretch}{1.5}
 \graphicspath{{./Pictures/}}
 \begin{document}

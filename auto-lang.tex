@@ -1,0 +1,328 @@
+\documentclass{article}
+\usepackage[left=-1.5mm, right=-1.5mm, top=-1mm, bottom=-1.5mm]{geometry}
+\usepackage[document]{ragged2e}
+\usepackage{graphicx}
+\usepackage{pict2e}
+\usepackage{amsmath, mathtools, nccmath, amssymb}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{array, makecell}
+\usepackage{moresize}
+\usepackage[T1]{fontenc}
+\usepackage{noto-sans}
+\renewcommand\cellalign{cl}
+\renewcommand\theadalign{lc}
+\newcommand{\ns}{\\ \vspace{-0.03in}}
+\newcommand{\mc}[1]{\makecell[cl]{#1}}
+\newcommand{\mcc}{\makecell[{{c}}]}
+\newcommand{\mcr}{\makecell[{{r}}]}
+\newcommand{\pic}{\includegraphics[scale=0.3]}
+\newcommand{\form}[1]{\vspace{-0.03in}\\ \small{\textcolor{Red}{\(#1\)}} \\ \vspace{-0.03in}}
+\newcommand{\forms}[1]{\vspace{-0.01in}\\ \scriptsize{\textcolor{Red}{\(#1\)}\\ \vspace{-0.01in}}}
+\newcommand{\noskipform}[1]{\small{\textcolor{Red}{\(#1\)}}}
+\newcommand{\fpic}{\vspace{-0.05in} \\ \includegraphics[scale=0.3]}
+\newcommand{\dx}[1]{\scriptsize{\textcolor{Red}{\(\dfrac{d}{dx}#1\)}}}
+\newcommand{\dxs}[1]{\ssmall{\(\dfrac{d}{dx}#1\)}}
+\newcommand{\dxo}{\dfrac{d}{dx}}
+\newcommand{\hs}{\hspace{0.5in}}
+\renewcommand{\b}{\textbf}
+\renewcommand{\r}[1]{\textcolor{Red}{#1}}
+\newcommand{\blu}[1]{\textcolor{Blue}{#1}}
+\newcommand{\gre}[1]{\textcolor{Green}{#1}}
+\newcommand{\yel}[1]{\textcolor{Yellow}{#1}}
+\newcommand{\ora}[1]{\textcolor{Orange}{#1}}
+\newcommand{\lims}[1]{\lim\limits_{#1}}
+\newcommand{\atb}[1]{\int_a^b #1 \,dx}
+%\renewcommand{\arraystretch}{1.5}
+\graphicspath{{./Pictures/}}
+\makeatletter
+\DeclareRobustCommand{\bigplus}{%
+  \mathop{\vphantom{\sum}\mathpalette\@bigplus\relax}\slimits@
+}
+\newcommand{\@bigplus}[2]{\smash{\vcenter{\hbox{\make@bigplus{#1}}}}}
+\newcommand{\make@bigplus}[1]{%
+  \sbox\z@{$\m@th#1\sum$}%
+  \setlength{\unitlength}{\wd\z@}%
+  \begin{picture}(1.4,1.4)
+  %\roundcap
+  \linethickness{.17ex}
+  \Line(.7,.14)(.7,1.26)
+  \Line(.14,.7)(1.26,.7)
+  \end{picture}%
+}
+\DeclareRobustCommand{\bigtimes}{%
+  \mathop{\vphantom{\sum}\mathpalette\@bigtimes\relax}\slimits@
+}
+\newcommand{\@bigtimes}[2]{\vcenter{\hbox{\make@bigtimes{#1}}}}
+\newcommand{\make@bigtimes}[1]{%
+  \sbox\z@{$\m@th#1\sum$}%
+  \setlength{\unitlength}{\wd\z@}%
+  \begin{picture}(1,1)
+  %\roundcap
+  \linethickness{.17ex}
+  \Line(.1,.1)(.9,.9)
+  \Line(.1,.9)(.9,.1)
+  \end{picture}%
+}
+\makeatother
+\begin{document}
+    \begin{table}[ht!]
+        \begin{normalsize}
+          \begin{tabular}{cc}
+          \begin{tabular}[t]{|@{\hskip1pt}p{10.475cm}|}
+              \hline
+              \mc{\r{Predicate:}\\ 
+              a mathematical predicate can be True or False.\\
+              predicates are functions with boolean return values:\\
+              P, Q(n), R(x,y,z)
+              }\\
+              \hline
+              \mc{\r{Logical Operators:}\\
+              AND: \(P \land Q\) || OR: \(P \lor Q\) || NOT: \(\lnot P\)  \\ 
+              Implication: \(P \implies Q = \lnot P \lor Q\)\\
+              }\\
+              \hline
+              \mc{\r{Distributive Rule}\\
+              \(P \land (Q \lor R) = (P \land Q) \lor (P \land R)\)\\
+              \( P \lor (Q \land R) = (P \lor Q) \land (P \lor R) \)\\
+              }\\
+              \hline
+              \mc{\begin{tabular}{ll}
+              \mc{\hspace{-0.08in}\r{De Morgans Law}\\
+              \(\lnot (P \land Q) = \lnot P \lor \lnot Q\)\\
+              \(\lnot (P \lor Q) = \lnot Q \implies \lnot P\)\\
+              \(P \implies Q = \lnot Q \implies \lnot P\)\\
+            }\hspace{-0.09in} & \vline 
+              \mc{\r{Implication}\\
+                \(P \implies Q = True\) \& \(\lnot P \implies Q = True\)\\
+              \(P \implies \lnot Q = False\) \\
+              \(\lnot P \implies \lnot Q = True\)
+              }
+              \end{tabular}
+              }\\
+              \hline
+              \mc{\r{Quantors}\\
+              \begin{tabular}{cc}
+              \mc{\r{OR:} \( \bigvee_{k=0}^n P_k\)\\
+              P true for any \(k \in {0 .. n}\)}&
+              \mc{\r{AND:} \(\bigwedge_{k=0}^n P_k\)\\
+              P true for all \(k \in n\)}\\
+              \mc{\r{All:} \(\forall k \in {0 .. n} = P_k \)\\
+              for all k P = True}&
+              \mc{\r{Exists:} \(\exists k \in {0 .. n} = P_k\)\\
+              a k exists where P = True
+              }\\
+              \end{tabular}
+              }\\
+              \hline
+              \mc{\r{Normalforms}\\
+              \begin{tabular}{cc}
+              \mc{\r{disjunctive}\\
+              \((x1 \land x2 ) \lor (\overline{x1} \land x2) \lor (x1 \land \overline{x2})\)
+              }&
+              \mc{\r{conjunctive}\\
+              \((x1 \lor x2) \land (\overline{x1} \lor x2) \land (x1 \lor \overline{x2})\)
+              }\\
+              \end{tabular}\\
+              \footnotesize{These are useful for true and false tables}\\
+              \footnotesize{This one would result to true if x1 or x2 is true.}\\
+              }\\
+              \hline
+              \mc{\r{Quantities:}\\
+              \(\emptyset = \{\}\) \hs \([n] = \{0 .. n\}\) \hs \{a .. z\}\\
+              \begin{tabular}{ll}
+                \mc{\r{Union:}\\ \(A \cup B = \{x | x \in A \lor x \in B\}\)} &
+                \mc{\r{Intersection:}\\ \(A \cap B = \{x | x \in A \land x \in B\}\)}\\
+                \mc{\r{Complement:} \\ \(\overline{A} = \{x | x \notin A\}\)}&
+                \mc{\r{Difference:} \\ \(A \setminus B = \{x \in A | x \notin B\}\)}
+              \end{tabular}
+              }\\
+              \hline
+              \mc{\r{Pairs}
+                \(A \times B = \{(a,b) | a \in A \land b \in B\}\)
+              }\\
+              \hline
+              \mc{\r{n-Tuples}
+              \(\bigtimes_{k=0}^n A_i = \{(a_o,a_i,..,a_n)| a_i \in A_i \}\)
+              }\\
+              \hline
+              \mc{
+              \r{Undirected Graph}\\ \footnotesize{doesn't have directions, and therefore can't have edges to itself}\\
+              \r{Directed Graph} \\ \footnotesize{This does have directions, therefore an edge to itself is valid!}\\
+              \pic{220617-4}\\
+              Vertices V = \(\{v_1,v_2,...,v_n \}\) Edge e = \(\{v_3,v_4\}\) \\
+              EdgeCount E = \(\{e | e Edge \}\)\\
+              }\\
+              \hline
+              \mc{\r{Proofs:}\\
+              \r{constructive Proof (proof by reforming)}\\
+              \footnotesize{Consider \(ax^2 + bx + c = 0\), we can proof this to have 2 solutions by reforming.}\\
+              \pic{220617-5}\\
+              \footnotesize{If \(b^2 - 4ac > 0\) then we have 2 solutions!}\\
+              \r{Proof by contradiction}\\
+              \footnotesize{Take -2, it isn't a natural number. We can prove this by claiming the opposite.}\\
+              \footnotesize{If -2 is a natural number, then it has all the attributes of a natural number.}\\
+              \footnotesize{For example, it should be possible to take the square root of -2.}\\
+              \(\sqrt{-2} = NaN\)\\
+              \footnotesize{As you can see -2 does not have this attribute and is therefore}\\
+              \footnotesize{NOT a natural number!}\\
+              }\\
+              \hline
+            \end{tabular}
+            \hspace{-0.1in}
+            \begin{tabular}[t]{|@{\hskip1pt}p{10.475cm}|}
+              \hline
+              \mc{\r{Proof by Induction}\\
+              \footnotesize{This is particularly useful if you want to check an attribute}\\
+              \footnotesize{for a range of numbers such as n or n+1}\\
+              \begin{tabular}{ll}
+              \mc{\footnotesize{Base claim:}\\
+              \(P(n) = \sum_{k=1}^n = \dfrac{n(n+1)}{2}\)\\
+              \footnotesize{Anker: check for n=1}\\
+              \(P(1) = \dfrac{1(1+1)}{2} = 1\)\\}&
+              \mc{\footnotesize{Hypothesis: it also works for n+1}\\
+              \pic{220617-6}}\\
+              \end{tabular}
+              }\\
+              \hline
+              \mc{\r{Alphabet and Word}\\
+              \(\Sigma\) = Alphabet: Nonempty Quantity of characters\\
+              \(\Sigma^n = \Sigma \times ... \times \Sigma\) = String\\
+              \( w \in \Sigma^n\) An element in that string is a Word with length n. \\
+              \r{\(\varepsilon \in \Sigma^0\) The empty word, don't forget the empty word!}\\
+              Quantity of all words:\\
+              \(\Sigma^* = \{\varepsilon\} \cup \Sigma \cup \Sigma^2 \cup \Sigma^3 \cup ... = \bigcup_{k=0}^\infty \Sigma^k\)\\
+              }\\
+              \hline
+              \mc{\r{Language}
+              \r{\(L \subset \Sigma^* \) = Language}\\
+              \(L= \emptyset \subset \Sigma^* =\) Empty Language\\
+              \(L = \Sigma^* \to \Sigma = \{0,1\}\) all binary strings.\\
+              \r{A language is regular if a DFA can be formed out of it.}
+              }\\
+              \hline
+              \mc{\r{Deterministic Finite Automaton (DFA/DEA)}\\
+              \pic{220617-7}\\
+              \footnotesize{A very simple machine that accepts a variety of inputs.}\\
+              \footnotesize{Only requirement is that a D follows after T.}\\
+              \footnotesize{This means all the following inputs are valid:}\\
+              \footnotesize{\_ (empty word!), D, DD, TD, TTTTTTTD, DDDDDTD, DDDDD, ....}\\
+              \begin{tabular}{ll}
+              \mc{\pic{220617-8}} &
+              \mc{Machine A: \{\r{Q},\blu{\(\Sigma\)},\gre{\(\delta\)},\(q_0\),\yel{F}\}\\
+              State = \r{Q} -> \(\{q_1,q_2,...,q_n\}\)\\
+              Alphabet = \blu{\(\Sigma\)}\\
+              Transitioning-Function = \(\gre{\delta} : \r{Q} \times \blu{\Sigma} \to \r{Q}\)\\
+              Starting State = \(q_0 = L(\varepsilon) = L\)\\
+              Acceptable Endstates =\(\yel{F} \subset \r{Q}\)
+              }\\
+              \end{tabular}\\
+              \pic{220617-9}\\
+              \r{Language of DFA A:}\\
+              \r{\(L(A) = \{ w \in \Sigma^* | A \text{ accepts } w \} = \{w \in \Sigma^* | \delta(q_0,w) \in F\}\)}\\
+              \footnotesize{The language of a DFA is simply all accepted words!}\\\\
+              \r{Error States in DFA}\\
+              \pic{220617-10}\\
+              \begin{tabular}{ll}
+              \mc{\pic{220617-11}\\}&
+              \mc{\footnotesize{from q, many paths lead to F}\\
+                \footnotesize{This means 11, or 0 would be the "same"}\\
+                \footnotesize{\(L(q) = \{0,10,11,12,...\} \)}\\
+                \footnotesize{The same would obviously apply to P}
+              }\\
+              \end{tabular}
+              }\\
+              \hline
+            \end{tabular}
+          \end{tabular}
+          \hfill
+        \end{normalsize}
+    \end{table}
+    \pagebreak
+    \begin{table}[ht!]
+        \begin{normalsize}
+          \begin{tabular}{cc}
+            \begin{tabular}[t]{|@{\hskip1pt}p{10.475cm}|}
+              \hline
+              \mc{\r{Myhill-Nerode}\\
+              \footnotesize{Adding a word to a word, to make it compatible with a language}\\
+              \r{\(L(w) = \{w' | ww' \in L\} \text{ including: } L(\varepsilon)\)!}\\
+              \begin{tabular}{ll}
+                \mc{\pic{220617-12}\\} &
+                \mc{\footnotesize{even and uneven amounts of 0s}\\
+                \footnotesize{mod 2 zero's, 1's don't matter}\\
+                }\\
+              \end{tabular}\\
+              \r{Detecting Nonregular Languages with Myhill}\\
+              \footnotesize{The examples before always had a specific amount of words/characters}\\
+              \footnotesize{that one had to add, in order to accept the word.}\\
+              \footnotesize{However, there are languages that would need infinite states}\\
+              \footnotesize{in order to find the entire language of a DFA}\\
+              \footnotesize{A good example for this is the language \(1^n0^n\)}\\
+              \begin{tabular}{ll}
+              \hspace{-0.1in} \mc{\pic{220617-13}} &
+              \mc{\footnotesize{for every 0 that we add, we need a 1} \\ 
+              \footnotesize{this means that for n+k 0's we need k 1's}\\
+              \footnotesize{as \(\lim_{k\to\infty}\) we need \(\infty \) states!}\\
+              \footnotesize{not possible with a \r{Deterministic} automaton!}\\\\
+              \footnotesize{also note: we have clear error states}\\
+              \footnotesize{anything starting with 1 is an error.}
+              }\\
+              \end{tabular}
+            }\\
+              \hline
+              \mc{}\\
+              \hline
+              \mc{}\\
+              \hline
+              \mc{}\\
+              \hline
+            \end{tabular}
+            \hspace{-0.1in}
+            \begin{tabular}[t]{|@{\hskip1pt}p{10.475cm}|}
+              \hline
+              \mc{}\\
+              \hline
+            \end{tabular}
+          \end{tabular}
+          \hfill
+        \end{normalsize}
+    \end{table}
+    \pagebreak
+    \begin{table}[ht!]
+        \begin{normalsize}
+          \begin{tabular}{cc}
+            \begin{tabular}[t]{|@{\hskip1pt}p{10.475cm}|}
+              \hline
+              \mc{}\\
+              \hline
+            \end{tabular}
+            \hspace{-0.1in}
+            \begin{tabular}[t]{|@{\hskip1pt}p{10.475cm}|}
+              \hline
+              \mc{}\\
+              \hline
+            \end{tabular}
+          \end{tabular}
+          \hfill
+        \end{normalsize}
+    \end{table}
+    \pagebreak
+    \begin{table}[ht!]
+        \begin{normalsize}
+          \begin{tabular}{cc}
+            \begin{tabular}[t]{|@{\hskip1pt}p{10.475cm}|}
+              \hline
+              \mc{}\\
+              \hline
+            \end{tabular}
+            \hspace{-0.1in}
+            \begin{tabular}[t]{|@{\hskip1pt}p{10.475cm}|}
+              \hline
+              \mc{}\\
+              \hline
+            \end{tabular}
+          \end{tabular}
+          \hfill
+        \end{normalsize}
+    \end{table}
+\end{document}
