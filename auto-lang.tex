@@ -270,15 +270,184 @@
               \end{tabular}
             }\\
               \hline
-              \mc{}\\
+              \mc{\r{Differentiation of States}\\
+              \footnotesize{To get a minimal DFA, we eliminate all states that are superfluous.}\\
+              \pic{220617-14}\\
+              \footnotesize{Here the 3 acceptable states can be put together, they are the same!}\\
+              \begin{tabular}{ll}
+              \mc{\pic{220617-15}}&
+              \mc{\pic{220617-16}\\
+              \footnotesize{z1 and z2 are the same!}\\
+              \footnotesize{they can't be differntiated}\\
+              \pic{220617-17} \\
+              \footnotesize{New minimal Automaton!}\\
+              }\\
+              \end{tabular}\\
+              \footnotesize{This algorithm makes it easy to see whether or not states are the same!}\\
+              \pic{220617-18}\\
+              }\\
               \hline
-              \mc{}\\
+              \mc{\r{Beauty of a language / Pumping Lemma}\\
+              \footnotesize{a language L can be pumped if the following is valid:}\\
+              \(\exists N > 0 \text{ where } w \in L \land |w| \geq N\)\\
+              \footnotesize{If this word can be divided into 3 parts x,y,z while:}\\
+              \(|xy| \leq N \land |y| > 0 \land |x| \geq 0 \land |z| \geq 0\land xy^kz \in L \to \forall k \in \mathbb{N}\)\\
+              \footnotesize{Find a number N that is bigger than 0 but less than the length of xy}\\
+              \footnotesize{while the length of y is greater than 0 and \(xy^kz\) is still part of the language}\\
+              \footnotesize{\r{Note: The power of \(xy^kz\) is NOT a power, but an indicator how many y's!!!}}\\
+              }\\
+              \hline
+            \end{tabular}
+            \hspace{-0.1in}
+            \begin{tabular}[t]{|@{\hskip1pt}p{10.475cm}|}
+              \hline
+              \mc{\footnotesize{\r{Any language that can be pumped is a regular language, and is therefore "schön"}}\\
+                \footnotesize{Consider the following 2 examples:}\\
+                \begin{tabular}{ll}
+                  \hspace{-0.12in}
+                  \mc{\( L(s1) = \{ 0,1| \text{ending with 1}\} \)\\
+                \footnotesize{z = 1, xy = any combination of 1 and 0}\\
+                \footnotesize{try: x=0 y=1010111 z=1,True -> \(N \geq 7\)}\\
+                \footnotesize{try: x=0 y=1 z=1,True -> \(N \geq 1\)}\\
+                \footnotesize{This can be done with any y, x}\\
+                \footnotesize{It will always satisfy all requierements}\\
+                \footnotesize{of the pumping lemma.}\\
+                \footnotesize{this language is regular.}
+              }& \hspace{-0.05in}
+                \mc{\( L(s1) = \{ 0^n,1^n| n \geq 0\} \)\\
+                \footnotesize{if z=1, more 1's than 0's, FALSE}\\
+                \footnotesize{if x - 0, more 0's than 1's, FALSE}\\
+                \footnotesize{This means we need x=0, z=0}\\
+                \footnotesize{If we do that, then y is empty}\\
+                \footnotesize{No matter what we do, it is FALSE}\\
+                \footnotesize{\(0^n1^n\) is therefore not regular}}\\
+                \end{tabular}\\
+                \pic{220617-19}\\
+              }\\
+              \hline
+              \mc{\r{Pumping Lemma usage guide !!FOLLOW THIS!!}\\
+              1. Claim that L is regular\\
+              2. According to pumping lemma \(\exists N\)\\
+              \footnotesize{Don't make claims about the size of N!}\\
+              3. Choose a word \(w \in L | |w| \geq N\)\\
+              \footnotesize{Definition with N has to be written!}\\
+              4. Division into parts according to Pumping Lemma\\
+              \footnotesize{\(w = xyz, |xy| \leq N, |y| > 0\) ,etc}\\
+              5. Check if word is in language\\
+              \footnotesize{min 1 word not in language: \(xy^kz \notin L | k \in \mathbb{N}\)}\\
+              \footnotesize{Explain why this word is not in the language}\\
+              6. Contradiction, aka explain that this language is not regular.\\
+              }\\
+              \hline
+              \mc{\r{Non-Deterministic Finite Automaton (NFA / NEA)}\\
+              \footnotesize{Before every step was clear, there was no other determinism}\\
+              \footnotesize{other than the input and the current state. A non-deterministic automaton}\\
+              \footnotesize{Can have other things, like only accept the last 2 0's}\\
+              \footnotesize{This is illustrated as both a DFA and an NFA:}\\
+              \begin{tabular}{ll}
+              \mc{\pic{220617-20}}&
+              \mc{\footnotesize{Both have the same goal, only the last}\\
+                \footnotesize{2 zero's lead to the acceptance state.}\\
+                \footnotesize{However one is obviously easier, while}\\
+                \footnotesize{not giving clear info on in what state it is,}\\
+                \footnotesize{it is hence non-deterministic.}\\
+              }\\
+              \end{tabular}\\
+              \r{Formal Definition:}\\
+              \begin{tabular}{ll}
+              \mc{\pic{220617-21}} &
+              \mc{Machine A: \{\r{Q},\blu{\(\Sigma\)},\gre{\(\delta\)},\(q_0\),\yel{F}\}\\
+              State = \r{Q} -> \(\{q_1,q_2,...,q_n\}\)\\
+              Alphabet = \blu{\(\Sigma\)}\\
+              Transitioning-Function = \(\gre{\delta} : \r{Q} \times \blu{\Sigma} \to \b{\r{P(Q)}}\)\\
+              Starting State = \(q_0 = L(\varepsilon) = L\)\\
+              Acceptable Endstates =\(\yel{F} \subset \r{Q}\)
+              }\\
+              \end{tabular}\\
+              \r{P(Q) is the Potence Quantity!!}\\
+              \r{Note the P(Q), it means that we have more complex transitions!}\\
+              \footnotesize{no arrow, multiple arrows for a certain character. See b in example}\\
+              \footnotesize{General tipp for NFA, only write what you need to accept the word!}\\
+              }\\
+              \hline
+              \mc{\r{NFA To DFA}\\
+              \pic{220617-22}\\
+              \(\overline q_1\) is the complement Quantity. It means, any state other than \(q_1\)\\
+              Q is the full Quantity, in here the NFA can be in any state.\\
+              \(\emptyset\) is the error state.\\
+                            }\\
+              \hline
+            \end{tabular}
+          \end{tabular}
+          \hfill
+        \end{normalsize}
+    \end{table}
+    \pagebreak
+    \begin{table}[ht!]
+        \begin{normalsize}
+          \begin{tabular}{cc}
+            \begin{tabular}[t]{|@{\hskip1pt}p{10.475cm}|}
+              \hline
+              \mc{\r{Formal Definition of the Transition}\\
+              DFA is marked with ', the regular expression is for NFA\\
+              Given \(\delta\) of an NFA and Transitions \(M \subset Q\)\\
+              \(\delta' : Q \times \Sigma \to P(Q): (M,a) \mapsto \delta ' (M,a) = \bigcup_{q\in M} \delta (q,a) \)\\
+              \(Q' = P(Q)\)\\
+              \(\Sigma' = \Sigma\)\\
+              \(q_0' = \{q_0\}\)\\
+              \(F' = \{M \in P(Q) | F \cap M \neq \emptyset \}\)\\
+              M is the union of all possible endstates.\\
+              \footnotesize{Note: a Thompson NFA needs at least 1 acceptable endstate!}\\
+}\\
+              \hline
+              \mc{\r{\(\varepsilon\) Transitions in NFA's}\\
+              \begin{tabular}{ll}
+                \mc{\pic{220617-23}}&
+                \mc{\(\delta : Q \times (\Sigma \cup \{\varepsilon\}) \to P(Q)\)\\
+                This means that \(\varepsilon\) signifies a transition\\
+              without using a character!!}\\
+              \end{tabular}
+              }\\
+              \hline
+              \mc{\r{Conversion from \(\varepsilon\)-NFA to regular NFA}\\
+              Any \(\varepsilon\)-NFA can be converted to a regular NFA!\\
+              \(E(q) =\)Quantity of all \(\varepsilon\)-Transitions from q\\
+              \(E(M) = \cup_{q\in M}E(q)\) Quantity of all \(\varepsilon\)-Transitions\\
+              \(\delta = Q \times (\Sigma \cap \{\varepsilon\} \to P(Q): (q,a) \mapsto E(\delta(q,a)))\)\\
+              \r{\(\varepsilon\)-NFA to DFA:}\\
+              \pic{220617-24}\\
+            }\\
+              \hline
+              \mc{\r{Set-Operations with Automatons}\\
+                \pic{220617-26}\\
+              }\\
               \hline
               \mc{}\\
               \hline
             \end{tabular}
             \hspace{-0.1in}
             \begin{tabular}[t]{|@{\hskip1pt}p{10.475cm}|}
+              \hline
+              \mc{\r{Pump-able, but not regular}\\
+              \pic{220617-28}\\
+              The first part L1 is regular, but the second isn't\\
+              The only way we can figure that out is by using the Myhill method!\\
+              Because L2 is not regular, the composite Language L is not regular\\
+              }\\
+              \hline
+              \mc{\r{Regular Operations}\\
+                \pic{220617-27}\\
+              }\\
+              \hline
+              \mc{\r{Regular Expressions}\\
+              \pic{220617-29}\\
+              \pic{220617-32}\\
+              \r{There is a DFA for every regular expression!}\\
+              }\\
+              \hline
+              \mc{}\\
+              \hline
+              \mc{}\\
               \hline
               \mc{}\\
               \hline
@@ -295,22 +464,11 @@
               \hline
               \mc{}\\
               \hline
-            \end{tabular}
-            \hspace{-0.1in}
-            \begin{tabular}[t]{|@{\hskip1pt}p{10.475cm}|}
+              \mc{}\\
               \hline
               \mc{}\\
               \hline
-            \end{tabular}
-          \end{tabular}
-          \hfill
-        \end{normalsize}
-    \end{table}
-    \pagebreak
-    \begin{table}[ht!]
-        \begin{normalsize}
-          \begin{tabular}{cc}
-            \begin{tabular}[t]{|@{\hskip1pt}p{10.475cm}|}
+              \mc{}\\
               \hline
               \mc{}\\
               \hline
