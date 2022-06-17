@@ -54,6 +54,9 @@
               \dx{sin(x) = cos(x)} \hspace{0.5in} \dx{csc(x) = (-1) * csc(x) * cot(x)}\\\\
               \dx{cos(x) = -sin(x)} \hspace{0.5in} \dx{sec(x) = sec(x) * tan(x) = }\\\\
               \dx{tan(x) = \frac{1}{cos^2(x)}} \hspace{0.5in} \dx{cot(x) = (-1) * csc^2(x) }\\\\
+              \scriptsize{\r{Note, sin(x) is done via chain rule -> sin(x) * 1 !!}}\\
+              \scriptsize{\r{For more than x inside sin, FULL CHAIN RULE!! \(sin(x^2) -> sin(x^2) * x\)}}\\
+              \scriptsize{\r{For integration, you need the substitution rule!}}\\
               \dx{tan(x) = 1 + tan^2(x)}\\\\
               \dx{(ax) = a \to \dxo(ax) = a * 1 \to \text{ we derive x NOT a!!}}\\\
               \dx{(3x) = a \to \dxo(3x) = 3 * 1 \to \text{ 3 is a factor!}}\\\\
@@ -86,7 +89,6 @@
               \form{\frac{1}{2} * \frac{1}{\sqrt{x^2 + 1}} * 2x = \frac{2x}{2 * \sqrt{x^2 + 1}} = \frac{x}{\sqrt{x^2 + 1}}}\\
               \scriptsize{Note: \((x^2 + 1)\) is g(x), while f is the exponent function}\\
               \scriptsize{More examples:}\\
-              \form{\dxo sin(x^2) = sin(x^2)' * (x^2)' = cos(x^2) * 2x}\\
               \form{\dxo sin^2(x) = \dxo(sin(x))^2 = 2 * sin(x) * cos(x)}\\
               \form{\dxo \left(\dfrac{x - 1}{x + 1}\right)^2 = 2 * \left(\dfrac{x - 1}{x + 1}\right) * \left(\dfrac{x - 1}{x + 1}\right)'}\\
               \form{\dxo (x + 2)^3(x)^4 = (x + 2)^3 * ((x)^4)' + ((x + 2)^3)' * (x)^4 }
@@ -516,9 +518,11 @@
             \begin{tabular}[t]{|@{\hskip1pt}p{10.9cm}|}
               \hline
               \mc{\footnotesize{Fourier Terms}\\\\
-              \footnotesize{\r{p = Period / primitive period (if possible)}}\\
-              \footnotesize{\r{\(\alpha\) = variable to multiply a period -> \(f(\alpha x)\) >> default 0}}\\\
-              \footnotesize{\r{p(new) = Calculated Period when \(a \geq 1\) ->\(\dfrac{p}{a}\)}}\\\\
+              \footnotesize{\r{p = Period }}\\
+              \footnotesize{\r{\(\alpha\) = variable to multiply a period -> \(f(\alpha x)\) >> default 0}}\\\\
+              \footnotesize{\r{T = Calculated Period when \(a \geq 1\) ->\(\dfrac{p}{a}\) can also be called the primitive period.}}\\\\
+              \footnotesize{\r{\(\omega = \text{Frequency} \dfrac{2 \pi}{T}\)}}\\\\
+              \footnotesize{\r{k/m/n factors for frequency!}}\\\\
               \scriptsize{\r{smallest period == primitive period}}\\
               \scriptsize{The fastest time that the function repeats itself -> sin(360)}\\
               \scriptsize{\(f(x+p) = f(x) \to sin(x + 360) = sin(x) \) }\\
@@ -548,16 +552,54 @@
               }\\
               \hline
               \mc{\foonotesize{Additionterms}\\
-              \large{\r{\(sin(x + y) = sin(x) * cos(y) \pm sin(y) * cos(x) \)}}\\
-              \large{\r{\(cos(x + y) = cos(x) * cos(y) \pm sin(y) * sin(x) \)}}\\
+              \large{\r{\(sin(x + y) = sin(x) * cos(y) \pm sin(y) * cos(x) \)}}\\\\
+              \large{\r{\(cos(x + y) = cos(x) * cos(y) \pm sin(y) * sin(x) \)}}\\\\
+              \large{\r{\(\text{for } \omega = \dfrac{2\pi}{T} \text{ and m/n} \in \mathbb{N}\)}}\\\\
+              \large{\r{
+                \(\int_0^{2\pi} sin(\omega m \, x) \, sin(\omega n \, x) \, dx =\)
+              \begin{equation}
+                \begin{cases}
+                0, \, &  m \neq n\\
+                \pi, &  \, m = n
+                \end{cases}
+              \end{equation}
+              }}\\\\
+              \large{\r{
+                \(\int_0^{2\pi} cos(\omega m \, x) \, cos(\omega n \, x) \, dx =\)
+              \begin{equation}
+                \begin{cases}
+                0, \, &  m \neq n\\
+                \pi, &  \, m = n
+                \end{cases}
+              \end{equation}
+              }}\\\\
+              \large{\r{\(\int_0^{2\pi} cos(\omega m \, x) \, sin(\omega n \, x) \, dx = 0\)}}\\\\
+              \normalsize{\r{\( \int sin(k * x) \, dx \to f[g(x)] = sin(x * k) \to g'(x) = dx * \b{k} \)}}\\
+              \normalsize{\r{the k is artificially added!}}\\
+              \normalsize{\r{\( \dfrac{\b{1}}{\b{k}} \int sin(u) \, du = \dfrac{1}{k} * -cos(u) = \dfrac{-cos(x * k)}{k}\)}}\\\\
               }\\
               \hline
               \mc{\normalsize{T-Periodic}\\\\
               \large{\r{\( a_0 = \dfrac{1}{T} \int_0^T f(t) \, dt \)}}\\\\
-              \large{\r{\( a_1 = \dfrac{1}{T} \int_0^T f(t) cos(\omega lt) \, dt \)}}\\\\
-              \large{\r{\( b_1 = \dfrac{1}{T} \int_0^T f(t) sin(\omega lt) \, dt \)}}\\\\
+              \large{\r{\( a_m = \dfrac{2}{T} \int_0^T f(t) cos(\omega lt) \, dt \)}}\\\\
+              \large{\r{\( b_m = \dfrac{2}{T} \int_0^T f(t) sin(\omega lt) \, dt \)}}\\\\
               \large{\r{\( \int_0^\infty (f(t) - S_N(t))^2 \, dt \to^{N\to \infty} 0 \)}}\\\\
               }\\
+              \hline
+              \mc{\pic{220617-1}}\\
+              \hline
+            \end{tabular}
+          \end{tabular}
+        \hfill
+      \end{tiny}
+    \end{table}
+    \pagebreak
+    \begin{table}[ht!]
+        \begin{tiny}
+          \begin{tabular}{ccc}
+            \begin{tabular}[ht!]{|@{\hskip1pt}p{10cm}|}
+              \hline
+              \mc{\pic{220617-2} \\ \pic{220617-3}}\\
               \hline
             \end{tabular}
           \end{tabular}
