@@ -382,7 +382,7 @@
           \hfill
         \end{normalsize}
     \end{table}
-    \pagebreak
+    \clearpage
     \begin{table}[ht!]
         \begin{normalsize}
           \begin{tabular}{cc}
@@ -445,11 +445,231 @@
               \r{There is a DFA for every regular expression!}\\
               }\\
               \hline
-              \mc{}\\
+              \mc{\r{VNEA / VNFA to regular expression}\\
+              1. add a new start and stop state. This is required as\\
+              the regular expressions can't have arrow back to the origin.\\
+              \pic{220618-1}\\
+              }\\
               \hline
-              \mc{}\\
+            \end{tabular}
+          \end{tabular}
+          \hfill
+          \vfill
+        \end{normalsize}
+    \end{table}
+    \pagebreak
+    \begin{table}[ht!]
+      \vspace{-0.01in}
+        \begin{normalsize}
+          \begin{tabular}{cc}
+            \begin{tabular}[t]{|@{\hskip1pt}p{10.475cm}|}
               \hline
-              \mc{}\\
+              \mc{\vspace{0.01in}\\
+              \pic{220618-2}\\
+              \pic{220618-3}}\\
+              \hline
+              \mc{\r{Contextfree-Grammar (CFG) >> \(G=(V,\Sigma,R,S)\)}\\
+                \begin{tabular}{ll}
+              \makecell[l]{
+              \(V\): Variables / Non-Terminalsymbols\\
+              \(\Sigma\): Terminalsymbols (Alphabet)\\
+              \(R\): Rules of Form \(A -> x_1X2...x_n \)\\
+              \(\text{ with } A \in V, x_i \in V \cup \Sigma\)\\
+              \(S\): Starvariable\\
+              \r{Rule A -> w generated out of uAv}\\\r{
+              \(uwv: uAv \implies uwv\)}\\
+              derivate v from u:\\
+              \(u \Rightarrow u_1 \Rightarrow u_2 \Rightarrow ... \Rightarrow u_n \Rightarrow v \text{ or } u \Rightarrow^* v\)\\
+              Context free grammar generated from G:\\
+              \(L(G) = \{w \in \Sigma^* | S \Rightarrow^* w \}\)
+            }& \hspace{-0.15in}
+              \makecell[l]{\pic{220618-4}}\\
+              %\hline
+              Example:\\
+              \mc{\r{Grammar \(L = \{0^n1^n | n \geq 0\}\)}\\
+              Variables: \(V = \{S\}\)\\
+              Terminalsymbols: \(\Sigma = \{0,1\}\)\\
+              Rules: \(R = \{S \to \varepsilon | 0S1\}\)\\
+              Startvariable: \(S\)\\
+              }&
+              \mc{\pic{220618-5}}\\
+              \end{tabular}\\
+              \r{Contextfree-Grammar Term explanations}\\
+              \footnotesize{\r{Terminalsymbols: }}\footnotesize{Symbols that we can't translate further, aka they are terminal.}\\
+              \footnotesize{\r{CFL = Contextfree-Language}}\\
+              \footnotesize{\r{\(\Rightarrow^*\)} means can be derived from}\\
+              \footnotesize{\(uAv \Rightarrow^* uwv\): all words that can be made with uAv}\\
+              \footnotesize{\blu{The goal of this grammar is to only have terminal symbols in the end}}\\
+              \footnotesize{\blu{Aka we remove the variables one by one, via these rules}}\\
+              }\\
+              \hline
+              \mc{\r{Definition of Context-free}\\
+              \footnotesize{The context is only based on the input variable.}\\
+              \footnotesize{Take A as a variable, if it can be parsed wihout regard for}\\
+              \footnotesize{what is to the left or right of it, then it has a context free rule}\\
+              \(A \to \text{something}\)\\
+              \footnotesize{A grammer with only variables like A is considered context free.}\\
+              \pic{220618-6}\\
+              This means that something like: \(S = aAb\)\\
+              Turns into this: \(S \to aAb \to aab\)\\
+              The A can be replaced without regard for context,\\
+              S is therefore context free.\\
+              }\\
+              \hline
+            \end{tabular}
+            \hspace{-0.1in}
+            \begin{tabular}[t]{|@{\hskip1pt}p{10.475cm}|}
+              \hline
+              \mc{\r{Multiple Contextfree-Grammars}\\
+              Context-free grammars can be interpreted in multiple ways:\\
+              This means there is no definite way to interpret something like:\\
+              \(0^n1^n\)\\
+              \pic{220618-7}\\
+              The grammar \(G_2\) gives us a clear Parse-tree, the first one doesn't\\
+              The reason for this is the obvious haskell like structure on the right.\\
+              The one on the left has no idea of leafs and nodes.\\
+              Another example with parse trees:\\
+              \pic{220618-8}\\
+              \pic{220618-9}
+              }\\
+              \hline
+              \mc{\r{Facts about Contextfree-Grammar:}\\
+              -- Contextfree-Grammars can't be compared!\\
+              -- Only the \(L_1 \cup L_2\) Quantity operation can be done\\
+              \,\,\, On ANY Contextfree-Grammar\\
+              -- The amount of steps to derive a word is not always clear\\
+              \,\,\, Some Grammars allow this, some don't\\
+              -- the class of regular languages is complete with regular operations
+              }\\
+              \hline
+              \mc{\r{Regular Operations on Contextfree-Grammar}\\
+              \pic{220618-10}
+              }\\
+              \hline
+              \mc{\r{Stack Automaton}\\
+              \pic{220618-11}\\
+              }\\
+              \hline
+            \end{tabular}
+          \end{tabular}
+          \hfill
+        \end{normalsize}
+    \end{table}
+    \pagebreak
+    \begin{table*}[htbp]
+    \vspace{-0.1in}
+        \begin{normalsize}
+          \begin{tabular}{ccc}
+            \begin{tabular}[t]{|@{\hskip1pt}p{10.45cm}|}
+              \hline
+              \mc{\pic{220618-12}\\
+              \pic{220618-13}\\
+              \pic{220618-14}\\
+              }\\
+              \hline
+              \mc{\r{Chomsky-Normalform}\\
+              This is used to make sure, that we don't have needless Variables\\
+              \pic{220618-15}\\
+              In order to solve this, we need to follow these rules:\\
+              \r{1. No Unit Rules: \(A \to B\)}\\
+              \r{2. No Rules like: \(A \to \varepsilon\) unless necessary: \(S \to \varepsilon\)}\\
+              \r{3. Right side has exactly 2 Variables, or 1 terminalsymbol.}\\
+              \r{\,  \,\,  Everything else if forbidden on the right side.}\\
+              \footnotesize{Note this includes ANY other formation, including \(aB,aa,ABC,aAB\)}\\\\
+              \r{Transforming into Chomsky-Normalform}\\
+              \pic{220618-16}\\
+              In-depth explanation:\\
+              \pic{220618-17}\\
+              }\\
+              \hline
+            \end{tabular}
+            \hspace{-0.1in}
+            \begin{tabular}[t]{|@{\hskip1pt}p{10.45cm}|}
+              \hline
+              \mc{\pic{220618-18}\\}\\
+              \hline
+              \mc{\r{Usage of Chomsky-Normalform Grammar G}\\
+              The derivation of a word \(w \in L(G)\) is always possible\\
+              within \(2* |w| - 1\) Rule applications.\\
+              Reason:\\
+              \r{1. Apply \(|w| - 1\) Rules of form \(A \to BC\) to generate a word}\\
+              \r{\,  \,\, with length \(|w|\) out of \(S\).}\\
+              \r{2. Apply \(|w|\) Rules of form \(A \to a\) to generate the word \(w\)}\\
+              This is a total of \(2 * |w| -1\) Rule applications
+              }\\
+              \hline
+              \mc{\r{Deterministic Parsing \ CYK-Algorithm}\\
+              Deterministic Parsing is used to check if a word can be derived\\
+              from either S, aka the entire Grammar\(S \Rightarrow^* w\),\\
+              or just a variable of it for example A. \(S \Rightarrow^* w | A \in V\)\\
+              This is especially easy with the Chomsky-Normalform!!\\
+              \pic{220618-19}\\
+              \pic{220618-20}
+              }\\
+              \hline
+            \end{tabular}
+          \end{tabular}
+          \hfill
+        \end{normalsize}
+    \end{table*}
+    \pagebreak
+    \begin{table}[ht!]
+    \vspace{-0.1in}
+        \begin{normalsize}
+          \begin{tabular}{ccc}
+            \begin{tabular}[t]{|@{\hskip1pt}p{10.45cm}|}
+              \hline
+              \mc{\r{Performance Comparison NFA/DFA}\\
+              \pic{220618-21}\\
+              }\\
+              \hline
+              \mc{\r{Standardization of Stack Automatons (PDA to CFG)}\\
+                \footnotesize{PDA, Push-Down-Automaton = Stack Automaton}\\
+                \footnotesize{The idea is to check whether or not Contextfree-Grammar can be expressed }\\
+                \footnotesize{ using only regular expressions.}\\
+                \footnotesize{One way of trying this is to create a Stack Automaton, }\\
+                \footnotesize{that is based on such expressions.}\\
+                \footnotesize{first need a Variable that handles words from input to stack \(A_{pq} \)}\\
+                \footnotesize{Then we need rules for this \(A_{pq}\to A_{pr}A_{rq}\)}\\
+                \footnotesize{from p to r and from r to q.}\\
+                \footnotesize{\r{Note that \(A_{pq}\) signifies the amount of words that lead from p to q}}\\
+                \footnotesize{\r{However, this is only the case because it is implied in the name,}}\\
+                \footnotesize{\r{it is otherwise just a Non-Terminalsymbol!!!}}\\
+                Turning the regular Stack Automaton to a CFG:\\
+                \pic{220618-22}\\
+                \pic{220618-23}\\
+                \pic{220618-24}
+              }\\
+              \hline
+            \end{tabular}
+            \hspace{-0.1in}
+            \begin{tabular}[t]{|@{\hskip1pt}p{10.45cm}|}
+              \hline
+              \mc{Derived Rules from the Automaton:\\
+              \pic{220618-25}\\
+              \pic{220618-26}\\
+              \r{every CFG can be converted to a Stack Automaton.}\\
+              }\\
+              \hline
+              \mc{\r{Regularity Check for CFG / Pumping Lemma for CFG}\\
+              \pic{220618-27}\\
+              \pic{220618-28}\\
+              \footnotesize{increasing a and b leads to c being smaller!}\\
+              \footnotesize{increasing b and c leads to a being smaller!}\\
+              \footnotesize{even if you increase ALL of them, you still have aa...(your pump)..bb}\\
+              \footnotesize{which is NOT correct!}\\
+              }\\
+              \hline
+              \mc{\r{Bakus-Naur Form}\\
+                \footnotesize{-Naur is a machine specification for Rules of a CFG.}\\
+              -- Variables: <variable-name>\\
+              -- single Symbols: A\\
+              -- Strings: 'Example'\\
+              -- Rules: <variable-name> ::= expression\\
+              \footnotesize{Haskell says hello!}\\
+            \footnotesize{Expressions are a series of variables, single symbols or strings, separated by '|'}\\
+              \pic{220618-29}
+              }\\
               \hline
             \end{tabular}
           \end{tabular}
@@ -459,22 +679,145 @@
     \pagebreak
     \begin{table}[ht!]
         \begin{normalsize}
-          \begin{tabular}{cc}
-            \begin{tabular}[t]{|@{\hskip1pt}p{10.475cm}|}
+          \begin{tabular}{ccc}
+            \begin{tabular}[t]{|@{\hskip1pt}p{10.45cm}|}
               \hline
-              \mc{}\\
+              \mc{\r{Extended-Backus-Naur-Form EBNF}\\
+              -- Literals: "" or ''\\
+              -- Rules are annotated with = instead of ::=\\
+              -- Variables without <> and can include symbols\\
+              -- comma for chaining: term, "*", expression\\
+              -- semicolon for end, just like cpp: ;\\
+              -- Comments: (* ... *)\\
+              -- Optional recursion: \{...\}\\
+              -- Option: []
+              -- Groups: (...)\\
+              -- Exception: - (without, not error handling)\\
+              \pic{220618-30}\\
+              \footnotesize{Both of these Naur implementations do of course resemble this:}\\
+              \pic{220618-31}\\
+              \footnotesize{One small problem with all this, these specifications change often}\\
+              \footnotesize{So even EBNF is likely soon to be out-of-date....}\\
+              \r{Note, EBNF does NOT save you from misimplementing things!}\\
+              \pic{220618-32}\\
+              \footnotesize{In this picture the Operator-prioritization was not implemented!}\\
+              \footnotesize{This means this implementation is not correct, it calculates trash!}\\
+              }\\
               \hline
-              \mc{}\\
+              \mc{\r{The stack problem}\\
+              The stack has enabled us to understand the Language \(0^n1^n\)\\
+              However the language \(a^nb^nc^n\) remains uninterpretable.\\
+              This can be solved by extending the stack.\\
+              One idea is to double the stack, giving us access to every element\\
+              The only problem is that this is a slow and tedious process.\\
+              \r{This is where a turing machine comes into play with it's band!!}\\
+              }\\
               \hline
-              \mc{}\\
-              \hline
-              \mc{}\\
-              \hline
-              \mc{}\\
+              \mc{\r{Turing Machine (TM)}\\
+              \pic{220618-33}\\
+              }\\
               \hline
             \end{tabular}
             \hspace{-0.1in}
-            \begin{tabular}[t]{|@{\hskip1pt}p{10.475cm}|}
+            \begin{tabular}[t]{|@{\hskip1pt}p{10.45cm}|}
+              \hline
+              \mc{
+                \r{Definition Of Deterministic Turing Machine}\\
+              \begin{tabular}{ll}
+                \mc{Turing Machine \\
+                \(M = ( \)\r{\(Q\)}\(,\)\blu{\(\Sigma\)}\(, \Gamma,\) \gre{\(\delta\)}\(, q_0, q_{\text{accept}, q_{reject}})\)\\ 
+                \textbullet \r{\(Q\)} : States\\
+                \textbullet \blu{\(\Sigma\)} : Alphabet\\
+                \textbullet \(\Gamma\) : Band-Alphabet: \(\text{\textvisiblespace{}} \in \Gamma \text{\textbackslash{}} \)\blu{\(\Sigma\)}\\
+                \textbullet \gre{\(\delta\)} : \r{\(Q\)}\( \times \Gamma \to \) \r{\(Q\)}\( \times \Gamma \times \{L,R\}\)\\
+                \textbullet \(q_0 \in \) \r{\(Q\)}: Startstate\\
+                \textbullet \(q_{accept} \in \)\r{\(Q\)}: accepting state\\
+                \textbullet \(q_{reject} \in \)\r{\(Q\)}: rejecting state\\
+                }&
+              \mc{\pic{220618-34}}\\
+              \end{tabular}\\
+              \pic{220618-35}\\
+              \pic{220618-36}
+              }\\
+              \hline
+              \mc{\r{\(a^nb^nc^n\)}\\
+                \footnotesize{Before we asked the quetion of how we could create a Turing Machine,}\\
+                \footnotesize{that understands the language \(a^nb^nc^n\)}\\
+                \footnotesize{Is this already possible ? YES!}\\
+                \pic{220618-37}\\
+              }\\
+              \mc{\r{Turing Machine Variants}\\
+              \pic{220618-38}\\
+              }\\
+              \hline
+            \end{tabular}
+          \end{tabular}
+          \hfill
+        \end{normalsize}
+    \end{table}
+    \pagebreak
+    \begin{table}[ht!]
+        \begin{normalsize}
+          \begin{tabular}{ccc}
+            \begin{tabular}[t]{|@{\hskip1pt}p{10.45cm}|}
+              \hline
+              \mc{
+              \pic{220618-39}\\
+              }\\
+              \hline
+              \mc{\r{Counter for TM}\\
+              A language of a Turing Machine is countable\\
+              \footnotesize{It essentially allows you to see all possible words.}\\
+              \pic{220618-40}\\
+              }\\
+              \hline
+              \mc{\r{Definitions for Computability (Entscheidbarkeit)}\\
+                \pic{220618-42}\\
+              }\\
+              \hline
+              \mc{\r{There are clear definite problems that we can solve:}\\
+              \pic{220618-41}
+              }\\
+              \hline
+              \end{tabular}
+            \hspace{-0.1in}
+            \begin{tabular}[t]{|@{\hskip1pt}p{10.45cm}|}
+              \hline
+              \mc{\r{And there are some that we can't solve:}\\
+              \pic{220618-43}\\
+              \r{Note, there is NO SUCH THING AS A DECIDER.}\\
+              \r{It is not possible to create it.}\\
+              }\\
+              \hline
+              \mc{\r{Reduction}\\
+              \pic{220618-44}\\
+              \pic{220618-45}\\
+              \pic{220619-1}\\
+              }\\
+              \hline
+            \end{tabular}
+          \end{tabular}
+          \hfill
+        \end{normalsize}
+    \end{table}
+    \pagebreak
+    \begin{table}[ht!]
+        \begin{normalsize}
+          \begin{tabular}{ccc}
+            \begin{tabular}[t]{|@{\hskip1pt}p{10.45cm}|}
+              \hline
+              \mc{\r{The law of Rice}\\
+              \pic{220619-2}\\
+              \pic{220619-3}\\
+              }\\
+              \hline
+              \mc{\r{Overview of Computability}\\
+              \pic{220619-4}\\
+              }\\
+              \hline
+            \end{tabular}
+            \hspace{-0.1in}
+            \begin{tabular}[t]{|@{\hskip1pt}p{10.45cm}|}
               \hline
               \mc{}\\
               \hline
