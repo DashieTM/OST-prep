@@ -785,8 +785,14 @@
               \hline
               \mc{\r{And there are some that we can't solve:}\\
               \pic{220618-43}\\
-              \r{Note, there is NO SUCH THING AS A DECIDER.}\\
-              \r{It is not possible to create it.}\\
+              }\\
+              \mc{\r{Halting Problem}\\
+              \footnotesize{The idea is that we have a Decider H and a program D that always returns the oppsite.}\\
+              \footnotesize{This D encompasses H, which means we give input to D, which gives the input to H}\\
+              \footnotesize{Then H returns and D inverts it, as described above.}\\
+              \footnotesize{The contradictin arises when you give D its own code as the input.}\\
+              \footnotesize{\r{D passes this on and returns an answer, but D inverts it, aka does the opposite}}\\
+              \footnotesize{This means H was wrong, aka the decider has lied, D didn't do what it said!}
               }\\
               \hline
               \mc{\r{Reduction}\\
