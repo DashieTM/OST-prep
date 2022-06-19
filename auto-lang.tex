@@ -790,7 +790,7 @@
               \footnotesize{The idea is that we have a Decider H and a program D that always returns the oppsite.}\\
               \footnotesize{This D encompasses H, which means we give input to D, which gives the input to H}\\
               \footnotesize{Then H returns and D inverts it, as described above.}\\
-              \footnotesize{The contradictin arises when you give D its own code as the input.}\\
+              \footnotesize{The contradiction arises when you give D its own code as the input.}\\
               \footnotesize{\r{D passes this on and returns an answer, but D inverts it, aka does the opposite}}\\
               \footnotesize{This means H was wrong, aka the decider has lied, D didn't do what it said!}
               }\\
@@ -819,6 +819,299 @@
               \hline
               \mc{\r{Overview of Computability}\\
               \pic{220619-4}\\
+              }\\
+              \hline
+              \mc{\r{Efficiency and Computability}\\
+              \footnotesize{We do not just have to ask ourselves whether or not the problem is solvable,}\\
+              \footnotesize{but also whether or not we can do so in a sensible amount of time.}\\
+              \footnotesize{Cracking the RSA algorithm is theoretically possible, but not practically,}\\
+              \footnotesize{as it would take thousands of years to do so.}\\
+              difference of Turing Machine Performance:\\
+              \pic{220619-5}\\
+              \footnotesize{\r{Difference: 1 step of Multiband == \(O(t(n))\)}}\\
+              \footnotesize{it is the worst case, the 4row machine takes 1 full iteration, just to simulate}\\
+              \footnotesize{1 change of the multiband machine.}\\
+              \footnotesize{\r{\(\text{Multiband: } O(n) \to \text{ Multirow: } O(n^2)\)}}\\
+              }\\
+              \hline
+              \mc{\r{Simulation of a Nondeterministic Turing Machine}\\
+                \begin{tabular}{cc}
+                  \mc{
+                  -- N possibilities.\\
+                  -- Every step gives \(\leq N\) possibilities\\
+                  -- Amount of steps: t(n)\\
+                  -- Worst case: \(N^{t(n)} = 2^{t(n) * log_2 N}\)\\
+                  \, \,\, \(2^{O*t(n)}\)\\
+                  }&
+                  \mc{\pic{220619-6}}\\
+                  \end{tabular}
+              }\\
+              \hline
+            \end{tabular}
+            \hspace{-0.1in}
+            \begin{tabular}[t]{|@{\hskip1pt}p{10.45cm}|}
+              \hline
+              \mc{\r{Difference in Hardware}\\
+              \blu{Difference between deterministic Hardware}\\
+              \begin{tabular}{cc}
+                \mc{\footnotesize{the difference between deterministic}\\
+                \footnotesize{TMs is never big. It stays polynomial!}\\
+                \footnotesize{max change: \(O(t_1(n) = O(t_2(n)^k)), k \geq 0\)}
+              }&
+                \mc{\pic{220619-7}}\\
+              \end{tabular}\\
+              \blu{Nondeterministic Hardware:}\\
+              \footnotesize{Nondeterministic Hardware is always faster!}\\
+              \footnotesize{It can be simulated within \(2^{O(t(n))}\) \,  \, \r{Notice the exponential complexity!}}\\
+              \footnotesize{The difference between TMs and NTMs is HUGE!}\\
+              }\\
+              \hline
+              \mc{\r{P and NP Problems}\\
+              \blu{P is the quantity of problems that can be solved within}\\
+              \blu{polynomial time by a deterministic TM}\\
+              \gre{NP is the quantity of problems that can be solved within}\\
+              \gre{polynomial time by a nondeterministic TM}\\
+              \footnotesize{\r{For NP there is always a deterministic TM that can verify the solution!!}}\\
+              \footnotesize{\r{NP is a bigger quantity than P!!}}\\
+              }\\
+              \hline
+              \mc{\r{Polynomial and Exponential Problems}\\
+              \pic{220619-8}\\
+              }\\
+              \hline
+              \mc{\r{Verificiation of Problems}\\
+              \footnotesize{Luckily the simple verification of a problem can always be done in }\\
+              \footnotesize{polynomial time by a regular deterministic TM}\\
+              \pic{220619-9}\\
+              }\\
+              \hline
+              \mc{\r{An Example for a verifier}\\
+              \pic{220619-10}\\
+              }\\
+              \hline
+              \mc{\r{k-Vertex-Coloring}\\
+              \footnotesize{The idea of the vertex-coloring problem is that you have k colors and a graph G}\\
+              \footnotesize{for every node, each neighbor should have a different color}\\
+              \footnotesize{The problem: is it possible for the graph G? -> NP Problem!}\\
+              \footnotesize{This problem can be converted to another problem, for example to the timetable problem:}\\
+              \begin{tabular}{cc}
+                \mc{\footnotesize{Each node is a module}\\
+                  \footnotesize{Each color is a time slot}\\
+                  \footnotesize{Each edge is a registration}\\
+                \footnotesize{The timetable should never overlap}\\
+                \footnotesize{k timeslots per week}\\
+                }&
+                \mc{\pic{220619-11}}\\
+              \end{tabular}
+              }\\
+              \hline
+            \end{tabular}
+          \end{tabular}
+          \hfill
+        \end{normalsize}
+    \end{table}
+    \pagebreak
+    \begin{table}[ht!]
+        \begin{normalsize}
+          \begin{tabular}{ccc}
+            \begin{tabular}[t]{|@{\hskip1pt}p{10.45cm}|}
+              \hline
+              \mc{\r{Polynomial Reduction}\\
+              \footnotesize{As the example above has already shown, we can convert problems.}\\
+              \footnotesize{Just like with regular reduction, we have converted an easier problem}\\
+              \footnotesize{to a more complex one that we already have a verifier for.}\\
+              \pic{220619-12}
+              }\\
+              \hline
+              \mc{\r{Hampath}\\
+              \footnotesize{Sadly, not every problem is straight forward to convert, some require}\\
+              \footnotesize{a bit of ingenuity.}\\
+              \footnotesize{Reduction Hampath into a quizz:}\\
+              \pic{220619-13}\\
+              }\\
+              \hline
+              \mc{\r{P and NP}\\
+              \pic{220619-14}\\
+              \footnotesize{Is P and NP the same? If so this would have major consequences!}\\
+              \footnotesize{Our cryptography would not be secure anymore! Problem is we can't be sure}\\
+              \footnotesize{about whether or not this is the case, P might be different to NP, perhaps not}\\
+              \footnotesize{We might find an algorithm to solve sudoku in polynomial time, or might not.}\\
+              }\\
+              \hline
+              \mc{\r{SAT}\\
+              \blu{SAT is a Logical formula that needs to be fulfilled.}\\
+              \gre{Also called Boolean satifiability problem}\\
+              }\\
+              \hline
+              \mc{\r{Fill-in Puzzle}\\
+              \footnotesize{A polynomial fill-in puzzle is a n x m table into which we }\\
+              \footnotesize{enter symbols of an alphabet \(\Sigma\), so that it coheres}\\
+              \footnotesize{to logical rules, which can be evaluated in polynomial time. }\\
+              \pic{220619-15}\\
+              Every fill-in puzzle can be reduced to SAT.\\
+              }\\
+              \hline
+            \end{tabular}
+            \hspace{-0.1in}
+            \begin{tabular}[t]{|@{\hskip1pt}p{10.45cm}|}
+              \hline
+              \mc{\r{Computation History}\\
+              \pic{220619-16}\\
+              }\\
+              \hline
+              \mc{\r{Cook Levins Law}\\
+              1. SAT is NP-Complete\\
+              2. if \(A \in NP\)\\
+              \, \,\, \footnotesize{There exists an NTM for A that computes in polynomial time \(O(t(n))\)}\\
+              \, \,\, \footnotesize{Therefore A can be reduced to SAT in polynomial time}\\
+              3. \(A \leq_P SAT\)\\\\
+              \footnotesize{The way to do this, is by turning A into a fill-in puzzle}\\
+              \footnotesize{From there on it is easy, as we already know that fill-in puzzles}\\
+              \footnotesize{can be reduced to SAT!}\\
+              \r{Reduction to polynomial fill-in puzzle}\\
+              \pic{220619-17}\\
+              \(O(t(n)^2) \) -> Amount of symbols and states * bandlength
+              }\\
+              \hline
+              \mc{\r{3SAT to k-Clique}\\
+              \pic{220619-19}\\
+              \footnotesize{Connect each node to every node that doesn't contradict itself (NOT \(x1\) to \(\overline x1\))}\\
+              \footnotesize{Only connect nodes from a different clause, (the conjunctions from 3SAT)}\\
+              \footnotesize{If you can then make a triangle with a node from each clause,}\\
+              \footnotesize{You have a TRUE from 3SAT. :)}\\
+              }\\
+              \hline
+            \end{tabular}
+          \end{tabular}
+          \hfill
+        \end{normalsize}
+    \end{table}
+    \pagebreak
+    \begin{table}[ht!]
+        \begin{normalsize}
+          \begin{tabular}{ccc}
+            \begin{tabular}[t]{|@{\hskip1pt}p{10.45cm}|}
+              \hline
+              \mc{\r{3SAT to SUBSET-SUM}\\
+              \pic{220619-20}\\
+              }\\
+              \hline
+              \mc{\r{Karp-Catalog}\\
+              \footnotesize{A catalog of NP-complete problems}\\
+              \footnotesize{The arrow denote the reducability. e.g. 3SAT to SUBSET-SUM}\\
+              \pic{220619-21}
+              }\\
+              \hline
+              \mc{\r{Turing Machine vs PC}\\
+              \begin{tabular}{cc}
+                \mc{Turing Machine\\
+                \footnotesize{States Q}\\
+                \footnotesize{Practically infinite memory -> Band}\\
+                \footnotesize{Read-Write Head}\\
+                \footnotesize{Stop -> \(q_{accept}\) or \(q_{reject}\)}\\
+                \footnotesize{\r{TM made for specific problem}}\\
+                }&
+                \mc{Regular PC\\
+                \footnotesize{Sates of CPU: Bits etc}\\
+                \footnotesize{virtual Memory (practically infinite)}\\
+                \footnotesize{Adress Register, Program Counter}\\
+                \footnotesize{EXIT\_SUCCESS, EXIT\_FAILURE}\\
+                \footnotesize{\r{runs ANY program}}\\
+                }\\
+              \end{tabular}
+              }\\
+              \hline
+              \mc{\r{The universal Turing Machine}\\
+              \footnotesize{Alan Turing made a Turing Machine that can simulate another TM!}\\
+              \footnotesize{These are the things needed for the TM:}\\
+              -- Band for the transition function from TM to TM\\
+              \, \,\, \(\delta : Q \times \Gamma \to Q \times \Gamma \times \{L,R\}\)\\
+              -- Band for the current state\\
+              -- Working Band\\
+              }\\
+              \hline
+              \mc{\r{Things that are missing on a TM}\\
+              -- Persistent Memory (Storage)\\
+              -- Input with keyboard/mouse\\
+              -- Input/Output (Monitor etc)\\
+              \footnotesize{\r{None of these additions change anything. }}\\
+              \footnotesize{\r{ are just things we added for quality of life}}\\
+              \footnotesize{\r{aka, all of these changes can be implemented on a TM,}}\\
+              \footnotesize{\r{ any issues as well! Just slow....}}\\
+              }\\
+              \hline
+              \mc{\r{Comparison of Machines}\\
+                \blu{If Machine 1 can simulate Machine 2}\\
+                \blu{Then Machine 1 is "more powerful" than Machine 2}\\
+                \gre{\(M_2 \leq_s M_1\) M1 simulates M2}\\
+                \footnotesize{\r{Unfortunately, the term is misleading, a PC is faster than a TM}}\\
+                \footnotesize{\r{But according to this an 8bit CPU and a TM are the same....}}\\
+              }\\
+              \hline
+            \end{tabular}
+            \hspace{-0.1in}
+            \begin{tabular}[t]{|@{\hskip1pt}p{10.45cm}|}
+              \hline
+              \mc{\r{Game of Life}\\
+              \pic{220619-22}
+              }\\
+              \hline
+              \mc{\r{Turing Complete}\\
+              \blu{Do we lose any capabilities of a TM with programming languages?}\\
+              \blu{If no, then said language is Turing complete!}\\
+              \gre{\(TM \leq_s \text{Programming lanugage}\)}\\
+              \footnotesize{Or a programming language A is Turing Complete, if a projection:}\\
+              \gre{\(c : A \to \Sigma^*\)}\\
+              \footnotesize{exists, where c(w) is a program of a univeral Turing machine.}\\
+              \footnotesize{examples of Turing complete languages: C, C++, javascript (Browser LOL), etc.}\\
+              }\\
+              \hline
+              \mc{\r{Base elements of a Programming language}\\
+              \blu{Both turing complete and not turing complete offer this:}\\
+              \begin{tabular}{cc}
+                \hspace{-0.1in}
+                \mc{
+              -- Constants c: \(\mathbb{N}_0\) \(0 \to \infty\)\\
+              -- Variables \(x_1 ,x_{..}\): \(\mathbb{N}_0\)\\
+              -- Assigment: \(x_i\) := c\\
+              -- Addition: \(x_i\) := \(x_j + c\)\\
+              -- Subtraction: \(x_i\) := \(x_j - c\)\\
+              \, \,\,\footnotesize{Note is \(c \ge x_j\) then \(x_i = 0\)}\\
+              }&
+              \mc{!Not Included!:\\
+              -- NO addition of variables: \(x_i + x_j\)\\
+              -- NO subtraction of variables: \(x_i - x_j\)\\
+              -- NO division or multiplication\\
+              }\\
+              \end{tabular}
+              }\\
+              \hline
+              \mc{\r{Non-Turing Complete Languages}\\
+              \blu{These types of languages ALWAYS halt! No halting problem!}\\
+              \gre{LOOP}: \r{not} turing complete\\
+              \pic{220619-23}\\
+              \footnotesize{We do not have conditional loops, only n says how many times we loop}\\
+              \footnotesize{This means we will ALWAYS halt, on n. This can be proven by induction, n - 1!}\\
+              }\\
+              \hline
+              \mc{\r{While and GOTO}\\
+              \pic{220619-24}\\
+              \pic{220619-25}\\
+              }\\
+              \hline
+            \end{tabular}
+          \end{tabular}
+          \hfill
+        \end{normalsize}
+    \end{table}
+    \pagebreak
+    \begin{table}[ht!]
+        \begin{normalsize}
+          \begin{tabular}{ccc}
+            \begin{tabular}[t]{|@{\hskip1pt}p{10.45cm}|}
+              \hline
+              \mc{
+              \pic{220619-26}\\
               }\\
               \hline
             \end{tabular}
