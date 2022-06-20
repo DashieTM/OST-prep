@@ -1,0 +1,1005 @@
+\documentclass{article}
+\usepackage[left=-1.5mm, right=-1.5mm, top=-1mm, bottom=1mm]{geometry}
+\usepackage[document]{ragged2e}
+\usepackage{graphicx}
+\usepackage{amsmath, mathtools, nccmath, amssymb}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{array, makecell}
+\usepackage{moresize}
+\usepackage[T1]{fontenc}
+\usepackage{noto-sans}
+\renewcommand\cellalign{cl}
+\renewcommand\theadalign{lc}
+\newcommand{\ns}{\\ \vspace{-0.03in}}
+\newcommand{\mc}[1]{\makecell[cl]{#1}}
+\newcommand{\mcc}{\makecell[{{c}}]}
+\newcommand{\mcr}{\makecell[{{r}}]}
+\newcommand{\pic}{\includegraphics[scale=0.3]}
+\newcommand{\form}[1]{\vspace{-0.03in}\\ \small{\textcolor{Red}{\(#1\)}} \\ \vspace{-0.03in}}
+\newcommand{\forms}[1]{\vspace{-0.01in}\\ \scriptsize{\textcolor{Red}{\(#1\)}\\ \vspace{-0.01in}}}
+\newcommand{\noskipform}[1]{\small{\textcolor{Red}{\(#1\)}}}
+\newcommand{\fpic}{\vspace{-0.05in} \\ \includegraphics[scale=0.3]}
+\newcommand{\dx}[1]{\scriptsize{\textcolor{Red}{\(\dfrac{d}{dx}#1\)}}}
+\newcommand{\dxs}[1]{\ssmall{\(\dfrac{d}{dx}#1\)}}
+\newcommand{\dxo}{\dfrac{d}{dx}}
+\renewcommand{\b}{\textbf}
+\renewcommand{\r}[1]{\textcolor{Red}{#1}}
+\newcommand{\gre}[1]{\textcolor{Green}{#1}}
+\newcommand{\blu}[1]{\textcolor{Blue}{#1}}
+\newcommand{\ora}[1]{\textcolor{Orange}{#1}}
+\newcommand{\lims}[1]{\lim\limits_{#1}}
+\newcommand{\atb}[1]{\int_a^b #1 \,dx}
+%\renewcommand{\arraystretch}{1.5}
+\graphicspath{{./Pictures/}}
+\begin{document}
+    \begin{table}[ht!]
+          %\vspace{0.075in}
+          \begin{tabular}{ccc}
+          \begin{tabular}[t]{|@{\hskip1pt}p{10.45cm}|}
+              \hline  
+              \mc{\r{Asset}\\
+              \footnotesize{Anything within the organization that is worth protecting:}\\
+              \footnotesize{Information, Systems, Devices, Facilities, Personnel, Intellectual Property}\\
+              }\\
+              \hline
+              \mc{\r{Confidentiality:}\\
+              \blu{Military / Government confidentiality:}\\
+              -- \blu{Top Secret:} \footnotesize{drastic effects / grave damage to national security}\\
+              -- \blu{Secret:} \footnotesize{significant effects / critical damage to national security}\\
+              -- \blu{Confidential:} \footnotesize{noticeable effects / serious damage to national security}\\
+              -- \blu{Sensitive but unclassified:} \footnotesize{internal use}\\
+              -- \blu{Unclassified:} \footnotesize{public data}\\
+              \gre{Commercial / private confidentiality}\\
+              -- \blu{Coonfidential / private:} \footnotesize{drastic effects on the competitiveness}\\
+              -- \blu{Sensitive}\\ 
+              -- \blu{Public}\\
+              \footnotesize{In general classified is used as a term to describe anything but public data.}\\
+              }\\
+              \hline
+              \mc{\r{Deleting Data}\\
+                \footnotesize{There are multiple ways to delete data with massive difference in effectiveness:}\\
+                -- \blu{Erasing:} \footnotesize{removes only the link to the storage point, actual data remains}\\
+                \, \,\,\footnotesize{\r{Simple tools can recover this data!}}\\
+                -- \blu{Clearing:} \footnotesize{Overwrites the data to delete it, usually with a single character}\\
+                \, \,\,\footnotesize{Can not be recovered using simple tools}\\
+                -- \blu{Purging:} \footnotesize{Clearing, but overwrites multiple times to make recovery harder}\\
+                \, \,\,\footnotesize{This method might also include others such as degaussing. It is Irrecoverable}\\
+                -- \blu{Degaussing:} \footnotesize{Strong magnetic field that can wipe data from an HDD}\\
+                \, \,\,\footnotesize{(SSD, CD, etc not affected!)}\\
+                -- \blu{Destruction:} \footnotesize{Destroy the physical hardware of said data. Irrecoverable.}\\
+              }\\
+              \hline
+              \mc{\r{Tracing and Hiding sensitive Data}\\
+                -- \blu{Steganography:} \footnotesize{Embedding a Message within a file}\\
+                -- \blu{Watermarking:} \footnotesize{unique identifier, that usually can't copied, or mutated.}\\
+              \, \,\,\footnotesize{Often used in Documents, movies, etc to stop counterfeits.}\\
+              }\\
+              \hline
+              \mc{\r{STRIDE Model}\\
+                -- \r{S}\blu{poofing:} \footnotesize{Using a false identity to gain access to a system.}\\
+                -- \r{T}\blu{ampering:} \footnotesize{unauthorized changes/manipulation of data}\\
+                -- \r{R}\blu{epudation:} \footnotesize{The ability to deny having performed an attack, }\\
+              \, \,\,\footnotesize{ to others being blamed.}\\
+              -- \r{I}\blu{nformation Disclosure:} \footnotesize{unauthorized revelation of classified }\\
+              \, \,\,\footnotesize{ private information.}\\
+              -- \r{D}\blu{enial of Service:} \footnotesize{Prevent or restrict access to a service by flooding it.}\\
+              -- \r{E}\blu{levation of Privilege:} \footnotesize{Gaining unauthorized privileges on a system}\\
+              \, \,\,\footnotesize{For example: becoming root as regular user}\\
+              }\\
+              \hline
+              \mc{\r{Copyright}\\
+              Protects these works: Literay, musical, dramatic, choreographic,\\
+              graphical,sculptural,audiovisual, recordings, architectural works\\
+              \footnotesize{Computer software is in the literary works category}\\
+              \footnotesize{Note only the source code is protected, not the idea itself.}\\
+              \footnotesize{Implicit Copyright is automatically granted if you are the creator of said work.}\\
+              \footnotesize{The explicit copyright can be obtained from the government and }\\
+              \footnotesize{lets you use the symbol: \copyright}\\
+              \footnotesize{This copyright lasts for 70 years after the death of the last copyright holder.}\\
+              }\\
+              \hline
+              \mc{\r{Trademark}\\
+              Protects: Slogans, Logos, words used to identify something\\
+              \footnotesize{Implicit Trademark is automatically granted if you use the \texttrademark{} symbol}\\
+              \footnotesize{Explicit Trademark has to be obtained from the government }\\
+              \footnotesize{and lets you use the \textregistered{} symbol.}\\
+              }\\
+              \hline
+              \mc{\r{Patents}\\
+              Patents protect intellectual Property for 20 years.\\
+              For a patent a product must be \r{useful,new,not be obvious}\\
+              \footnotesize{After the 20 years the patents enters into the public domain.}\\
+              \footnotesize{Patents are the worst thing ever.}\\
+              }\\
+              \hline
+              \mc{\r{Trade Secrets}\\
+              \footnotesize{Copyright, Patents and Trademarks require you to disclose what is protected}\\
+              \footnotesize{Because of this, many companies simply hide this information from the public}\\
+              \footnotesize{This means, while you are not protected by the law, as long as this information }\\
+              \footnotesize{stays within your company, it will be protected forever.}\\
+              \footnotesize{Likely the "best way" to protect computer software, aka proprietary trash}\\
+              }\\
+              \hline
+            \end{tabular}
+            \hspace{-0.1in}
+            \begin{tabular}[t]{|@{\hskip1pt}p{10.45cm}|}
+              \hline
+              \mc{\r{CIA triad}\\
+              The primary goal of Security infrastructure:\\
+              -- \r{C}\blu{onfidientiality:} \footnotesize{prevention of unauthorized access to data}\\
+              \, \,\,\footnotesize{no matter if the data is \r{in transit, in storage or in process}}\\
+              \, \,\,\footnotesize{Usually done with \r{encryption and access control}}\\
+              -- \r{I}\blu{ntegrity:} \footnotesize{prevention of unauthorized alteration of data}\\
+              \, \,\,\footnotesize{\gre{Data integrity:} data is complete, consistent and accurate}\\
+              \, \,\,\footnotesize{\gre{System integrity:} System only does what it was intended to do}\\
+              \, \,\,\footnotesize{Usually  done with \r{hash verification, intrusion detection}}\\
+              -- \r{A}\blu{vailability:} \footnotesize{Systems should be accessible at all times}\\
+              \, \,\,\footnotesize{Usuall done with \r{Redundancy, backups}}\\
+              }\\
+              \hline
+              \mc{\r{Nonrepudation \& Accountability}\\
+              \footnotesize{Nonrepudation ensures that every action can be traced to the actual source}\\
+              \footnotesize{This prevents attackers from covering their actions.}\\
+              \footnotesize{Accountability ensures that every being is responsible for their actions.}\\
+              \footnotesize{E.G. Nonrepudation ensures Accountability.}\\
+              \footnotesize{Usually done with certificates, session identifiers, logs, etc}\\
+              }\\
+              \hline
+              \mc{\r{Data Classification}\\
+                -- \blu{Data in Use, Transit, Rest}\\
+              \, \,\,\footnotesize{used by application, tranit via x, rest = storage, HDD, SSD}\\
+              -- \blu{Personally Identifiable Information PII}\\
+              \, \,\,\footnotesize{information to identify a person, name, social security number etc}\\
+              -- \blu{Protected Health Information PHI}\\
+              \, \,\,\footnotesize{Health Information recorded in any form.}\\
+              -- \blu{Proprietary(Trash) Data}\\
+              \, \,\,\footnotesize{microtroll windoof, appul}\\
+              }\\
+              \hline
+              \mc{\r{Threats}\\
+                -- \blu{Threat:} \footnotesize{A potential danger to an asset}\\
+                -- \blu{Threat intelligence:} \footnotesize{Knowledge about emerging or existing threats}\\ 
+                -- \blu{Thrat event:} \footnotesize{Accidental or malicious exploitation of a vulnerability}\\
+              }\\
+              \hline
+              \mc{\r{Vulnerability}\\
+              -- \blu{Common Vulnerabilities and Exposures (CVE)}\\
+              \, \,\,\footnotesize{Industry wide standard identification number for Vulnerabilities}\\
+              -- \blu{Common Vulnerability Scoring System (CVSS) }\\
+              \, \,\,\footnotesize{Uses the CIA triad to score vulnerabilities on severity}\\
+              }\\
+              \hline
+              \mc{\r{Risk}\\
+              \footnotesize{Assessment of the possibility that a threat will exploit a vulnerability}\\
+              \r{Realized Risk}\\
+              \footnotesize{A threat actor has now taken advantage of a vulnerability}\\
+              \footnotesize{The whole point of security is to stop exactly this.}\\
+              }\\
+              \hline
+              \mc{\r{Risk Management}\\
+                -- \blu{Identifying vulnerabilities}\\
+                -- \blu{evaluating importance of data and countermeasure cost}\\
+                -- \blu{Implementing cost effective countermeasures}\\
+              \footnotesize{Risk management is the balance of threat/risk and usability}\\
+              \footnotesize{In other words, only implement measures that are necessary}\\
+              \footnotesize{Some data is not worth protecting, and some systems can be replaced easily.}\\
+              \footnotesize{Others are sensitive, or fundamental, these must be preserved at all costs.}\\
+              }\\
+              \hline
+              \mc{\r{Risk Analysis}\\
+              -- \blu{Evaluation, assessment, assigment of value to assets}\\
+              -- \blu{Examining environment for risks}\\
+              -- \blu{Evaluating the likelihood of a threat event occurring}\\
+              -- \blu{Assessing the cost of countermeasures}\\
+              -- \blu{present cost/benefit report to upper management}\\
+              }\\
+              \hline
+              \mc{\r{Asset Valuation}\\
+              \footnotesize{The representation of an asset in currency}\\
+              \footnotesize{This can include things such as repair costs, maintenance costs,etc}\\
+              }\\
+              \hline
+              \mc{\r{Exposure}\\
+              \footnotesize{Possibility of an asset loss due to a threat}\\
+              \footnotesize{exposure factor (EF) checks how serious that loss would be}\\
+              }\\
+              \hline
+              \mc{\r{Attack}\\
+              \footnotesize{The \r{intentional} try to exploit a vulnerability}\\
+              }\\
+              \hline
+              \mc{\r{Breach}\\
+              \footnotesize{The circumvention of security measures by a threat actor.}\\
+              \footnotesize{A \r{breach combined with an attack}, can result in \r{penetration}}\\
+              }\\
+              \hline
+            \end{tabular}
+          \end{tabular}
+          \hfill
+    \end{table}
+    \pagebreak
+    \begin{table}[ht!]
+          \begin{tabular}{ccc}
+            \begin{tabular}[t]{|@{\hskip1pt}p{10.45cm}|}
+              \hline
+              \mc{\pic{220620-1}}\\
+              \hline
+              \mc{\r{Quantitative and Qualitative Risk Analysis}\\
+              --\gre{Quantitative Risk Analysis:}\\
+              \footnotesize{assignment of real dollar figures to loss of assets}\\
+              --\gre{Qualitative Risk Analysis}\\
+              \footnotesize{The subjective / intangible worth value to the loss of assets}\\
+              \footnotesize{\r{Both methodologies are necessary for complete risk analisys!}}\\
+              }\\
+              \hline
+              \mc{\r{Quantitative Risk Analysis}\\
+              \pic{220620-2}\\
+              -- \blu{Exposure Factor (EF):} \footnotesize{percentage of loss by realized risk}\\
+              -- \blu{Single Loss Expectancy (SLE):} \footnotesize{Cost of single realized  risk}\\
+              \, \,\,\ora{\footnotesize{SLE = EF * Asset Value (AV)}}\\
+              -- \blu{Annualized Rate of Occurrence (ARO):} \\
+              \, \,\,\footnotesize{expected frequency of a risk within a year}\\
+              -- \blu{Annualized Loss Expectancy (ALE):} \\
+              \, \,\,\footnotesize{Expected yearly cost of Losses due to realized risks}\\
+              \, \,\,\ora{\footnotesize{ALE = SLE * ARO}}\\
+              \footnotesize{If you implemented a safeguard, you have to recalculate the ARO.}\\
+              \footnotesize{The entire idea of of security is to reduce the ARO!!}\\
+              \footnotesize{The EF usually remains the same}\\
+              -- \r{Safeguard Costs}\\
+              \footnotesize{First, compile a list of safeguards against each threat.}\\
+              \footnotesize{Assign each safeguard a deployment value -> \r{Annual Cost of Safeguard (ACS)}}\\
+              -- \r{Safeguard Cost/Benefit}\\
+              \footnotesize{ALE without safeguard - ALE with safeguard - ACS = Value of safeguard}\\
+              \footnotesize{if the value of safeguard is below 0, then it is financially irresponsible}\\
+              \footnotesize{Note that this only takes in the financial damage since this is Quantitative!}\\
+              }\\
+              \hline
+              \mc{\r{Dealing with Risk}\\
+              -- \blu{Risk Mitigation} \footnotesize{Implementation of safeguards in order to}\\
+              \, \,\,\footnotesize{eliminate vulnerabilities or block threats}\\
+              -- \blu{Risk Assignment / Risk Transferring} \\
+              \, \,\,\footnotesize{purchasing insurance or outsourcing. Transfer the cost of risk to other entity}\\
+              -- \blu{Risk Acceptance} \footnotesize{Doing nothing as cost/benefit would be low}\\
+              -- \blu{Risk Deterrence} \footnotesize{auditing, cameras, security guards, warnings, etc}\\
+              -- \blu{Risk Avoidance} \footnotesize{Not using the system associated with the risk}\\
+              -- \blu{Risk Rejection} \footnotesize{Simply ignore risk \r{without cost/benefit analysis!}}\\
+              -- \blu{Residual Risk} \footnotesize{A countermeasure might not fully eliminate a risk}\\
+              \, \,\,\footnotesize{This is the remaining risk that we have decided to accept.}\\
+              }\\
+              \hline
+            \end{tabular}
+            \hspace{-0.1in}
+            \begin{tabular}[t]{|@{\hskip1pt}p{10.45cm}|}
+              \hline
+              \mc{\r{Privacy} \\
+                -- \blu{GDPR} \\
+                \, \,\, - \footnotesize{Companies have inform authorities in case of serious data breaches}\\
+                \, \,\, - \footnotesize{Individuals have the right to demand their data from companies}\\
+                \, \,\, - \footnotesize{Individuals have the right to be forgotten (deletion of data)}\\
+                \, \,\, - \footnotesize{EU tries to enforce this globally}\\
+                \, \,\, - \footnotesize{enforces pseudonomization}\\
+                -- \blu{Patriot act}\\
+                \, \,\, - \footnotesize{blanked authorization of surveillance of an individual with 1 warrant}\\
+                \, \,\, - \footnotesize{ISP have to provide data}\\
+                \, \,\, - \footnotesize{easier wiretapping}\\
+                -- \blu{pseudonomization} \footnotesize{replacement of data with aliases}\\
+                \, \,\, \footnotesize{This makes it harder to identify a person from said data}\\
+                -- \blu{anonymization} \footnotesize{Complete obfuscation of an identity}\\
+              }\\
+              \hline
+              \mc{\r{Access Control}\\
+              -- \blu{Subject} \footnotesize{The Requesting party}\\
+              \, \,\,\footnotesize{Note, this can be a person, a program, a process, etc.}\\
+              -- \blu{Object} \footnotesize{The requested "object"}\\
+              \, \,\,\footnotesize{Databases, programs, files, etc}\\
+              -- \blu{Access Control} \footnotesize{The management of the relationship}\\
+              \, \,\,\footnotesize{Between Subject and Object}\\
+              -- \blu{Preventive Access Control}\\
+              \, \,\,\footnotesize{Stops unwanted access to Objects}\\
+              -- \blu{Detective Access Control}\\
+              \, \,\,\footnotesize{Detects unwanted access to Objects after it has occurred}\\
+              -- \blu{Corrective Access Control}\\
+              \, \,\,\footnotesize{Restores the last "correct" state after unwanted access}\\
+              -- \blu{Deterrent Access Control}\\
+              \, \,\,\footnotesize{discourages unwanted access to Objects }\\
+              -- \blu{Directive Access Control}\\
+              \, \,\,\footnotesize{Directive issued by company. -> Don't click on links.}\\
+              -- \blu{Compensating Access Control}\\
+              \, \,\,\footnotesize{Controls used in addition/ as a replacement. Can be any control measure}\\
+              -- \blu{Recovery Access Control}\\
+              \, \,\,\footnotesize{More advanced version of corrective control}\\
+              -- \blu{Physical Control}\\
+              \, \,\,\footnotesize{Control of items that one can physically touch}\\
+              -- \blu{Technical / logical Control}\\
+              \, \,\,\footnotesize{Hardware or Software mechanism for access control}\\
+              -- \blu{Administrative Control}\\
+              \, \,\,\footnotesize{Policies and Procedures created by a Company}\\
+              }\\
+              \hline
+              \mc{\r{Steps of Access Control}\\
+              \blu{1. Identification}\\
+              \, \,\,\footnotesize{Providing an identity to enforce Nonrepudation.}\\
+              \, \,\,\footnotesize{ is usually public information.}\\
+              \, \,\,\footnotesize{username, tokens, fingerprints, facial recognition}\\
+              \blu{2. Authentication}\\
+              \, \,\,\footnotesize{Often used in combination with Identification.}\\
+              \, \,\,\footnotesize{Verifies the identity. Usually a password, or token.}\\
+              \blu{3. Authorization}\\
+              \, \,\,\footnotesize{Controls what a user is allowed to do and what they aren't}\\
+              \, \,\,\footnotesize{There are different ways of controlling this.(Check next page)}\\
+              \blu{4. Auditing}\\
+              \, \,\,\footnotesize{Record all actions by all Subjects in order to hold them accountable}\\
+              \blu{5. Accounting (Accountability)}\\
+              \, \,\,\footnotesize{This would mean taking actions against a person,}\\
+              \, \,\,\footnotesize{that has acted in bad faith/maliciously }\\
+              \, \,\,\footnotesize{Keep in mind that you need a strong system of identification,}\\
+              \, \,\,\footnotesize{ and auditing}\\
+              \, \,\,\footnotesize{in order to actually win in a court of law against the bad actor!}\\
+              }\\
+              \hline
+              \mc{\r{Authentication Factors}\\
+              -- \blu{Type 1: Something you know}\\
+              -- \blu{Type 2: Something you have, ex. a Device, smartcard, etc}\\
+              -- \blu{Type 3: Something you are/do, ex. Fingerprint, face, etc.}\\
+              \ora{\footnotesize{Type 1 is the weakest form of authentication and type 3 the strongest!}}\\
+              }\\
+              \hline
+            \end{tabular}
+          \end{tabular}
+          \hfill
+    \end{table}
+    \pagebreak
+    \begin{table}[ht!]
+          \begin{tabular}{ccc}
+            \begin{tabular}[t]{|@{\hskip1pt}p{10.45cm}|}
+              \hline
+              \mc{-- \gre{Location}\\
+              \footnotesize{This is a form that is used in combination with others.}\\
+              \footnotesize{Ex: A certain IP might be a requirement to log into one of your systems}\\
+              \footnotesize{Or your bank might block a transaction if it isn't from your country of residence.}\\
+              }\\
+              \hline
+              \mc{\r{Multifactor Authentication}\\
+              \footnotesize{Multifactor Authentication simply uses more than one type to authenticate}\\
+              \footnotesize{This might be a password(Type1) and a token(Type2)}\\
+              \ora{\footnotesize{The strongest form of authentication if therefore all 3 types together!}}\\
+              }\\
+              \hline
+              \mc{\r{Passwords}\\
+                \footnotesize{Passwords are never stored in plain text,} \\
+              \footnotesize{they might be stolen easily with 1 breach}\\
+              \footnotesize{Instead, they are saved with a hash-algorithm, }\\
+              \footnotesize{makes them nearly useless to threat actors}\\
+              \footnotesize{Unless they also have the access to said algorithm.}\\
+              }\\
+              \mc{\r{Types of passwords:}\\
+              -- \blu{Plain Password}\\
+              \, \,\,\footnotesize{use numbers, characters and special symbols with a length of at least 10.}\\
+              \, \,\,\footnotesize{10 characters -> 928 years of cracking!!}\\
+              \, \,\,\footnotesize{Don't use personal information such as names etc.}\\
+              -- \blu{PassPhrases}\\
+              \, \,\,\footnotesize{Passphrases are chained words that are easy to remember}\\
+              \, \,\,\footnotesize{It is important to have a longer passphrase than a regular password!}\\
+              \, \,\,\footnotesize{Still use special symbols. Also try to include random upper-lower case spelling}\\
+              \, \,\,\footnotesize{Or leadspeak s1nc3 that 1s qu1te 3ff3ct1v3!!}\\
+              -- \blu{Cognitive Passwords}\\
+              \, \,\,\footnotesize{A series of personal questions. -> what is the name of your first pet?}\\
+              \, \,\,\footnotesize{Best way to do this is letting users create both the question and the answer!}\\
+              -- \blu{SmartCards}\\
+              \, \,\,\footnotesize{Card used for identification / authentication. Often integrates key encryption}\\
+              \, \,\,\footnotesize{Usually temper resistant}\\
+              \, \,\,\footnotesize{One downside, loss of card might give a threat a window of exploitation!}\\
+              -- \blu{Tokens}\\
+              \, \,\,\footnotesize{Generated by a \r{special Device}.}\\
+              \, \,\,\footnotesize{Regular password generators: any device can take that place. ex. smartphone}\\
+              -- \blu{Synchronous Dynamic Token}\\
+              \, \,\,\blu{Time-based One-Time Password (TOTP)}\\
+              \, \,\,\footnotesize{Device generates Token every x seconds.}\\
+              -- \blu{Asynchronous Dynamic Token}\\
+              \, \,\,\blu{HMAC-based One-Time Password (HOTP)}\\
+              \, \,\,\footnotesize{Device generates one time token based on algorithm. Stays until used!}\\
+              }\\
+              \hline
+              \mc{\r{Access Control Models (Authorization)}\\
+              -- \blu{Discretionary Access Control (DAC)}\\
+              \, \,\,\footnotesize{Every object has an owner, and that owner can to grant or deny permissions}\\
+              \, \,\,\footnotesize{NTFS from windoof uses this}\\
+              -- \blu{Role Based Access Control}\\
+              \, \,\,\footnotesize{Permissions are assigned to roles not users. Users are assigned to roles.}\\
+              \, \,\,\footnotesize{Users who are in a role with said privileges can use them.}\\
+              -- \blu{Rule Based Access Control}\\
+              \, \,\,\footnotesize{Global rules that are applied to all subjects}\\
+              \, \,\,\footnotesize{Good example is a firewall, which applies said rules equally to all subjects}\\
+              -- \blu{Attribute Based Access Control}\\
+              \, \,\,\footnotesize{Similar to Rule based Control but with additional attributes}\\
+              \, \,\,\footnotesize{This could give one subject more rights than another}\\
+              -- \blu{Mandatory Access Control}\\
+              \, \,\,\footnotesize{Use of labels applied to both subject and Object}\\
+              \, \,\,\footnotesize{If user has the same label as a file, then user has access to it.}\\
+              }\\
+              \hline
+              \mc{\r{Authorization Mechanism}\\
+              -- \blu{Implicit Deny}\\
+              \, \,\,\footnotesize{Deny everything that hasn't been specifically allowed}\\
+              \, \,\,\footnotesize{\r{Most used!}}\\
+              -- \blu{Constrained Interference}\\
+              \, \,\,\footnotesize{Applications might hide functionality based on the privileges of a user}\\
+              }\\
+              \hline
+            \end{tabular}
+            \hspace{-0.1in}
+            \begin{tabular}[t]{|@{\hskip1pt}p{10.45cm}|}
+              \hline
+              \mc{
+              -- \blu{Access Control Matrix}\\
+              \, \,\,\footnotesize{This writes Objects,Subjects and privileges into a table}\\
+              \, \,\,\footnotesize{If Subject tries to access an object the table for said object is checked}\\
+              -- \blu{Capability Table}\\
+              \, \,\,\footnotesize{This is the same as the Access Control Matrix but with a subject focus}\\
+              \, \,\,\footnotesize{In this table the subject and all accessible Objects are written down}\\
+              -- \blu{Content-Dependent Control}\\
+              \, \,\,\footnotesize{Constrict Access to the data within an Object}\\
+              \, \,\,\footnotesize{In a database a user might be able to check table 1 but not table 2.}\\
+              \, \,\,\footnotesize{While the object is the entire database!}\\
+              -- \blu{Context-Dependent Control}\\
+              \, \,\,\footnotesize{Give a subject access depending on what the subject does}\\
+              \, \,\,\footnotesize{Ex. The checkout button in an online shop only works, if you have something}\\
+              \, \,\,\footnotesize{in the shopping cart.}\\
+              -- \blu{Need to Know}\\
+              \, \,\,\footnotesize{Subjects should only have access to Objects they need to do their job.}\\
+              -- \blu{Least Privilege}\\
+              \, \,\,\footnotesize{Subjects should only have the privileges they need to do their job.}\\
+              -- \blu{Separation of Duties and Responsibilities}\\
+              \, \,\,\footnotesize{\r{No single person should have total control over the entire System!}}\\
+              }\\
+              \hline
+              \mc{\r{Common Access Control Attacks}\\
+              -- \blu{Access Aggregation Attacks (Passive Attacks)}\\
+              \, \,\,\footnotesize{This is the collection of nonsensitive data, that combined could give}\\
+              \, \,\,\footnotesize{a threat actor the opportunity to launch a proper attack.}\\
+              \, \,\,\footnotesize{Ex. IP address, open ports, Operating System -> specific exploit}\\
+              -- \blu{Password Attacks (Brute Force)}\\
+              \, \,\,\footnotesize{Spam random sequences until you get the right one}\\
+              -- \blu{Dictionary Attacks (Brute Force)}\\
+              \, \,\,\footnotesize{Try passwords from a list of passwords, example leaked password list.}\\
+              \, \,\,\footnotesize{Can also be done with list of common passwords, or slightly changed}\\
+              \, \,\,\footnotesize{previous passwords (One-Upped-Passwords -> 1 character changed)}\\
+              -- \blu{Birthday Attack (Brute Force)}\\
+              \, \,\,\footnotesize{Try to get the same hash as the password with a different sequence}\\
+              \, \,\,\footnotesize{Can be mitigated by using better hashing algorithms. SHA-3 instead of md5}\\
+              \, \,\,\footnotesize{\r{Note the attacker needs access to the hash in order for this to work!}}\\
+              -- \blu{Rainbow Table Attacks}\\
+              \, \,\,\footnotesize{Combines the Birthday attack with a table of precomputed hashes.}\\
+              \, \,\,\footnotesize{This is then used to compare to a password hash list.}\\
+              -- \blu{Sniffer Attacks}\\
+              \, \,\,\footnotesize{Threat actor analyzes data sent over network with a sniffer tool.}\\
+              \, \,\,\footnotesize{A good example for this is wireshark}\\
+              \, \,\,\footnotesize{Can be mitigated by using encryption and One-Time passwords}\\
+              \, \,\,\footnotesize{encryption makes the data useless and One-Time passwords are as well}\\
+              -- \blu{Spoofing Attacks}\\
+              \, \,\,\footnotesize{Pretending to be something/someone else. Ex. pretending to be router.}\\
+              -- \blu{Social Engineering Attacks}\\
+              \, \,\,\footnotesize{Gaining and then misusing trust of someone. }\\
+              \, \,\,\footnotesize{*Indian accent* you get refund if you buy me 2 cards from target}\\
+              -- \blu{Shoulder Surfing (Social Engineering)}\\
+              \, \,\,\footnotesize{Reading information on a screen from a persons back.}\\
+              -- \blu{Phishing (Social Engineering)}\\
+              \, \,\,\footnotesize{Trick a Person to click on a fake link to log in, giving the attacker}\\
+              \, \,\,\footnotesize{all the credentials to log-in}\\
+              -- \blu{Spear Phishing (Social Engineering)}\\
+              \, \,\,\footnotesize{Targeted Phishing at a group. Ex. Employees at company x.}\\
+              -- \blu{Whaling (Social Engineering)}\\
+              \, \,\,\footnotesize{"Phishing für grosse Fisch" -> CEOs etc}\\
+              -- \blu{Vishing (Social Engineering)}\\
+              \, \,\,\footnotesize{Phishing via VOIP or instant messaging}\\
+              }\\
+              \hline
+              \mc{\r{Protection Mechanism}\\
+              -- \blu{Layering (defense in depth)}\\
+              \, \,\,\footnotesize{Multiple Controls in Layers, if one fails, there are still the other ones}\\
+              -- \blu{Abstraction}\\
+              \, \,\,\footnotesize{Combining Objects into groups in order to simplify permission management}\\
+              }\\
+              \hline
+            \end{tabular}
+          \end{tabular}
+          \hfill
+    \end{table}
+    \pagebreak
+    \begin{table}[ht!]
+          \begin{tabular}{ccc}
+            \begin{tabular}[t]{|@{\hskip1pt}p{10.45cm}|}
+              \hline
+              \mc{
+              -- \blu{Data Hiding}\\
+              \, \,\,\footnotesize{Storing Objects in compartments that can't be seen / accessed }\\
+              \, \,\,\footnotesize{by an unauthorized subject}\\
+              -- \blu{Security through Obscurity}\\
+              \, \,\,\footnotesize{Not informing a subject about an object, and hoping it will stay hidden}\\
+              -- \blu{Encryption}\\
+              \, \,\,\footnotesize{Turning data into gibberish via algorithms.}\\
+            }\\
+              \hline
+              \mc{\r{Red-Team}\\
+              Offensive Cyber-Security: simulate attacks\\
+              -- \r{Think outside the box}\\
+              \, \,\,\footnotesize{Find new ways and tools and attack systems to show the flaws}\\
+              -- \r{Deep Knowledge of Systems}\\
+              \, \,\,\footnotesize{Deep Knowledge about systems, flaws, exploits, methodologies,etc}\\
+              \, \,\,\footnotesize{always up-to-date with technology}\\
+              -- \r{Software Development}\\
+              \, \,\,\footnotesize{Learn how to develop your own tools.}\\
+              -- \r{Penetration testing}\\
+              \, \,\,\footnotesize{Identify vulnerabilities and potential threats}\\
+              -- \r{Social Engineering}\\
+              }\\
+              \hline
+              \mc{\blu{Blue-Team}\\
+              Defensive Cyber-Security: prevent attacks\\
+              -- \blu{Organized and detail-oriented}\\
+              \, \,\,\footnotesize{Prevent gaps by thinking about EVERYTHING}\\
+              -- \blu{Cybersecurity Analysis and threat profile}\\
+              \, \,\,\footnotesize{Assess the security of an organization. Create Risk/Threat Profiles. }\\
+              -- \blu{Hardening Techniques}\\
+              \, \,\,\footnotesize{Reduce the attack surface hackers might exploit}\\
+              -- \blu{Knowledge about detection Software}\\
+              \, \,\,\footnotesize{Be familiar with software that recognizes unauthorized actions}\\
+              \, \,\,\footnotesize{low skill application would be rkhunter. }\\
+              -- \blu{Security Information, Event Management (SIEM)}\\
+              \, \,\,\footnotesize{Software that allows real-time analysis of security events}\\
+              }\\
+              \hline
+              \mc{\r{Linux}\\
+              \footnotesize{\blu{Adding user:} usermod -m username -s /path/to/shell}\\
+              \footnotesize{\blu{Change shell:} chsh -s /path/to/shell}\\
+              \footnotesize{\blu{Change password:} passwd username}\\
+              \footnotesize{\blu{Add user to group:} usermod -a -G groupname username}\\
+              \footnotesize{\blu{Change file permission:} chmod permission file}\\
+              \footnotesize{\blu{Change file owner:} chown file user/group }\\
+              \footnotesize{\blu{Check IP address:} ip addr / ip -c -brie a }\\
+              \footnotesize{\blu{DNS query:} dig domain (dig shitgaem.online) }\\
+              -- \r{File System Permissions}\\
+              \footnotesize{\ora{r = read, w = write , x = execute}}\\
+              \footnotesize{Every single file has these attributes.}\\
+              \footnotesize{These attributes are also duplicated for 3 different types of users.}\\
+              \footnotesize{1. owner, 2. group of owner, 3. other}\\
+              \footnotesize{This means the actual permission would look like this:}\\
+              \pic{220620-3}\\
+              \pic{220620-4}
+              }\\
+              \hline
+            \end{tabular}
+            \hspace{-0.1in}
+            \begin{tabular}[t]{|@{\hskip1pt}p{10.45cm}|}
+              \hline
+              \mc{
+              \footnotesize{\blu{Manually set IP address (abando):} edit /etc/network/interfaces}\\
+              \footnotesize{\blu{Configure SSH:} edit /etc/ssh/sshd\_config}\\
+              \, \,\footnotesize{For birbs sake, use a nonstandard port for ssh :)}\\
+              \footnotesize{\blu{Check current shells:} ps}\\
+              \footnotesize{\blu{Check current processes:} htop }\\
+              \footnotesize{\blu{grep} read lines }\\
+              \, \,\footnotesize{grep 'Warning' /var/log/rkhunter.log}\\
+              \footnotesize{\blu{Read Lines:} awk 'sshd.*invalid user/ \{print \$11\}' auth.log}\\
+              \footnotesize{\blu{bit-by-bit copy:} dd if=<media/partition> of<image\_files>}\\
+              \, \,\footnotesize{mount - o ro,noexec,loop evidence\_01 /mnt/investigation}\\
+              \, \,\footnotesize{mount with read only and no execution}\\
+              \footnotesize{\blu{Check recently changed files } ls -lasrt }\\
+              }\\
+              \hline
+              \mc{\r{PID}\\
+              \footnotesize{The unique identifier the kernel gives each process}\\
+              \footnotesize{This shows both background and foreground applications}\\
+              }\\
+              \hline
+              \mc{\r{logs}\\
+              \footnotesize{Logs capture every single action on linux, this can be used to detect bad actors.}\\
+              \footnotesize{However, logs can also be spoofed, which means you always have to be sure, that}\\
+              \footnotesize{everything is being logged, and that no logs have been tampered with.}\\
+              \footnotesize{notable logging systems/files: syslog, rsyslog,var/log ,auth.log}\\
+              \r{\footnotesize{The shred command with -f and -n force deletes log files.}}\\
+              \footnotesize{Mainly used like this: shred -f -n 15 /var/log/auth.log*}\\
+              \footnotesize{This shreds 15 lines from every log file with the name auth.log(something)}\\
+              \footnotesize{other things to look out for:}\\
+              \footnotesize{-- \blu{set-UID} Rogue Files}\\
+              \footnotesize{-- \blu{Directories with .something} Hidden...}\\
+              \footnotesize{-- \blu{Regular files in the /dev directory}}\\
+              \footnotesize{-- \blu{Recently modified files ls -lasrt}}\\
+              }\\
+              \hline
+              \mc{\r{Schedules Tasks}\\
+              \footnotesize{Schedules tasks can be written either in cron.d or with systemd}\\
+              }\\
+              \hline
+              \mc{\r{IP-Tables}\\
+                \footnotesize{name one reason not to use ufw...}\\
+                \footnotesize{\blu{Flush all rules:} iptables -F}\\
+                \footnotesize{\blu{Block Input:} iptables -P INPUT DROP}\\
+                \footnotesize{\blu{Block Output:} iptables -P OUTPUT DROP}\\
+                \footnotesize{\blu{Block Forward:} iptables -P FORWARD DROP}\\
+                \footnotesize{\blu{Allow Port:} iptables -A INPUT/OUTPUT -p port ...other shit...}\\
+                \footnotesize{\blu{Show rules:} iptables -L -n -v -- line-numbers}\\
+              }\\
+              \hline
+              \mc{\r{Sticky Bit}\\
+              \footnotesize{This is a single bit in front of rwx. -> 1777 sticky set, 0777 sticky not set}\\
+              \footnotesize{The interpretation of this bit depends on the file type}\\
+              \footnotesize{For directories, it means that any files within that folder}\\
+              \footnotesize{May only be renamed or deleted by the owner.}\\
+              \footnotesize{For files this bit is deprecated!}\\
+              }\\
+              \hline
+              \mc{\r{Security Enhanced Linux (SELinux)}\\
+              \footnotesize{This is a module created by the NSA that implements types,}\\
+              \footnotesize{which mark files based on the type of a subject.}\\
+              \footnotesize{Ex. a top-secret process can create a file with chmod 777,}\\
+              \footnotesize{but a confidential process still can't open it.}\\
+              \ora{\footnotesize{This is called MLS in SELinux and is related to Multi Category Security (MCS)}}\\
+              }\\
+              \hline
+              \mc{\r{Snort}\\
+              Detection software like rkhunter\\
+              }\\
+              \hline
+              \mc{\r{NetCat}\\
+              \footnotesize{This can be used for anything dealing with TCP and UDP.}\\
+              \footnotesize{You can also use it to control compromised systems...}\\
+              \blu{Reverse Shell}\\
+              \footnotesize{The idea is, since the starting connection comes from the victim,}\\
+              \footnotesize{Not only do we not have NAT and firewall problems, the connection}\\
+              \footnotesize{also looks more legit than when we connect.}\\
+              \footnotesize{This gives a hacker some sort of legitimacy on that system.}\\
+              }\\
+              \hline
+              \mc{\r{Scapy}\\
+              \footnotesize{Tool used to send, sniff, dissect and forge IP packets.}\\
+              \footnotesize{You can probe, scan and attack networks}\\
+              \footnotesize{You can attack signature for IDS/IPS systems}\\
+              }\\
+              \hline
+            \end{tabular}
+          \end{tabular}
+          \hfill
+    \end{table}
+    \pagebreak
+    \begin{table}[ht!]
+          \begin{tabular}{ccc}
+            \begin{tabular}[t]{|@{\hskip1pt}p{10.45cm}|}
+              \hline
+              \mc{\r{Encryption Terms}\\
+                -- \blu{Plain Text:} \footnotesize{unencrypted message}\\
+                -- \blu{Ciphertext:} \footnotesize{encrypted message}\\
+                -- \blu{Cipher:} \footnotesize{Algorithm used to encrypt}\\
+                -- \blu{Cryptographic key:} \footnotesize{Just a number to decrypt a message}\\
+                \, \,\,\footnotesize{The range is defined by the algorithm. \(0 \text{ to } 2^n\)}\\
+                \, \,\,\footnotesize{A key with 128 bits would have a range of: \(0 \text{ to } 2^{128}\)}\\
+                \, \,\,\footnotesize{\r{It is critical to keep the keys secret!}}\\
+                -- \blu{One-Way Function:}\\
+                \, \,\,\footnotesize{mathematical function that produces output in a way that}\\
+                \, \,\,\footnotesize{ input can't be retrieved.}\\
+                \, \,\,\ora{\footnotesize{There is no TRUE One-Way-Function}}\\
+                \, \,\,\footnotesize{Cryptography works on the believe that it can't be broken RIGHT NOW}\\
+                \, \,\,\footnotesize{However, this does not mean it will stay so forever, see already broken ciphers}\\
+                -- \blu{Reversability:} \footnotesize{The option of encryption....}\\
+                -- \blu{Nonce:} \footnotesize{A Public,unique One-Time-Use Number}\\
+                \, \,\,\footnotesize{Makes sure a key is not re-used twice!}\\
+                -- \blu{Initialization Vector (IV):} \footnotesize{A random bit string}\\
+                \, \,\,\footnotesize{Same length as the block size and is 'XORed with the message'}\\
+                \, \,\,\footnotesize{IVs are used to create a unique ciphertext with the same key}\\
+                -- \blu{Confusion:} \\
+                \, \,\,\footnotesize{This is the case when encryption is so complicated,}\\
+                \, \,\,\footnotesize{that merely reforming the string doesn't reveal the message}\\
+                \, \,\,\footnotesize{Aka bruteforce doesn't work anymore.}\\
+                -- \blu{Diffusion:} \\
+                \, \,\,\footnotesize{A change in the plaintext will result in multiple changes in the ciphertext.}\\
+                -- \blu{The Kerckhoff's Principle} \\
+                \, \,\,\footnotesize{This means everything about the system is public but the key}\\
+                \, \,\,\footnotesize{It therefore requires the system to be secure even under these circumstances}\\
+                \, \,\,\footnotesize{The idea is that public algorithms may hasten the improvements on them}\\
+                -- \blu{Permutation} \footnotesize{Swapping Bytes around}\\
+                -- \blu{Byte Substitution} \footnotesize{Replacing bytes with others}\\
+                -- \blu{SP-Networks} \footnotesize{algorithm that uses repeated Permutations and Substitutions}\\
+                \, \,\,\footnotesize{Permutations and Substitutions are combined to a round}\\
+                \, \,\,\footnotesize{Rounds are then repeated many times}\\
+              }\\
+              \hline
+              \mc{\r{Caesar Cipher or ROT3}\\
+              \footnotesize{One of the earliest encryption systems}\\
+              \footnotesize{Simply shifts a chracter by 3  A to D, B to E...}\\
+              }\\
+              \hline
+              \mc{\r{One-Time-Pad}\\
+                \footnotesize{Create a key with the same length as the message}\\
+                \footnotesize{XOR each message bit with each key bit}\\
+                \footnotesize{\r{This Cipher is UNBREAKABLE!}}\\
+                \footnotesize{However it is not practical.. 1GB file 1GB key...}\\
+                \footnotesize{No proper way to transmit, store a key}\\
+                \footnotesize{Using a key twice == Cipher broken}\\
+              }\\
+              \hline
+              \mc{\r{Symmetric Cryptography}\\
+              \pic{220620-5}\\
+              -- \blu{Same key for encrypting and decrypting}\\
+              -- \blu{Shared key for all parties involved!}\\
+              \, \,\,\footnotesize{If one leaks the key, the cipher is broken!}\\
+              -- \blu{Doesn't confirm identity!}\\
+              \, \,\,\footnotesize{Anyone who has the key can pretend do be another}\\
+              }\\
+              \hline
+            \end{tabular}
+            \hspace{-0.1in}
+            \begin{tabular}[t]{|@{\hskip1pt}p{10.45cm}|}
+              \hline
+              \mc{\r{Stream Ciphers}\\
+              \pic{220620-6}\\
+            \footnotesize{\blu{+ Encryption of long continuous streams, of possible unknown length}}\\
+              \footnotesize{\blu{+ Extremely fast with low memory footprint, ideal for low power devices}}\\
+              \footnotesize{\blu{+ If designed well, it can seek to any location in the stream}}\\
+              \footnotesize{\r{-- The keystream must appear statistically random}}\\
+              \footnotesize{\r{-- You must never reuse a key + nonce}}\\
+              \footnotesize{\r{-- Stream ciphers do not protect the ciphertext (no guaranteed integrity)}}\\
+              }\\
+              \hline
+              \mc{\r{Substitution / Permutation box}\\
+              \pic{220620-7}
+              }\\
+              \hline
+              \mc{\r{Block Cipher}\\
+              \footnotesize{Takes in an input of a fixed size and returns an output of the same size}\\
+              -- \blu{Diffusion and Confusion}\\
+              -- \blu{SP-Network}\\
+              \gre{Advanced Ecryption Standard (AES) is a Block Cipher}\\
+              Here is a Block Cipher works:\\
+              \pic{220620-8}\\
+              }\\
+              \hline
+              \mc{\r{AES}\\
+              \footnotesize{Built around the Rijndael algorithm}\\
+              \footnotesize{Superceedes the DES as a standard}\\
+              -- \blu{SP-Network with 128-bit block size}\\
+              \, \,\,\footnotesize{>> Key length 128,192,256 bit}\\
+              \, \,\,\footnotesize{>> 10, 12 or 14 rounds}\\
+              \, \,\,\footnotesize{>> Each Round: Substitute Bytes, ShiftRows, MixColumns, KeyAddition}\\
+              \pic{220620-9}\\
+              }\\
+              \hline
+            \end{tabular}
+          \end{tabular}
+          \hfill
+    \end{table}
+    \pagebreak
+    \begin{table}[ht!]
+          \begin{tabular}{ccc}
+            \begin{tabular}[t]{|@{\hskip1pt}p{10.45cm}|}
+              \hline
+              \mc{
+              \pic{220620-10}\\
+              \pic{220620-11}\\
+              \pic{220620-12}\\
+              }\\
+              \hline
+              \mc{}\\
+              \hline
+              \mc{}\\
+              \hline
+              \mc{}\\
+              \hline
+              \mc{}\\
+              \hline
+            \end{tabular}
+            \hspace{-0.1in}
+            \begin{tabular}[t]{|@{\hskip1pt}p{10.45cm}|}
+              \hline
+              \mc{}\\
+              \hline
+              \mc{}\\
+              \hline
+              \mc{}\\
+              \hline
+              \mc{}\\
+              \hline
+              \mc{}\\
+              \hline
+            \end{tabular}
+          \end{tabular}
+          \hfill
+    \end{table}
+    \pagebreak
+    \begin{table}[ht!]
+          \begin{tabular}{ccc}
+            \begin{tabular}[t]{|@{\hskip1pt}p{10.45cm}|}
+              \hline
+              \mc{}\\
+              \hline
+              \mc{}\\
+              \hline
+              \mc{}\\
+              \hline
+              \mc{}\\
+              \hline
+              \mc{}\\
+              \hline
+            \end{tabular}
+            \hspace{-0.1in}
+            \begin{tabular}[t]{|@{\hskip1pt}p{10.45cm}|}
+              \hline
+              \mc{}\\
+              \hline
+              \mc{}\\
+              \hline
+              \mc{}\\
+              \hline
+              \mc{}\\
+              \hline
+              \mc{}\\
+              \hline
+            \end{tabular}
+          \end{tabular}
+          \hfill
+    \end{table}
+    \pagebreak
+    \begin{table}[ht!]
+          \begin{tabular}{ccc}
+            \begin{tabular}[t]{|@{\hskip1pt}p{10.45cm}|}
+              \hline
+              \mc{}\\
+              \hline
+              \mc{}\\
+              \hline
+              \mc{}\\
+              \hline
+              \mc{}\\
+              \hline
+              \mc{}\\
+              \hline
+            \end{tabular}
+            \hspace{-0.1in}
+            \begin{tabular}[t]{|@{\hskip1pt}p{10.45cm}|}
+              \hline
+              \mc{}\\
+              \hline
+              \mc{}\\
+              \hline
+              \mc{}\\
+              \hline
+              \mc{}\\
+              \hline
+              \mc{}\\
+              \hline
+            \end{tabular}
+          \end{tabular}
+          \hfill
+    \end{table}
+    \pagebreak
+    \begin{table}[ht!]
+          \begin{tabular}{ccc}
+            \begin{tabular}[t]{|@{\hskip1pt}p{10.45cm}|}
+              \hline
+              \mc{}\\
+              \hline
+              \mc{}\\
+              \hline
+              \mc{}\\
+              \hline
+              \mc{}\\
+              \hline
+              \mc{}\\
+              \hline
+            \end{tabular}
+            \hspace{-0.1in}
+            \begin{tabular}[t]{|@{\hskip1pt}p{10.45cm}|}
+              \hline
+              \mc{}\\
+              \hline
+              \mc{}\\
+              \hline
+              \mc{}\\
+              \hline
+              \mc{}\\
+              \hline
+              \mc{}\\
+              \hline
+            \end{tabular}
+          \end{tabular}
+          \hfill
+    \end{table}
+    \pagebreak
+    \begin{table}[ht!]
+          \begin{tabular}{ccc}
+            \begin{tabular}[t]{|@{\hskip1pt}p{10.45cm}|}
+              \hline
+              \mc{}\\
+              \hline
+              \mc{}\\
+              \hline
+              \mc{}\\
+              \hline
+              \mc{}\\
+              \hline
+              \mc{}\\
+              \hline
+            \end{tabular}
+            \hspace{-0.1in}
+            \begin{tabular}[t]{|@{\hskip1pt}p{10.45cm}|}
+              \hline
+              \mc{}\\
+              \hline
+              \mc{}\\
+              \hline
+              \mc{}\\
+              \hline
+              \mc{}\\
+              \hline
+              \mc{}\\
+              \hline
+            \end{tabular}
+          \end{tabular}
+          \hfill
+    \end{table}
+    \pagebreak
+    \begin{table}[ht!]
+          \begin{tabular}{ccc}
+            \begin{tabular}[t]{|@{\hskip1pt}p{10.45cm}|}
+              \hline
+              \mc{}\\
+              \hline
+              \mc{}\\
+              \hline
+              \mc{}\\
+              \hline
+              \mc{}\\
+              \hline
+              \mc{}\\
+              \hline
+            \end{tabular}
+            \hspace{-0.1in}
+            \begin{tabular}[t]{|@{\hskip1pt}p{10.45cm}|}
+              \hline
+              \mc{}\\
+              \hline
+              \mc{}\\
+              \hline
+              \mc{}\\
+              \hline
+              \mc{}\\
+              \hline
+              \mc{}\\
+              \hline
+            \end{tabular}
+          \end{tabular}
+          \hfill
+    \end{table}
+    \pagebreak
+    \begin{table}[ht!]
+          \begin{tabular}{ccc}
+            \begin{tabular}[t]{|@{\hskip1pt}p{10.45cm}|}
+              \hline
+              \mc{}\\
+              \hline
+              \mc{}\\
+              \hline
+              \mc{}\\
+              \hline
+              \mc{}\\
+              \hline
+              \mc{}\\
+              \hline
+            \end{tabular}
+            \hspace{-0.1in}
+            \begin{tabular}[t]{|@{\hskip1pt}p{10.45cm}|}
+              \hline
+              \mc{}\\
+              \hline
+              \mc{}\\
+              \hline
+              \mc{}\\
+              \hline
+              \mc{}\\
+              \hline
+              \mc{}\\
+              \hline
+            \end{tabular}
+          \end{tabular}
+          \hfill
+    \end{table}
+\end{document}
