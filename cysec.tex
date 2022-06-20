@@ -778,27 +778,102 @@
               \pic{220620-12}\\
               }\\
               \hline
-              \mc{}\\
+              \mc{\r{Block Cypher with random input length}\\
+                \footnotesize{Obviously we want to encrypt more than just one block}\\
+                \footnotesize{How do we do that?}\\
+                -- \blu{Electronic Code Block (ECB)}\\
+                -- \blu{Cipher Block Chaining (CBC)}\\
+                -- \blu{Counter Mode (CTR)}\\
+              }\\
               \hline
-              \mc{}\\
+              \mc{\r{Electronic Code Block (ECB)}\\
+              \footnotesize{Just encrypt block after block.}\\
+              \footnotesize{However, this might give away the bigger picture}\\
+              \footnotesize{Aka the pattern of the data is still visible!!}\\
+              \pic{220620-13}\\
+              }\\
               \hline
-              \mc{}\\
+              \mc{\r{Cipher Block Chaining (CBC)}\\
+              \footnotesize{XOR each output with the next block.}\\
+              \footnotesize{\ora{not parallelizable}, but more secure than ECB}\\
+              \pic{220620-14}\\
+              }\\
               \hline
-              \mc{}\\
+              \mc{\r{Counter Mode (CTR)}\\
+              \footnotesize{Encrypt a counter (Nonce) to produce a stream cypher}\\
+              \footnotesize{Encrypted Nonce is then XORed with the plain text}\\
+              \footnotesize{\ora{parallelizable!!}}\\
+              \footnotesize{\r{Standard for all AES ciphers!}}\\
+              \pic{220620-15}\\
+              }\\
               \hline
             \end{tabular}
             \hspace{-0.1in}
             \begin{tabular}[t]{|@{\hskip1pt}p{10.45cm}|}
               \hline
-              \mc{}\\
+              \mc{\r{Cons and Pros of symmetric Cryptography}\\
+              \r{-- Key distribution}\\
+              \, \,\,\footnotesize{Keys have to be shared securely, anyone who has the key can }\\
+              \, \,\,\footnotesize{encrypt and decrypt all messages (sent by that key)}\\
+              \r{-- No Nonrepudation}\\
+              \, \,\,\footnotesize{Because everyone who has the key can encrypt and decrypt,}\\
+              \, \,\,\footnotesize{there is no guarantee that this message is from a trusted source.}\\
+              \r{-- No message Integrity}\\
+              \, \,\,\footnotesize{If the message gets damaged, then there is no recovery inbuilt.}\\
+              \gre{+ Speed}\\
+              \, \,\,\footnotesize{often 1000 to 10000 times faster than asymmetric algorithms}\\
+              \, \,\,\footnotesize{Lots of processors have an AES intruction set.}\\
+              Alternatives: Chacha20 cipher\\
+              }\\
               \hline
-              \mc{}\\
+              \mc{\r{Diffie-Hellman}\\\
+              \footnotesize{With this method the problem of sharing a key over the internet is solved}\\
+              \footnotesize{We can now do so without any worries of giving a malicious third party access}\\
+              \footnotesize{Every TLS handshake is in some way powered by this.}\\
+              \footnotesize{\ora{We are not actually exchanging a key, only some mathematical part of it!!}}\\
+              }\\
               \hline
-              \mc{}\\
+              \mc{\r{Discrete Logarithm}\\
+              \footnotesize{A logarithm that is implicit when using mod.}\\
+              \r{\(a^b (mod \, n ) = c == b = \log_{a,n} (c)\)}\\
+              \footnotesize{\ora{These are harder to calculate than regular ones!}}\\
+              \footnotesize{Which is why they are used in Diffie-Hellman!}\\
+              \pic{220620-16}
+              }\\
               \hline
-              \mc{}\\
+              \mc{\r{Primitve Root}\\
+              \footnotesize{A number g is a primitive root of p when:}\\
+              \r{\(\bigvee_{k=0}^{p} g^k \, mod \, p = \text{Distinct from each other} \)}\\
+              \footnotesize{\ora{In other words, every single result from the modulo must be different!}}\\
+              }\\
               \hline
-              \mc{}\\
+              \mc{\r{Diffie-Hellman Example}\\
+              \blu{1. Agree on Parameters}\\
+              \footnotesize{Alice and Bob agree on a \r{large prime p} and a second \gre{prime / primitive root g}}\\
+              \footnotesize{p is usually at least 2048 or 4096 bits}\\
+              \blu{2. Select Private Numbers}\\
+              \footnotesize{Alice picks the random number \r{a}}\\
+              \footnotesize{Bob picks the random number \r{b}}\\
+              \footnotesize{>> private numbers are between 1 and \r{p}}\\
+              \footnotesize{>> If p is 2048 bits, then you are guessing a number with 2048 bits, have fun :)}\\
+              \footnotesize{>> They \r{NEVER tell each other the private number}}\\
+              \blu{3. Alice and Bob each calculate a Public Key}\\
+              \footnotesize{>> Alice calculates key:\ora{\(g^a \, mod \, p\)}}\\
+              \footnotesize{>> Bob calculates key:\ora{\(g^b \, mod \, p\)}}\\
+              \, \,\,\footnotesize{\r{Because we are using a discrete logarithm, it is mathematically infeasible}}\\
+              \, \,\,\footnotesize{\r{to get the private numbers by calculation.}}\\
+              \blu{4. Alice and Bob exchange the Public Keys}\\
+              \footnotesize{These are simple the calculated versions of keys.}\\
+              \blu{5. Alice and Bob calculate the shared key}\\
+              \footnotesize{for both this is: \ora{\(g^{ab} \, mod \, p\)}}\\
+              \footnotesize{The shared key is therefore the same for both parties}\\
+              \blu{6. Calculate Master Secret}\\
+              \footnotesize{The shared key is also called the Pre-Master}\\
+              \footnotesize{This is because the shared key is quite big and}\\ 
+              \footnotesize{not often used to encrypt directly}\\
+              \footnotesize{It is instead used to control sessions after it has been hashed}\\
+              \footnotesize{The hashed shared key is then called the Master Secret}\\
+              }\\
               \hline
             \end{tabular}
           \end{tabular}
@@ -809,27 +884,118 @@
           \begin{tabular}{ccc}
             \begin{tabular}[t]{|@{\hskip1pt}p{10.45cm}|}
               \hline
-              \mc{}\\
+              \mc{
+              \pic{220620-17}\\
+              }\\
               \hline
-              \mc{}\\
+              \mc{\r{Eliptic Curve Cryptography}\\
+              \pic{220620-18}
+              }\\
               \hline
-              \mc{}\\
+              \mc{\r{Ephemeral Mode}\\
+              \footnotesize{For Diffie-Hellman this means calculating a new key for every session}\\
+              \footnotesize{This is also called \r{Perfect Forwarding Secrecy}}\\
+              \footnotesize{The reason for this is that calculating this key costs close to no power}\\
+              \footnotesize{So why not just create a new one for every session to increase security?}\\
+              \footnotesize{This is usually done every browser refresh etc.}\\
+              \footnotesize{It is also automatically done after a certain time, again to improve security}\\
+              }\\
               \hline
-              \mc{}\\
+              \mc{\r{RSA Rivest-Shamir-Adleman}\\
+              -- \blu{Public Key cryptosystem}\\
+              -- \blu{widely used for secure data transmission}\\
+              -- \blu{Most common method for public cryptography}\\
+              -- \blu{Offers Nonrepudation!!}\\
+              -- \blu{Reverseable Keys}\\
+              \, \,\,\footnotesize{Both the public key and the private key can be used to encrypt or decrypt.}\\
+              \, \,\,\footnotesize{It just has to be the inverse at the other end. }\\
+              \, \,\,\footnotesize{Encrypt pub-key -> decrypt priv-key | encrypt priv-key -> decrypt pub-key}\\
+              >> \ora{The reverseable keys lead to 2 operating Modes}\\
+              \gre{1. Encrypt so only the receiver can read}\\
+              \footnotesize{If I want to send a message to the server that only said server can read, then}\\
+              \footnotesize{I can encrypt my message with the servers public key.}\\
+              \footnotesize{The server then uses its private key to decrypt. \ora{Not even you can decrypt it :P}}\\
+              \gre{2. Nonrepudation Mode}\\
+              \footnotesize{By encrypting with the private key, everyone who has the public key can read.}\\
+              \footnotesize{However, it guarantees that said message is from you, and no one else!}\\
+              }\\
+              \mc{\r{Prime Factorization}\\
+              \footnotesize{Every non-prime number has a prime factorization}\\
+              \footnotesize{This means every non-prime number can be created by multiplying x primes}\\
+              \footnotesize{Prime factorization of 30 -> 5 * 3 * 2}\\
+              \footnotesize{\r{Calculating the prime factorization is EXTREMELY HARD for big numbers}}\\
+              \footnotesize{In other words, it is not feasible to calculate it with a current Computer}\\
+              \footnotesize{Which is why it is used by the RSA algorithm}\\
+              }\\
               \hline
-              \mc{}\\
+              \mc{\r{RSA Functionality}\\
+              \begin{tabular}{cc}
+              \mc{
+              Public keys: \blu{e} \r{n}\\
+              Prime factors: p1,p2\\
+              Private key: \gre{d}\\
+              Message: \ora{m}\\
+              }&
+              \mc{
+              \footnotesize{\blu{e} is almost always 3 or 65537}\\
+              \footnotesize{\r{n} is a random Prime factorization of 4096 bits}\\
+              \footnotesize{\(\gre{d} = \dfrac{k * \phi ( \r{n}) + 1}{\blu{e}}\)}\\
+              \footnotesize{where k is a random integer}\\
+              \footnotesize{\r{p1,p2,d must be private!!}}
+              }\\
+              \end{tabular}
+              }\\
               \hline
             \end{tabular}
             \hspace{-0.1in}
             \begin{tabular}[t]{|@{\hskip1pt}p{10.45cm}|}
               \hline
-              \mc{}\\
+              \mc{
+              \begin{tabular}{cc}
+              \mc{
+              -- \blu{Encrypting:}\\
+              \, \,\,\(c = \)\ora{\(m^{\blu{e}} \, \)}\( mod \, \)\r{\(n\)}\\
+              -- \blu{Decrypting:}\\
+              \, \,\,\ora{\(m\)}\( = c^{\gre{d}} \, mod \, \)\r{\(n\)}\\
+              }&
+              \mc{
+              -- \blu{Combined}\\
+              \, \,\,\ora{\(m^{ed} \, mod \, n = m\)}\\
+              \\
+              \\
+              }\\
+              \end{tabular}
+              }\\
               \hline
-              \mc{}\\
+              \mc{\r{The PHI Function}\\
+              \pic{220621-1}\\
+              \pic{220621-2}\\
+              }\\
               \hline
-              \mc{}\\
+              \mc{\r{Using RSA}\\
+              \gre{1. Choose two very large Primes}\\
+              \pic{220621-3}\\
+              \gre{2. Calculate PHI}\\
+              \r{\(\phi (n) = \phi (a) * \phi (n)\)}\\
+              \r{a and b are the prime factorization primes!}\\
+              \ora{if number is prime, then: \(\phi (a) = a - 1 \)}\\
+              \footnotesize{Ex. n = 77, a = 11, b = 7 -> \(\phi (77) = \phi (11) * \phi (7) = 10 * 6 = 60\)}\\
+              \gre{3. Choose k and e to calculate d}\\
+              \r{\(d = \dfrac{k * \phi (n) + 1}{e}\) with k being an integer}\\
+              \footnotesize{Ex. n=55, e=7, k=4, \(\phi (n) = 40\) \(d = \dfrac{4 * \phi(55) + 1}{7} = 23 \)}\\\\
+              }\\
               \hline
-              \mc{}\\
+              \mc{\r{RSA quirks}\\
+              -- \blu{Very weak with short messages}\\
+              \, \,\,\footnotesize{\r{To mitigate this, padding is added}}\\
+              \, \,\,\footnotesize{Optimal assymetric Encryption Padding (OAEP) is used}\\
+              \, \,\,\footnotesize{pseudo random padding that introduces an IV then hashes it}\\
+              \, \,\,\footnotesize{Server has to create same padding to check if it matches up}\\
+              -- \blu{Not common to encrypt with RSA!}\\
+              \, \,\,\footnotesize{TLS used RSA before but no longer.}\\
+              \, \,\,\footnotesize{RSA is used more for signing! Something that Diffe can't!!}\\
+              -- \r{RSA is 1000x slower than symmetric crypto systems!!}\\        
+              }\\
               \hline
               \mc{}\\
               \hline
