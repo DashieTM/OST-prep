@@ -222,7 +222,8 @@
           \begin{tabular}{ccc}
             \begin{tabular}[t]{|@{\hskip1pt}p{10.45cm}|}
               \hline
-              \mc{\pic{220620-1}}\\
+              \mc{\\
+              \pic{220620-1}}\\
               \hline
               \mc{\r{Quantitative and Qualitative Risk Analysis}\\
               --\gre{Quantitative Risk Analysis:}\\
@@ -773,6 +774,8 @@
             \begin{tabular}[t]{|@{\hskip1pt}p{10.45cm}|}
               \hline
               \mc{
+              \vspace{-0.1in}
+              \\
               \pic{220620-10}\\
               \pic{220620-11}\\
               \pic{220620-12}\\
@@ -885,6 +888,8 @@
             \begin{tabular}[t]{|@{\hskip1pt}p{10.45cm}|}
               \hline
               \mc{
+              \vspace{-0.1in}
+              \\
               \pic{220620-17}\\
               }\\
               \hline
@@ -951,12 +956,18 @@
             \begin{tabular}[t]{|@{\hskip1pt}p{10.45cm}|}
               \hline
               \mc{
-              \begin{tabular}{cc}
+              \begin{tabular}{ccc}
               \mc{
-              -- \blu{Encrypting:}\\
+              -- \blu{Encrypting Public:}\\
               \, \,\,\(c = \)\ora{\(m^{\blu{e}} \, \)}\( mod \, \)\r{\(n\)}\\
-              -- \blu{Decrypting:}\\
+              -- \blu{Decrypting Private:}\\
               \, \,\,\ora{\(m\)}\( = c^{\gre{d}} \, mod \, \)\r{\(n\)}\\
+              }&
+              \mc{
+              -- \blu{Encrypting Private:}\\
+              \, \,\,\(c = \)\ora{\(m^{\gre{d}} \, \)}\( mod \, \)\r{\(n\)}\\
+              -- \blu{Decrypting Public:}\\
+              \, \,\,\ora{\(m\)}\( = c^{\blu{e}} \, mod \, \)\r{\(n\)}\\
               }&
               \mc{
               -- \blu{Combined}\\
@@ -982,7 +993,8 @@
               \footnotesize{Ex. n = 77, a = 11, b = 7 -> \(\phi (77) = \phi (11) * \phi (7) = 10 * 6 = 60\)}\\
               \gre{3. Choose k and e to calculate d}\\
               \r{\(d = \dfrac{k * \phi (n) + 1}{e}\) with k being an integer}\\
-              \footnotesize{Ex. n=55, e=7, k=4, \(\phi (n) = 40\) \(d = \dfrac{4 * \phi(55) + 1}{7} = 23 \)}\\\\
+              \footnotesize{Ex. n=55, e=7, k=4, \(\phi (n) = 40\) \(d = \dfrac{4 * \phi(55) + 1}{7} = 23 \)}\\
+              \gre{4. Encrypt and Decrypt...}\\
               }\\
               \hline
               \mc{\r{RSA quirks}\\
@@ -994,38 +1006,259 @@
               -- \blu{Not common to encrypt with RSA!}\\
               \, \,\,\footnotesize{TLS used RSA before but no longer.}\\
               \, \,\,\footnotesize{RSA is used more for signing! Something that Diffe can't!!}\\
-              -- \r{RSA is 1000x slower than symmetric crypto systems!!}\\        
+              -- \r{RSA is 1000x slower than symmetric crypto systems!!}\\
+              -- \blu{Message Integrity}\\
+              \, \,\,\footnotesize{>> Message is first hashed to shorten it}\\
+              \, \,\,\footnotesize{>> Said hash is sent alongside the message}\\
+              \, \,\,\footnotesize{>> Receiver hashes the message as well on arrival,}\\
+              \, \, \,\footnotesize{  to check whether the 2 hashes match}\\
+              \, \,\,\footnotesize{\ora{Simply decrypting the hash is sadly not possible.}}\\
+              }\\
+              \hline
+              \mc{\r{Digital Signature Challenges}\\
+              \footnotesize{Before communicating with a server, we want said server to prove}\\
+              \footnotesize{its identity,  we do this by sending the server a message that}\\
+              \footnotesize{the server then has to sign with its private key.}\\
+              \footnotesize{\ora{This challenge is also part of Transport Layer Security (TLS)}}\\
+              }\\
+              \hline
+              \mc{\r{Digital Signature Algorithm (DSA)}\\
+              \footnotesize{RSA will soon become unusable due to the ever growing messages.}\\
+              \footnotesize{In order to solve this the DSA has been developed, which is much faster!}\\
+              \footnotesize{\ora{The downside is that it can't be used to encrypt, but we have Diffie for that}}\\
+              \footnotesize{\gre{It also supports Elliptic Curves as it has similar mathematics as Diffie}}\\
+              }\\
+              \hline
+            \end{tabular}
+          \end{tabular}
+          \hfill
+    \end{table}
+    \pagebreak
+    \begin{table}[ht!]
+          \begin{tabular}{ccc}
+            \begin{tabular}[t]{|@{\hskip1pt}p{10.45cm}|}
+              \hline
+              \mc{\r{Hash Function}\\
+              -- \blu{Fixed Length}\\
+              \, \,\,\footnotesize{A hash function always has a fixed length. Meaning that if we have a 128 bit}\\
+              \, \,\,\footnotesize{hash function, then it will always return 128 bits}\\
+              \, \,\,\footnotesize{no matter how many inputs we enter}\\
+              \begin{tabular}{cc}
+              \mc{
+              -- \blu{Iterative}\\
+              \, \,\,\footnotesize{We iteratively hash over the message }\\
+              \, \,\,\footnotesize{by block until we get to the end}\\
+              \, \,\,\footnotesize{Then we take the current hash as the final hash.}\\
+              }&
+              \hspace{-0.2in}
+              \mc{
+              \pic{220621-4}\\
+              }\\
+              \end{tabular}\\
+              -- \blu{Indistinguishable from Noise}\\
+              \, \,\,\footnotesize{The output of a hash function should not be interpretable.}\\
+              -- \blu{Diffusion}\\
+              \, \,\,\footnotesize{Best way is to make small changes in the message }\\
+              \, \,\,\footnotesize{in a big change in the hash.}\\
+              -- \blu{Balance between speed and security}\\
+              \, \,\,\footnotesize{A good hash function needs to be quick enough to use}\\
+              \, \,\,\footnotesize{But also needs to offer proper protection!!}\\
+              -- \blu{Needs to be infeasible to Revert}\\
+              \, \,\,\footnotesize{Just like with encryption, there is no way to guarantee irreversibility}\\
+              \, \,\,\footnotesize{We can however make it infeasible to do this with current computers!!}\\
+              -- \blu{few Collisions}\\
+              \, \,\,\footnotesize{The best would be to have 0 collisions, but that is impossible to guarantee}\\
+              \, \,\,\footnotesize{Instead we simply push the probability to a very, very small number!}\\
+              -- \blu{Used for Integrity}\\
+              \, \,\,\footnotesize{Often a message gets corrupted, or even attacked by a threat actor}\\
+              \, \,\,\footnotesize{In both cases we need a way to check integrity.}\\
+              \, \,\,\footnotesize{We do this by hashing the message and sending the hash alongside it}\\
+              \, \,\,\footnotesize{The receiver can then hash the message as well and compare the hashes.}\\
+              }\\
+              \hline
+              \mc{\r{Current Hashing Algorithms}\\
+              -- \blu{SHA-2 256/512}\\
+              \, \,\,\footnotesize{\ora{Current standard!} }\\
+              -- \blu{SHA-3}\\
+              \, \,\,\footnotesize{Same quality as SHA-2, designed as a backup in case SHA-2 is broken}\\
+              \pic{220621-5}\\
+              }\\
+              \hline
+              \mc{\r{Hashes and Passwords}\\
+              \footnotesize{These hashes alone are not good enough for passwords!}\\
+              \footnotesize{Hacker will simly use hashed passwords to compare to your hash table}\\
+              \gre{Solution: Password-Based Key Derivation Function 2 (PBKDF2)}\\
+              \footnotesize{\blu{This hashes the password with SHA-2 5000 times.}}\\
+              \footnotesize{It is therefore 5000times slower, but also much more secure!}\\
+              \footnotesize{Inside password managers, the iterations go up to 100 000 times!}\\
+              \footnotesize{The alternative is called 'Blowfish'}\\
+              }\\
+              \hline
+              \mc{\r{HMAC and the length extension attack}\\
+              \footnotesize{using only 1 hash might give attackers the opportunity to}\\
+              \footnotesize{add more data to the end of the hash, as long as the hash is still "random"}\\
+              \footnotesize{With HMAC we split the message in half and hash each side with both}\\
+              \footnotesize{The public and the private key. This prohibits length extension attacks.}\\
+              \footnotesize{\ora{MAC means Message Authentication Code, not Multimedia Access Control lmao}}\\
+              }\\
+              \hline
+              \mc{\r{Message Authentication Code (MAC)}\\
+              \begin{tabular}{cc}
+                \mc{\hspace{-0.12in}
+              \pic{220621-6}\\
+              \r{The MAC is the hash that is signed.}
+              }& \hspace{-0.35in}
+              \mc{\pic{220621-17}}\\
+              \end{tabular}\\
+              }\\
+              \hline
+            \end{tabular}
+            \hspace{-0.1in}
+            \begin{tabular}[t]{|@{\hskip1pt}p{10.45cm}|}
+              \hline
+              \mc{\r{Certification Terms}\\
+              -- \blu{Public Key Infrastructure}\\
+              \, \,\,\footnotesize{\gre{The entire Processof requesting, receiving and holding a certificate}}\\
+              \, \,\,\footnotesize{\ora{This means the Environment: hardware, software, policies, roles, procedures.}}\\
+              -- \blu{Certificate Signing Request (CSR)}\\
+              \, \,\,\footnotesize{A request to a CA to sign your certificate}\\
+              -- \blu{Certification Authority (CA)}\\
+              \, \,\,\footnotesize{CA is the signing third party organization: letsencrypt, Google, Digicert, etc.}\\
+              -- \blu{Root Certificate}\\
+              \, \,\,\footnotesize{Public key of a CA that will be used to decrypt and check the}\\
+              \, \,\,\footnotesize{Certificates of websites. Note the CA must match!}\\
+              -- \blu{Trust Service Provider (TSP)}\\
+              \, \,\,\footnotesize{An organization that provides Certificates, validation, etc}\\
+              \, \,\,\footnotesize{letsencrypt, digicert etc.}\\
+              -- \blu{Trust Services (TS)}\\
+              \, \,\,\footnotesize{All services of a TSP -> CA,VA,RA}\\
+              -- \blu{Validation Authority (VA)}\\
+              \, \,\,\footnotesize{TSPs Validation part}\\
+              -- \blu{Registration Authority (RA)}\\
+              \, \,\,\footnotesize{TSPs Registration part}\\
+              }\\
+              \hline
+              \mc{\r{Digital Certificate}\\
+                \ora{A digital certificate is nothing more than data that includes:}\\
+              -- \blu{Information about the key}\\
+              -- \blu{The identity of the owner (subject)}\\
+              -- \blu{Issuer information}\\
+              \footnotesize{With public and private keys, we can only guarantee that the message}\\
+              \footnotesize{comes from PC x, but not that said PC is actually trustworthy!}\\
+              \footnotesize{Or that said PC is actually from the person it is claiming to be!!}\\
+              \footnotesize{This is where digital certificates come into play}\\
+              \footnotesize{They are signed by a third party and are therefore considered to be trustworthy}\\
+              \footnotesize{\ora{The third party is usually a Public Key infrastructure}}\\
+              }\\
+              \hline
+              \mc{\r{Qualities of Certificates}\\
+              \ora{There are different levels of certificate quality,}\\
+              \ora{the higher, the more trust you can have in a certificate:}\\
+              -- \blu{1. Domain Validated (DV)}\\
+              \, \,\,\footnotesize{It is issued after the owner hash shown proof that they}\\
+              \, \,\,\footnotesize{have the right to use their domain. (automatic check)}\\
+              \, \,\,\footnotesize{letsencrypt only offers this level! 80\% of internet}\\
+              -- \blu{2. Organization Validated (OV)}\\
+              \, \,\,\footnotesize{This is issued after the CA has validated the company name,}\\
+              \, \,\,\footnotesize{domain name and other information through public databases}\\
+              \, \,\,\footnotesize{Used by bigger companies and Emails}\\
+              -- \blu{3. Extended Validation (EV)}\\
+              \, \,\,\footnotesize{This requires strict authentication procedure}\\
+              \, \,\,\footnotesize{Used by banks, Governments, etc}\\
+              -- \blu{4. Qualified Website Authentication Certificate (QWAC)}\\
+              \, \,\,\footnotesize{Not supported by browsers}\\
+              \, \,\,\footnotesize{mixture of OV and EV, wanted standard}\\
+              }\\
+              \hline
+              \mc{\r{Certificate Issuance}\\
+              \gre{1. Create a private/public key for RSA or DSA}\\ 
+              \gre{2. Create a CSR and send it to a RA}\\
+              \, \,\,\footnotesize{in Base64-PEM format}\\
+              \gre{3. The RA does identification checks}\\
+              \, \,\,\footnotesize{These vary heavily depending on the type of CA and}\\
+              \, \,\,\footnotesize{the amount of trust you want to have from a client}\\
+              \, \,\,\footnotesize{letsencrypt is free and easy to use, but offers only minimal identification!}\\
+              \, \,\,\footnotesize{Digicert and others offer in person identification and liability}\\
+              \, \,\,\footnotesize{However these also cost money and are more time consuming to create}\\
+              \gre{4. The CA signs the public key, you now have a certificate}\\
+              \, \,\,\footnotesize{Now every time someone visits your website, they see the }\\
+              \, \,\,\footnotesize{certificate signed by the CA with their private key}\\
+              \gre{5. The VA checks the validity of the certificate}\\
+              }\\
+              \hline
+            \end{tabular}
+          \end{tabular}
+          \hfill
+    \end{table}
+    \pagebreak
+    \begin{table}[ht!]
+          \begin{tabular}{ccc}
+            \begin{tabular}[t]{|@{\hskip1pt}p{10.45cm}|}
+              \hline
+              \mc{\r{Certificate Use}\\
+              \footnotesize{When you navigate to a website, you get the certificate of said website during}\\
+              \footnotesize{a TLS handshake, after that you need to decrypt the certificate with }\\
+              \footnotesize{public key of the issuer CA. This key is stored within your browser or OS}\\
+              \footnotesize{Then you can use this decrypted certificate, which in the end is just a public key}\\
+              \footnotesize{To decrypt all messages sent by the server, which are now guaranteed to be from}\\
+              \footnotesize{said server}\\
+              \r{This is called Chain of Trust!}\\
+              \footnotesize{\r{If you don't have the Signing CAs public key stored,}}\\
+              \footnotesize{\r{then the connection is rejected!!}}\\
+              }\\
+              \hline
+              \mc{\r{X509 Certificate}\\
+              \pic{220621-23}\\
+              -- \blu{Extension Requirements:}\\
+              \pic{220621-24}\\
+              -- \blu{Serial Number}\\
+              \, \,\,\footnotesize{Positive Integer unique for each certificate issued by CA}\\
+              -- \blu{Signature Algorithm}\\
+              \, \,\,\footnotesize{Algorithm used by CA to sign the certificate}\\
+              }\\
+              \hline
+              \mc{\r{x509 Validity Checks}\\
+              -- \blu{Method 1: Certification Revocation List (CRL)}\\
+              \, \,\,\footnotesize{Most browsers perform this check}\\
+              \, \,\,\footnotesize{CRL Distribution point included in the certificate}\\
+              -- \blu{Method 2: Online Certification Status Protocol (OCSP)}\\
+              \, \,\,\footnotesize{The Authorative Information Access (AIA) field}\\
+              \, \,\,\footnotesize{provides information about the CA.}\\
+              \ora{Other Terms:}\\
+              -- \gre{Certificate Policies}\\
+              \, \,\,\footnotesize{Link to governance rules of the CA}\\
+              -- \gre{Authority Key Identifier (AKI)}\\
+              \, \,\,\footnotesize{Key identifier of the CA}\\
+              -- \gre{Subject Alternative Name (SAN)}\\
+              \, \,\,\footnotesize{various values associated with the certificate owner}\\
+              -- \gre{Subject Key Identifier (SKI)}\\
+              \, \,\,\footnotesize{Hash value of the certificate}\\
+              }\\
+              \hline
+              \mc{\r{Certificate Pinning}\\
+              \footnotesize{When a website pins a CAs root, or intermediate CA,}\\
+              \footnotesize{it forces the browser to only use this specific certificate}\\
+              \footnotesize{This prevents modified RootCAs from connecting to this website.}\\
+              \footnotesize{The problem with this is that, when the pinned CA is compromised,}\\
+              \footnotesize{there is no check the browser can do to stay secure.}\\
+              \footnotesize{For this reason, the pinned CAs are usually only valid for 60 days.}\\
+              \ora{Pinnable CAs}: root CA, Intermediate CA, End Certificate (SSH)
+              }\\
+              \hline
+            \end{tabular}
+            \hspace{-0.1in}
+            \begin{tabular}[t]{|@{\hskip1pt}p{10.45cm}|}
+              \hline
+              \mc{\r{Root Store and CA/B Browser Forum}\\
+              \footnotesize{The root store defined what TSP/CA we trust.}\\
+              \footnotesize{But who decides what CA is in said store??}\\
+              \footnotesize{While every browser has their own Root Store Policy,}\\
+              \footnotesize{There is a forum that tries to unify this:}\\
+              \pic{220621-25}
               }\\
               \hline
               \mc{}\\
               \hline
-            \end{tabular}
-          \end{tabular}
-          \hfill
-    \end{table}
-    \pagebreak
-    \begin{table}[ht!]
-          \begin{tabular}{ccc}
-            \begin{tabular}[t]{|@{\hskip1pt}p{10.45cm}|}
-              \hline
-              \mc{}\\
-              \hline
-              \mc{}\\
-              \hline
-              \mc{}\\
-              \hline
-              \mc{}\\
-              \hline
-              \mc{}\\
-              \hline
-            \end{tabular}
-            \hspace{-0.1in}
-            \begin{tabular}[t]{|@{\hskip1pt}p{10.45cm}|}
-              \hline
-              \mc{}\\
-              \hline
-              \mc{}\\
-              \hline
               \mc{}\\
               \hline
               \mc{}\\
@@ -1041,29 +1274,554 @@
           \begin{tabular}{ccc}
             \begin{tabular}[t]{|@{\hskip1pt}p{10.45cm}|}
               \hline
-              \mc{}\\
+              \mc{\r{Authenticated Encryption with associated data (AEAD)}\\
+              -- \blu{is an AEAD protocol}\\
+              \footnotesize{In order to guarantee confidentiality as well as integrity,}\\
+              \footnotesize{we add a Message authentication code at the end of our message}\\
+              \pic{220621-8}\\
+              \blu{One such MAC is the Galois Counter Mode (GCM)}\\
+              \footnotesize{It calculates a MAC over the message and the additional data}\\
+              \pic{220621-9}
+              }\\
               \hline
-              \mc{}\\
+              \mc{\r{ChaCha20\_Poly1305}\\
+              -- \blu{is an AEAD protocol}\\
+              -- \blu{allowed on TLS 1.3}\\
+              \, \,\,\footnotesize{The only one next to AES.}\\
+              -- \blu{needs a Nonce as ChaCha20 is a Stream Cipher}\\
+              -- \blu{Used for Android}\\
+              \, \,\,\footnotesize{It is used mostly for speed purposes as ChaCha20 is faster}\\
+              \, \,\,\footnotesize{when the CPU doesn't have an AES instruction set.}\\
+              }\\
               \hline
-              \mc{}\\
+              \mc{\r{Protocol Handshakes}\\
+              \gre{1. Handshake phase}\\
+              \, \,\,\footnotesize{>> Check Certificate with root CA certificate}\\
+              \, \,\,\footnotesize{>> Agree on a set of cryptographic protocols: AES 123, DSA, RSA, etc}\\
+              \, \,\,\footnotesize{>> Perform key exchange to obtain session keys and other values like IVs}\\
+              \, \,\,\footnotesize{>> Verify authenticity using the public key}\\
+              \gre{2. Transport/Record phase}\\
+              \, \,\,\footnotesize{when sending encrypt packets with the agreed method}\\
+              \, \,\,\footnotesize{\ora{always include a MAC for integrity!}}\\
+              }\\
               \hline
-              \mc{}\\
-              \hline
-              \mc{}\\
+              \mc{\r{Common Protocol Issues}\\
+              -- \blu{Cipertexts that aren't secured with MAC}\\
+              \, \,\,\footnotesize{This means the message can be altered in transport}\\
+              -- \blu{Messages without a timestamp}\\
+              \, \,\,\footnotesize{This means we can copy and resend this message }\\
+              \, \,\,\footnotesize{from another PC!!}\\
+              -- \blu{Protocols without public key -> without authenticity}\\
+              \, \,\,\footnotesize{These are vulnerable to man in the middle attacks}\\
+              -- \blu{Reuse of Nonce}\\
+              \, \,\,\footnotesize{might lead to a broken cipher...}\\
+              \pic{220621-10}\\
+              \pic{220621-11}
+              }\\
               \hline
             \end{tabular}
             \hspace{-0.1in}
             \begin{tabular}[t]{|@{\hskip1pt}p{10.45cm}|}
               \hline
-              \mc{}\\
+              \mc{\r{Transport Layer Security (TLS)}\\
+              -- \blu{Confidentiality}\\
+              -- \blu{Integrity}\\
+              -- \blu{Authentication}\\
+              -- \blu{Fragmentation}\\
+              -- \blu{Compression}\\
+              -- \r{Primary protocol for HTTPS!!}\\
+              \, \,\,\footnotesize{However, it can be used by everywhere!}\\
+              -- \blu{Other:}\\
+              \, \,\,\footnotesize{Versions: SSL1.0, SSL2.0, SSL3.0, TLS1.0, TLS1.1, TLS1.2, TLS1.3}\\
+              \, \,\,\footnotesize{\r{DO NOT USE SSL! In fact USE TLS 1.3!!}}\\
+              \, \,\,\footnotesize{\ora{>> currently at version 1.3}}\\
+              \, \,\,\footnotesize{\ora{Previously called Secure Socket Layer (SSL)}}\\
+              }\\
               \hline
-              \mc{}\\
+              \mc{\r{TLS Connection}\\
+              \, \,\,\footnotesize{>> peer to peer}\\
+              \, \,\,\footnotesize{>> transient, they are not stored}\\
+              \, \,\,\footnotesize{>> each connection is associated with exactly 1 session}\\
+              -- \blu{Server and client random number}\\
+              -- \blu{Server and client MAC private key}\\
+              -- \blu{Server and client encryption private key}\\
+              -- \blu{Initialization Vectors}\\
+              \, \,\,\footnotesize{For block ciphers IV are maintained for each key.}\\
+              -- \blu{Sequence numbers}\\
+              \, \,\,\footnotesize{Same as with TCP}\\
+              \, \,\,\footnotesize{When change cipher spec is used, the sequence number is reset to 0}\\
+              \, \,\,\footnotesize{Sequence numbers may not exceed \(2^{64}-1\)}\\
+              }\\
               \hline
-              \mc{}\\
+              \mc{\r{TLS Session}\\
+              \, \,\,\footnotesize{>> Defines the cryptographic parameters used}\\
+              \, \,\,\footnotesize{>> Sessions are used to avoid expensive negotiation of security parameters}\\
+              \, \, \,\footnotesize{on every new connection}\\
+              -- \blu{Session Identifier}\\
+              \, \,\,\footnotesize{an arbitrary bite sequence chosen by the server to identify }\\
+              \, \,\,\footnotesize{an active or resumable session state}\\
+              \, \,\,\footnotesize{\r{Can also be a previous session to resume!!!}}\\
+              -- \blu{Peer certificate}\\
+              \, \,\,\footnotesize{certificate of the peer, may be null}\\
+              -- \blu{Compression method}\\
+              \, \,\,\footnotesize{The algorithm used to compress data prior to encryption}\\
+              -- \blu{Cipher spec}\\
+              \, \,\,\footnotesize{Specifies: encryption algorithm, hash algorithm, hash size, Signing algorithm}\\
+              -- \blu{Master secret}\\
+              \, \,\,\footnotesize{shared key that is used for encryption -> Diffie-Hellman}\\
+              -- \blu{Is resumable -> can be stored, unlike connections}\\
+              \, \,\,\footnotesize{a flag that indicates that this session can be resumed}\\
+              }\\
               \hline
-              \mc{}\\
+              \mc{\r{TLS and TCP}\\
+              \pic{220621-12}\\
+              \pic{220621-13}\\
+              }\\
               \hline
-              \mc{}\\
+            \end{tabular}
+          \end{tabular}
+          \hfill
+    \end{table}
+    \pagebreak
+    \begin{table}[ht!]
+          \begin{tabular}{ccc}
+            \begin{tabular}[t]{|@{\hskip1pt}p{10.45cm}|}
+              \hline
+              \mc{\r{TLS handshake}\\
+              \footnotesize{The handshake allows server and client to negotiate}\\
+              \footnotesize{all necessary algorithms and specifications}\\
+              \footnotesize{\ora{Note that this example is for older versions of TLS, NOT TLS3.0!}}\\
+              \pic{220621-14}\\
+              \r{Rs and Rc are the random numbers}\\
+              }\\
+              \hline
+              \mc{\r{Ephemeral Mode in TLS}\\
+              \footnotesize{We have already learned that we calculate a new key for every session}\\
+              \footnotesize{This now applies to TLS, which conveniently works with sessions as well}\\
+              \footnotesize{This means we now calculate a new key for every session we have with the server}\\
+              \pic{220621-15}\\
+              }\\
+              \hline
+              \mc{\r{Master secret to Signing and encryption key}\\
+              \footnotesize{The master secret is used to calculate all the other keys,}\\
+              \footnotesize{this makes it possible that the server and client only need}\\
+              \footnotesize{to share keys once, after that they can simply}\\
+              \footnotesize{send a new random number for a new set of keys!! Super simple!!}\\
+              \pic{220621-16}\\
+              }\\
+              \hline
+              \mc{\r{Different Combinations in TLS}\\
+              \footnotesize{With Diffie-Hellman you can encrypt only encrypt/decrypt}\\
+              \footnotesize{With RSA/DSA you can sign or encrypt/decrypt}\\
+              \footnotesize{The most usual combination is to use RSA/DSA and Diffie-Hellman!}\\
+              \footnotesize{However, what do you do first? Encrypt or sign?}\\
+              \footnotesize{You can choose this depending on your needs.}\\
+              \footnotesize{If you want 100\% anonymity then use encrypt first}\\
+              \footnotesize{If you want authenticity then use signing first.}\\
+              \pic{220621-18}\\
+              }\\
+              \hline
+              \mc{\r{TLS allowed Combinations:}\\
+              \pic{220621-19}
+              }\\
+              \hline
+            \end{tabular}
+            \hspace{-0.1in}
+            \begin{tabular}[t]{|@{\hskip1pt}p{10.45cm}|}
+              \hline
+              \mc{\r{TLS alerts:}\\
+              \ora{Consists of 2 bytes: severity and code}\\
+              -- \gre{Severity}\\
+              \, \,\,\footnotesize{There are 2 severity levels, warning and fatal}\\
+              \, \,\,\footnotesize{\r{on fatal the connection terminates immediately}}\\
+              \, \,\,\footnotesize{Warning simply shows the alert code}\\
+              -- \gre{Code}\\
+              \, \,\,\footnotesize{Specific alert code.}\\
+              }\\
+              \hline
+              \mc{\r{Heartbeat Protocol}\\
+              -- \blu{Keep-alive Protocol}\\
+              \, \,\,\footnotesize{assures the server that the client is still alive}\\
+              -- \blu{Runs on top of TLS}\\
+              \, \,\,\footnotesize{negotiated on handshake}\\
+              \r{>> Heartbleed (Heartbeat exploit) <<}\\
+              \footnotesize{This is done by requesting a bigger size package than the heartbeat actually is}\\
+              \footnotesize{This can trick the server into sending data that it wasn't supposed to send.}\\
+              \footnotesize{If done often enough and with lots of luck, the server might send data,}\\
+              \footnotesize{that is critical, such as private keys and password hash-tables!}\\
+              }\\
+              \hline
+              \mc{\r{TLS 1.3}\\
+              -- \blu{Removal of broken features}\\
+              \, \,\,\footnotesize{Removed broken ciphers like MD5, SHA-1, Kerberos, etc}\\
+              \, \,\,\footnotesize{\ora{Removed compression and renegotiation}}\\
+              \, \,\,\footnotesize{Remove static RSA/DH}\\
+              -- \blu{Allows 1-RTT and 0-RTT}\\
+              -- \blu{Improved security by using modern techniques}\\
+              -- \blu{Privacy encrypt more of the protocol}\\
+              \, \,\,\footnotesize{Almost all handshake messages}\\
+              -- \blu{Continuity >> backwards compatibility}\\
+              \pic{220621-20}\\
+              \pic{220621-21}\\
+              }\\
+              \hline
+            \end{tabular}
+          \end{tabular}
+          \hfill
+    \end{table}
+    \pagebreak
+    \begin{table}[ht!]
+          \begin{tabular}{ccc}
+            \begin{tabular}[t]{|@{\hskip1pt}p{10.45cm}|}
+              \hline
+              \mc{\r{Penetration Testing}\\
+              \footnotesize{Penetration testing is done to find and eliminate vulnerabilities}\\
+              \footnotesize{Usually companies hire a specialist to do this work}\\
+              \footnotesize{For legal reasons it is very important that a rigorous contract is signed}\\
+              \footnotesize{The reason for this, is that attacking a system is illegal in many countries}\\
+              \footnotesize{So you need explicit permission from the company to do so.}\\
+              \footnotesize{The contracts are usually called Statements of Work}\\
+              \footnotesize{They include: Activities to be performed, pen testing timeline}\\
+              \footnotesize{Scope, and Location of work}\\
+              \footnotesize{Usually you also have to sign a Non-Disclosure agreement}\\
+              \footnotesize{This makes sure the vulnerabilities do not get public!}\\
+              \pic{220621-22}
+              }\\
+              \hline
+              \mc{\r{Zero-Day attacks}\\
+              \footnotesize{This is an exploitation of a vulnerability that has been present since}\\
+              \footnotesize{the creation of the program/service. However, it has not been found yet.}\\
+              \footnotesize{The time frame of hackers figuring out the vulnerability and the developers}\\
+              \footnotesize{patching said vulnerability, is called the \ora{window of vulnerability} }\\
+              \footnotesize{>> Zero-Day is a big problem, because system administrators often wait}\\
+              \footnotesize{  with applying updates to systems, which leaves a bigger window for attackers}\\
+              }\\
+              \hline
+              \mc{\r{Malicious Code}\\
+              \footnotesize{Code that is written to exploit vulnerabilities on networks, OSes, etc}\\
+              -- \blu{Viruses,Worms,Trojans}\\
+              \, \,\,\footnotesize{These are the most typical forms of malicious code.}\\
+              \, \,\,\footnotesize{Most of them are only received through misuse of a computer}\\
+              \, \,\,\footnotesize{\blu{Viruses usually have 2 functions, Propagation and Destruction}}\\
+              }\\
+              \hline
+              \mc{\r{Sources of Malicious Code}\\
+              -- \blu{Script Kiddie}\\
+              \, \,\,\footnotesize{downloads crap and spams it into the internet}\\
+              -- \blu{Drive-by Download}\\
+              \, \,\,\footnotesize{This exploits a vulnerability where the browser downloads}\\
+              \, \,\,\footnotesize{something in the background without your knowledge}\\
+              -- \blu{Advanced Persistent Threat (APT)}\\
+              \, \,\,\footnotesize{These are often state sponsored actors with large amount of resources.}\\
+              \, \,\,\footnotesize{They often use Zero-Day attacks against very specific/high value targets}\\
+              \, \,\,\footnotesize{An example is the RUAG Stuxnet attack.}\\
+              }\\
+              \hline
+              \mc{\r{Virus Propagation Techniques}\\
+              -- \blu{Master Boot Record Infection}\\
+              \, \,\,\footnotesize{Very nasty, although the MBR is not big enough to host the virus}\\
+              \, \,\,\footnotesize{It is perfect to launch it without a users knowledge}\\
+              \, \,\,\footnotesize{It simply points to a location somewhere on a disk,}\\
+              \, \,\,\footnotesize{where the virus is stored}\\
+              -- \blu{File Infection}\\
+              \, \,\,\footnotesize{These viruses change existing files to include their own code.}\\
+              \, \,\,\footnotesize{Often executables are used, although there are many other variants.}\\
+              \, \,\,\footnotesize{Most standard injectors are easily detected with antivirus software}\\
+              -- \blu{Companion Virus}\\
+              \, \,\,\footnotesize{A Virus that has a similar name to legitimate system services.}\\
+              -- \blu{Service Injection}\\
+              \, \,\,\footnotesize{Instead of regular file injection, these viruses inject themselves}\\
+              \, \,\,\footnotesize{into critical system services in order to escape detection from }\\
+              \, \,\,\footnotesize{antivirus software. Can be nasty to remove}\\
+              -- \blu{Macro Infection}\\
+              \, \,\,\footnotesize{This is an infection inside an application that has a scripting language}\\
+              \, \,\,\footnotesize{For example Excel has the visual basic crap language inside it.}\\
+              \, \,\,\footnotesize{A virus can be written in that language and be configured to}\\
+              \, \,\,\footnotesize{launch at startup. Which means click on file = pwned}\\
+              \, \,\,\footnotesize{Although this specific variant was fixed, there are }\\
+              \, \,\,\footnotesize{always new ways in which this happens again and again}\\
+              }\\
+              \hline
+            \end{tabular}
+            \hspace{-0.1in}
+            \begin{tabular}[t]{|@{\hskip1pt}p{10.45cm}|}
+              \hline
+              \mc{\r{Malware Variants}\\
+              \r{Note: Malware can have multiple variants at once!}\\
+              -- \blu{Multipartite Viruses}\\
+              \, \,\,\footnotesize{Viruses that use more than 1 propagation technique}\\
+              -- \blu{Stealth Viruses}\\
+              \, \,\,\footnotesize{These are viruses that use tricks to fool the OS and}\\
+              \, \,\,\footnotesize{antimalware software that everything is working fine.}\\
+              \, \,\,\footnotesize{An example is an MBR infection virus that returns a }\\
+              \, \,\,\footnotesize{clean MBR if the antimalware software checks the MBR}\\
+              \, \,\,\footnotesize{but on boot it selects the infected MBR}\\
+              -- \blu{Polymorphic Viruses}\\
+              \, \,\,\footnotesize{These viruses change their own code on each infection}\\
+              \, \,\,\footnotesize{This is similar to how an actual virus gets mutations}\\
+              \, \,\,\footnotesize{\ora{The effect is that the signature of the virus changes!!}}\\
+              \, \,\,\footnotesize{This makes it hard for antimalware software to detect it!}\\
+              -- \blu{Encrypted Viruses}\\
+              \, \,\,\footnotesize{Uses encryption to hide itself}\\
+              \, \,\,\footnotesize{On each system, a new key is used in order to change appearance}\\
+              \, \,\,\footnotesize{The \ora{Virus decryption routine} handles encryption and decryption}\\
+              -- \blu{Logic Bombs}\\
+              \, \,\,\footnotesize{This malware stays dormant until a certain time, }\\
+              \, \,\,\footnotesize{or certain prerequisites are active.}\\
+              -- \blu{Trojan Horse}\\
+              \, \,\,\footnotesize{Software that appears kind, but carries a malicious \ora{payload behind the scenes}}\\
+              \, \,\,\footnotesize{It is often used in combination with a keylogger to get critical information}\\
+              -- \blu{Key stroke logger}\\
+              \, \,\,\footnotesize{Logs every single keypress the victim does on a system}\\
+              \, \,\,\footnotesize{Can also be in form of hardware!}\\
+              -- \blu{Ransomware}\\
+              \, \,\,\footnotesize{Malicious Code that encrypts the entire drive of a victim and }\\
+              \, \,\,\footnotesize{prompts them to pay a ransom for their files}\\
+              \, \,\,\footnotesize{If the user doesn't pay in time, the files are deleted.}\\
+              \, \,\,\footnotesize{Examples: Petya, wannacry, cryptlocker}\\
+              -- \blu{Worms}\\
+              \, \,\,\footnotesize{Malware that propagates without any human interaction/intervention}\\
+              \, \,\,\footnotesize{Often used in combination with other types.}\\
+              -- \blu{Adware}\\
+              \, \,\,\footnotesize{Often targeted at browsers. Launches and shows random adds and websites}\\
+              \, \,\,\footnotesize{Were often bundled with legitimate software in the 2010s.}\\
+              -- \blu{Spyware}\\
+              \, \,\,\footnotesize{Reports \r{(all)} information on your system to an attacker}\\
+              -- \blu{CryptoMiner}\\
+              \, \,\,\footnotesize{Software that mines cryptocurrency for an attacker in the background}\\
+              }\\
+              \hline
+              \mc{\r{Antivirus / Antimalware}\\
+              \r{Most antimalware software uses multiple methods!}\\
+              -- blu{Signature based}\\
+              \, \,\,\footnotesize{Checks for specific signatures (hashes) from a regularly updated database}\\
+              -- \blu{Heuristics based}\\
+              \, \,\,\footnotesize{Checks for specific malicious behavior}\\
+              -- \blu{Data integrity based}\\
+              \, \,\,\footnotesize{Checks for suspicious file changes on the system}\\
+              \, \,\,\footnotesize{Usually this is a change to an executable without updating it.}\\
+              }\\
+              \hline
+              \mc{\r{Application Attacks}\\
+              -- \blu{Buffer Overflow Attack}\\
+              \, \,\,\footnotesize{Send more data than the server anticipated.}\\
+              \, \,\,\footnotesize{Unless the server is modfied to drop the rest of the data,}\\
+              \, \,\,\footnotesize{it is written as a block to memory. In that additional data,}\\
+              \, \,\,\footnotesize{there might be instructions, commands that the attacker wants to run.}\\
+              \, \,\,\footnotesize{input field : 5 char -> input = "hellonetcat 192.168.1.1 ..." (reverse shell)}\\
+              -- \blu{Time of Check to Time of Use (TOCTTOU)}\\
+              \, \,\,\footnotesize{If an admin revokes a users permission while said user is online,}\\
+              \, \,\,\footnotesize{then the change won't happen until said user loggs off.}\\
+              \, \,\,\footnotesize{This user can now simply choose to not log off and keep all permissions.}\\
+              \, \,\,\footnotesize{A simple way to fix this is, is to force log off said user.}\\
+              }\\
+              \hline
+            \end{tabular}
+          \end{tabular}
+          \hfill
+    \end{table}
+    \pagebreak
+    \begin{table}[ht!]
+          \begin{tabular}{ccc}
+            \begin{tabular}[t]{|@{\hskip1pt}p{10.45cm}|}
+              \hline
+              \mc{
+              -- \blu{Back Doors}\\
+              \, \,\,\footnotesize{\r{an undocumented way of accessing a system}}\\
+              \, \,\,\footnotesize{This can either be done \ora{via malicious software,}}\\
+              \, \,\,\footnotesize{or \ora{intended backdoors by developers.}}\\
+              \, \,\,\footnotesize{The developer backdoors are often only used in testing, and removed later}\\
+              \, \,\,\footnotesize{The removing part can of course simply be forgotten :)}\\
+              -- \blu{Escalation of Privilege}\\
+              \, \,\,\footnotesize{Use exploits to elevate the priviliges on a victims system}\\
+              \, \,\,\footnotesize{often done with a rootkit, but does not necessarily have to be root!}\\
+              \, \,\,\footnotesize{For example, an elevation from user to moderator would also suffice.}\\
+              -- \blu{Rootkit}\\
+              \, \,\,\footnotesize{Uses various exploits to gain root access on a system.}\\
+              }\\
+              \hline
+              \mc{\r{Web Application Attacks}\\
+              -- \blu{Cross Site Scripting}\\
+              \, \,\,\footnotesize{A browser opens scripts with the <script>script-name</script> notation}\\
+              \, \,\,\footnotesize{Normally this is used to get input from users and to spawn other things}\\
+              \, \,\,\footnotesize{However, these scripts can also be integrated into a link directly}\\
+              \, \,\,\footnotesize{In this case an attacker might send you a link to a legitimate website,}\\
+              \, \,\,\footnotesize{however, inside that link is also a script that gets loaded, }\\
+              \, \,\,\footnotesize{is not from that website}\\
+              \, \,\,\footnotesize{This means that the hacker could get your login information, }\\
+              \, \,\,\footnotesize{if you enter that on this website}\\
+              -- \blu{Cross Site Forgery (XSRF or CSRF)}\\
+              \, \,\,\footnotesize{This sends a command to another website that is currently open.}\\
+              \, \,\,\footnotesize{For example, if you are currently logged in into your bank account,}\\
+              \, \,\,\footnotesize{and you have that website open, then clicking on such a malicious link}\\
+              \, \,\,\footnotesize{might steal funds from you without you noticing!!}\\
+              -- \blu{SQL Injection Attacks}\\
+              \, \,\,\footnotesize{form username: password: in username you write:}\\
+              \, \,\,\footnotesize{dashie';DELETE * from acc;}\\
+              \, \,\,\footnotesize{you end the first command and then enter another, both commands:}\\
+              \, \,\,\footnotesize{SELECT * FROM acc WHERE name = 'dashie'; DELETE * FROM acc;}\\
+              \, \,\,\footnotesize{bye bye table :). Luckily this is easy to combat}\\
+              \, \,\,\footnotesize{\r{Use prepared statements, limit privileges and perform input validation}}\\
+              }\\
+              \hline
+              \mc{\r{Network Attacks}\\ 
+              -- \blu{Denial of Service (DoS)}\\
+              \, \,\,\footnotesize{Simple resource consumption attack that tries to use all bandwidth.}\\
+              \, \,\,\footnotesize{This makes the server unable to provide the service to other users.}\\
+              -- \blu{SYN Flooding}\\
+              \, \,\,\footnotesize{Spam a server with SYN floods. Aka pretend to open 999999 TCP connections}\\
+              \, \,\,\footnotesize{The server responds to these SYN requests, but you never answer,}\\
+              \, \,\,\footnotesize{instead you send new SYN requests}\\
+              \, \,\,\footnotesize{Without protection against this, the server can't open new connections!}\\
+              -- \blu{Service Request Floods}\\
+              \, \,\,\footnotesize{Similar to the SYN flood with the difference being actual open connections}\\
+              \, \,\,\footnotesize{This means you actually respond and open the connection, only to then}\\
+              \, \,\,\footnotesize{use this connection to spam application requests.}\\
+              -- \blu{Application level DoS}\\
+              \, \,\,\footnotesize{Exploits a vulnerability in a software to spam a server with bad packages.}\\
+              \, \,\,\footnotesize{These bad packages might overload the server, preventing access.}\\
+              -- \blu{Permanent DoS}\\
+              \, \,\,\footnotesize{Crippling the hardware itself so the service can't be accessed.}\\
+              \, \,\,\footnotesize{A good example if installing faulty firmware (Phlashing attack)}\\
+              -- \blu{Botnets}\\
+              \, \,\,\footnotesize{This is a network of bots(systems) that have been compromised.}\\
+              \, \,\,\footnotesize{It is then used to perform a combined attack on a victim,}\\
+              \, \,\,\footnotesize{or simply to add more systems to the botnet.}\\
+              -- \blu{Distributed DoS}\\
+              \, \,\,\footnotesize{A combined targeted DoS against a service}\\
+              \, \,\,\footnotesize{Much harder to combat than single DoS, often done via Botnets}\\
+              -- \blu{Man-in-the-Middle Attack}\\
+              \, \,\,\footnotesize{Forcing traffic to your own system instead of router etc.}\\
+              \, \,\,\footnotesize{This allows package manipulation, eavesdropping etc.}\\
+              }\\
+              \hline
+            \end{tabular}
+            \hspace{-0.1in}
+            \begin{tabular}[t]{|@{\hskip1pt}p{10.45cm}|}
+              \hline
+              \mc{
+              -- \blu{Man-in-the-Browser Attack}\\
+              \, \,\,\footnotesize{Trojan installed via plugin, used to steal credentials,}\\
+              \, \,\,\footnotesize{inject scripts and hijack authentication sessions}\\
+              -- \blu{Eavesdropping}\\
+              \, \,\,\footnotesize{Monitoring the traffic of a system to the net.}\\
+              \, \,\,\footnotesize{Hard to detect as it has no symptoms.}\\
+              -- \blu{Impersonation/Masquerading}\\
+              \, \,\,\footnotesize{Pretending to be someone else in order to gain access to a system}\\
+              \, \,\,\footnotesize{requires authentication credentials to be stolen!}\\
+              -- \blu{Replay Attacks}\\
+              \, \,\,\footnotesize{Gaining access to a session by sending copies of older messages.}\\
+              \, \,\,\footnotesize{Possible after eavesdropping a session.}\\
+              -- \blu{Modification Attacks}\\
+              \, \,\,\footnotesize{Capture and then modify packages.}\\
+              \, \,\,\footnotesize{It is essentially a man-in-the-middle attack.}\\
+              }\\
+              \hline
+              \mc{\r{Session IDs and attacks}\\
+              -- \gre{Session IDs}\\
+              \, \,\,\footnotesize{Session IDs are a quick way of knowing who the server is dealing with}\\
+              \, \,\,\footnotesize{It allows for storage of tokens, cookies etc.}\\
+              \, \,\,\footnotesize{And it reduces the amount of times we have to enter passwords}\\
+              -- \blu{Hijacking with Session ID Predicting}\\
+              \, \,\,\footnotesize{The attacker tries to bruteforce guess the Session ID.}\\
+              \, \,\,\footnotesize{Attacker sends thousands of guesses based on previous sessions.}\\
+              -- \blu{Session Hijacking with Cross-Site Scripting}\\
+              \, \,\,\footnotesize{Get the session ID with a cross-site script}\\
+              -- \blu{Session Hijacking with Cross-Site Request Forgery}\\
+              \, \,\,\footnotesize{Get the session with a malicious command}\\
+              -- \blu{TCP/IP Hijacking}\\
+              \, \,\,\footnotesize{During a TCP handshake, respond to quicker to the server than the victim.}\\
+              \, \,\,\footnotesize{or force the victim to reset the handshake you start the session instead.}\\
+              }\\
+              \hline
+              \mc{\r{Ethical Hacking and regular Hacking}\\
+              -- \gre{Ethical Hacking}\\
+              \, \,\,\footnotesize{System auditing, reporting and testing}\\
+              \, \,\,\footnotesize{Vulnerability reporting}\\
+              -- \gre{Hacking}\\
+              \, \,\,\footnotesize{Security control compromise}\\
+              \, \,\,\footnotesize{Produce behaviors in a software outside of original intent}\\
+              \, \,\,\footnotesize{Exploitation of vulnerabilities}\\
+              }\\
+              \hline
+              \mc{\r{Types of Hax0rz11!}\\
+              -- \gre{Black Hat}\\
+              \, \,\,\footnotesize{malicious/destructive hacker}\\
+              -- \gre{Grey Hat}\\
+              \, \,\,\footnotesize{possessing black hat skills, but focus on both offense and defense}\\
+              -- \gre{White Hat}\\
+              \, \,\,\footnotesize{Defense focused hacker}\\
+              -- \gre{Cyber Terrorist}\\
+              \, \,\,\footnotesize{Advancing Ideology with cyber attacks}\\
+              }\\
+              \hline
+              \mc{\r{Email Security S/MIME}\\
+                \ora{Multipurpose Internet Mail Extension MIME}\\
+                -- \blu{Application Layer Protocol}\\
+                \pic{220621-26}\\
+              }\\
+              \hline
+            \end{tabular}
+          \end{tabular}
+          \hfill
+    \end{table}
+    \pagebreak
+    \begin{table}[ht!]
+          \begin{tabular}{ccc}
+            \begin{tabular}[t]{|@{\hskip1pt}p{10.45cm}|}
+              \hline
+              \mc{
+                -- \blu{S/MIME signing format 1}\\
+                \pic{220621-27}\\
+                -- \blu{S/MIME supports Multiple Signatures}\\
+                \pic{220621-28}\\
+                -- \blu{S/MIME Signing format 2}\\
+                \pic{220621-29}\\
+                \, \,\,\footnotesize{\gre{+ This format is not affected by encoding enforced by mail providers}}\\
+                \, \,\,\footnotesize{\r{-- In order to read this format, the mail client must support S/MIME}}\\
+                -- \blu{S/MIME Encrypted format:}\\
+                \pic{220621-30}\\
+                -- \blu{S/MIME Multi Encryption}\\
+                \pic{220621-31}\\
+                \footnotesize{Just like before, if you \ora{sign before you encrypt you have authenticity}, }\\
+                \footnotesize{if you \ora{encrypt before you sign you have anonymity}.}\\
+                \footnotesize{For more info, check the encryption and signing part of this doc.}\\
+              }\\
+              \hline
+            \end{tabular}
+            \hspace{-0.1in}
+            \begin{tabular}[t]{|@{\hskip1pt}p{10.45cm}|}
+              \hline
+              \mc{\r{SPAM :)}\\
+              \pic{220621-32}\\
+              \pic{220621-33}\\
+              -- \blu{False Negatives vs False Positives:}\\
+              \pic{220621-34}\\
+              \footnotesize{First doesn't cover all spam, but guarantees that no legitimate mail is missed}\\
+              \footnotesizet{Second blocks nearly all spam, but also blocks some legitimate mail! }\\
+              }\\
+              -- \blu{Sender Policy Framework (SPF)}\\
+              \, \,\,\footnotesize{\r{TXT records in DNS}}\\
+              \, \,\,\footnotesize{Mail client does DNS query for the mail sender.}\\
+              \pic{220621-35}\\
+              \hline
+              \mc{\r{DKIM Domain Keys Identified Mail}\\
+              \pic{220621-36}\\
+              }\\
+              \hline
+              \mc{\r{Other Methods}\\
+              -- \blu{Blacklists}\\
+              \, \,\,\footnotesize{Filter based on a list of bad actors}\\
+              \, \,\,\footnotesize{\gre{+ Very fast with no false positives}}\\
+              \, \,\,\footnotesize{\r{-- List must be updated constantly, new senders not blocked}}\\
+              -- \blu{Greylisting}\\
+              \, \,\,\footnotesize{Check Sender IP, sender mail address and recipient address}\\
+              \, \,\,\footnotesize{Test this against database. If it is unknown return failure to sender.}\\
+              \, \,\,\footnotesize{\gre{+ blocks ALL spam}}\\
+              \, \,\,\footnotesize{\r{-- also blocks legitimate mails that are unknown}}\\
+              \, \,\,\footnotesize{\r{-- senders with multiple IP can't send mail}}\\
+              \, \,\,\footnotesize{\r{-- Check can slow down mails to minutes or hours}}\\
+              }\\
               \hline
             \end{tabular}
           \end{tabular}
