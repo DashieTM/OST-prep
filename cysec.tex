@@ -550,6 +550,14 @@
               \, \,\,\footnotesize{Software that allows real-time analysis of security events}\\
               }\\
               \hline
+              \mc{\textcolor{Yellow}{Yellow-Team}\\
+              \footnotesize{Builds defensive software against attackers}\\
+              }\\
+              \hline
+              \mc{\textcolor{Purple}{Purple-Team}\\
+              \footnotesize{Improves organization security posture}\\
+              }\\
+              \hline
               \mc{\r{Linux}\\
               \footnotesize{\blu{Adding user:} usermod -m username -s /path/to/shell}\\
               \footnotesize{\blu{Change shell:} chsh -s /path/to/shell}\\
@@ -1798,7 +1806,7 @@
               -- \blu{False Negatives vs False Positives:}\\
               \pic{220621-34}\\
               \footnotesize{First doesn't cover all spam, but guarantees that no legitimate mail is missed}\\
-              \footnotesizet{Second blocks nearly all spam, but also blocks some legitimate mail! }\\
+              \footnotesize{Second blocks nearly all spam, but also blocks some legitimate mail! }\\
               }\\
               -- \blu{Sender Policy Framework (SPF)}\\
               \, \,\,\footnotesize{\r{TXT records in DNS}}\\
@@ -1832,29 +1840,87 @@
           \begin{tabular}{ccc}
             \begin{tabular}[t]{|@{\hskip1pt}p{10.45cm}|}
               \hline
-              \mc{}\\
+              \mc{\r{Authentication}\\
+              -- \blu{A1 Plain Password}\\
+              \, \,\,\footnotesize{Regular Passwords, easy to sniff if they aren't encrypted.}\\
+              -- \blu{A2 One time Passwords}\\
+              \, \,\,\footnotesize{Can't be sniffed and used, but Man in the middle attacks are possible}\\
+              -- \blu{A3 Challange Response Protocol}\\
+              \, \,\,\footnotesize{Server sends a random value as 'challenge'.}\\
+              \, \,\,\footnotesize{The user then hashes his password and turns it into a MAC.}\\
+              \, \,\,\footnotesize{The user then sends the MAC alongside his own Random number and his ID.}\\
+              \, \,\,\footnotesize{The server calculates the MAC as well and compares it.}\\
+              \, \,\,\footnotesize{The server has the password saved as well, aka it just hashes that}\\
+              \, \,\,\footnotesize{This also means that a brute force is possible if the password table is stolen}\\
+              \, \,\,\footnotesize{For better protection you send a signed MAC instead, user authenticity!}\\
+              \pic{220622-2}\\
+              -- \blu{A4 Anonymous Key Exchange}\\
+              \, \,\,\footnotesize{Essentially encrypted password}\\
+              -- \blu{A5 Zero Knowledge Passwords}\\
+              \, \,\,\footnotesize{Challenge Responses with encrypted random numbers.}\\
+              \, \,\,\footnotesize{Server also sends the MAC back to user to double check!}\\
+              \pic{220622-4}\\
+              -- \blu{A6 Certificate-based Server Authentication}\\
+              \, \,\,\footnotesize{Server authenticates itself, then encrypted password used.}\\
+              -- \blu{A7 Mutual Public Key Authentication}\\
+              \, \,\,\footnotesize{You authenticate yourself and the server authenticates itself}\\
+              \, \,\,\footnotesize{Recommended if you want a certain machine to have access.}\\
+              \, \,\,\footnotesize{Often combined with encrypted passwords.}\\
+              \pic{220622-1}\\
+              }\\
               \hline
-              \mc{}\\
-              \hline
-              \mc{}\\
-              \hline
-              \mc{}\\
-              \hline
-              \mc{}\\
+              \mc{\r{Kerberos}\\
+              -- \blu{Realm == Domain}\\
+              -- \blu{Key Distribution Center (KDC)}\\
+              \, \,\,\footnotesize{The Server that handles key distribution and Kerberos tickets}\\
+              -- \blu{Kerberos Tickets}\\
+              \, \,\,\footnotesize{Mediates the communication between principles.}\\
+              -- \blu{Principles (Users)}\\
+              \, \,\,\footnotesize{Every user in the network is called a principle}\\
+              -- \blu{Shared key = Principles master key}\\
+              \, \,\,\footnotesize{Key that is assigned to a principle. Connects to the KDC}\\
+              \pic{220622-3}\\
+              \footnotesize{Shared secrets like Diffie-Hellman and time-stamped.}\\
+              }\\
               \hline
             \end{tabular}
             \hspace{-0.1in}
             \begin{tabular}[t]{|@{\hskip1pt}p{10.45cm}|}
               \hline
-              \mc{}\\
+              \mc{\vspace{-0.1in}\\
+                \pic{220622-5}\\
+              -- \blu{KDC Slaves}\\
+              \, \,\,\footnotesize{In order to save the KDC from overload, we create some read-only}\\
+              \, \,\,\footnotesize{KDC slave server, that can create tickets and authenticate users}\\
+              \, \,\,\footnotesize{The only thing they can't do is create new passwords for users etc.}\\
+              -- \blu{Inter-Realm Authentication}\\
+              \pic{220622-6}
+              }\\
               \hline
-              \mc{}\\
-              \hline
-              \mc{}\\
-              \hline
-              \mc{}\\
-              \hline
-              \mc{}\\
+              \mc{\r{Federation}\\
+              \footnotesize{The linking of 2 domains alongside their login systems.}\\
+              \footnotesize{Example: kerberos inter-realm authentication.}\\
+              \footnotesize{Formal Definition: \ora{a set of oranizations agreeing on a common}}\\
+              \footnotesize{\ora{set of rules and standards.}}\\
+              -- \blu{Shibboleth}\\
+              \, \,\,\footnotesize{>> based on SAML, opensource, EDU-SWITCH, most used protocol}\\
+              \, \,\,\footnotesize{>> used for WLAN, E-Learning, Libraries, etc}\\
+              -- \blu{W3C - XML Signature/Encryption}\\
+              \, \,\,\footnotesize{xmlns:ds = signature, xmlns:enc = encryption}\\
+              -- \blu{Secure Assertion Markup Language (SAML)}\\
+              \, \,\,\footnotesize{Parts: Assertions and Protocols, Bindings, Profiles, Metadata, Authentication-}\\
+              \, \,\,\footnotesize{Context, Conformance Requirements, Security/Privacy, Glossary}\\
+              \, \,\,\footnotesize{used with xml : xmlns:saml / xmlns:samlp}\\
+              -- \blu{OAuth 2 Authorization Framework}\\
+              \, \,\,\footnotesize{>> Used to connect services to accounts, ex. use Picasa resources from google}\\
+              \, \,\,\footnotesize{>> based on https, security handled by TLS, used by big companies}\\
+              \pic{220622-7}\\
+              -- \blu{Open-ID Connect Authentication Layer}\\
+              \, \,\,\footnotesize{>> on top of O-Auth 2.0, solves multiple IDs for multiple services}\\
+              \, \,\,\footnotesize{>> used by many big companies, implementation up to service}\\
+              \, \,\,\footnotesize{>> SwissID also uses this.}\\
+              \pic{220622-8}\\
+              }\\
               \hline
             \end{tabular}
           \end{tabular}
@@ -1865,29 +1931,125 @@
           \begin{tabular}{ccc}
             \begin{tabular}[t]{|@{\hskip1pt}p{10.45cm}|}
               \hline
-              \mc{}\\
+              \mc{\r{Technical Vulnerability Management}\\
+              \footnotesize{The idetification, classification, remedation and mitigation of vulnerabilities}\\
+              -- \blu{Plan}\\
+              \, \,\,\footnotesize{Identify Assets that could be exposed to risk}\\
+              \, \,\,\footnotesize{Establish who or what will conduct the vulnerability tests}\\
+              \, \,\,\footnotesize{Establish how the tests will flow into software development}\\
+              -- \blu{Discover}\\
+              \, \,\,\footnotesize{Monitor sources about known vulnerabilities that might apply to your system}\\
+              -- \blu{Scan}\\
+              \, \,\,\footnotesize{>> run automated tests based on your previous results}\\
+              \, \,\,\footnotesize{>> hire professionals to do penetration testing}\\
+              \, \,\,\footnotesize{>> Compare these results back-to-back}\\
+              \, \,\,\footnotesize{\r{Note, certain tests might disrupt the system!}}\\
+              \, \,\,\footnotesize{And, there might be false positives! Especially with the automated tests}\\
+              -- \blu{Log \& Report}\\
+              \, \,\,\footnotesize{Log results based on severity...}\\
+              -- \blu{Remediate}\\
+              \, \,\,\footnotesize{>> Ideally, every discovered vulnerability should be patched immediately}\\
+              \, \,\,\footnotesize{>> However, performing a proper cost analysis as explained in the first 2 pages}\\
+              \, \, \,\footnotesize{ is often preferred as not all vulnerabilities are worth fixing.}\\
+              }\\
               \hline
-              \mc{}\\
+              \mc{\r{Security evens and Security Incidents}\\
+              -- \blu{Security Event}\\
+              \, \,\,\footnotesize{A security event is just a simple logging mechanism for noteworthy changes:}\\
+              \, \,\,\footnotesize{password changes, certificate renewal, new certificates, new root CAs etc}\\
+              \, \,\,\footnotesize{These can be ignored if they were intended.}\\
+              \, \,\,\footnotesize{They need to be configured, as you don't want your logs spammed with trash}\\
+              -- \blu{Security Incident}\\
+              \, \,\,\footnotesize{\r{a Security Incident is a detected breach!! Take action!!}}\\
+              -- \blu{Scanning for Security Incidents}\\
+              \, \,\,\footnotesize{>> Pattern matching: find a collection of events with similar cause}\\
+              \, \,\,\footnotesize{>> Scan detection: attacks often begin with port scans etc!}\\
+              \, \,\,\footnotesize{>> Threshold: if x events with y port scans, then ALERT}\\
+              \, \,\,\footnotesize{>> Event correlation: assign the attack to a known attack variant}\\
+              }\\
               \hline
-              \mc{}\\
+              \mc{\r{PLAN-ASSESS-SIMPLIFY-DEPLOY}\\
+              \ora{Best practises for security event management}\\
+              -- \blu{PLAN}\\
+              \, \,\,\footnotesize{>> What systems should be monitored?}\\
+              \, \,\,\footnotesize{>> What events are important, which can be discarded?}\\
+              \, \,\,\footnotesize{>> Where should we store the logs, and for how long do we store it?}\\
+              \, \,\,\footnotesize{>> How will the performance of this system be monitored?}\\
+              -- \blu{ASSESS}\\
+              \, \,\,\footnotesize{Understand your priorities}\\
+              -- \blu{SIMPLIFY}\\
+              \, \,\,\footnotesize{Order the priorities and simplify them}\\
+              -- \blu{DEPLOY}\\
+              \, \,\,\footnotesize{Turn your priorities into action}\\
+              }\\
               \hline
-              \mc{}\\
-              \hline
-              \mc{}\\
+              \mc{\r{Cyber Attack Kill Chain}\\
+              \pic{220622-9}\\
+              \ora{How to deal with each step:}\\
+              -- \blu{Reconnaissance}\\
+              \, \,\,\footnotesize{>> use firewalls, whitelists, Network segmentation}\\
+              \, \,\,\footnotesize{>> simple port scans can also be deterred by using high random ports}\\
+              -- \blu{Weaponization}\\
+              \, \,\,\footnotesize{>> patching a vulnerability before it is exploited....}\\
+              }\\
               \hline
             \end{tabular}
             \hspace{-0.1in}
             \begin{tabular}[t]{|@{\hskip1pt}p{10.45cm}|}
               \hline
-              \mc{}\\
+              \mc{
+              -- \blu{Delivery}\\
+              \, \,\,\footnotesize{>> Firewalls, antimalware software, good policies}\\
+              \, \, \,\footnotesize{ Intrusion Prevention Software (IPS), Web Application Firewall (WAF)}\\
+              -- \blu{Exploit}\\
+              \, \,\,\footnotesize{>> Host-based Intrusion Detection System (HIDS), Backups, frequent patching}\\
+              -- \blu{Installation}\\
+              \, \,\,\footnotesize{>> antimalware software, HIDS, proper security events -> privilege escalation}\\
+              -- \blu{Command \& Control}\\
+              \, \,\,\footnotesize{Firewall, Network-based Intrusion Detection System (NIDS)}\\
+              -- \blu{Actions}\\
+              \, \,\,\footnotesize{you are fucked, restore the backup.}\\
+              }\\
               \hline
-              \mc{}\\
+              \mc{\r{Incident Management Process}\\
+              -- \blu{PREPARE}\\
+              \, \,\,\footnotesize{>> WHO-WHEN-WHAT}\\
+              \, \,\,\footnotesize{>> develop Internal and External reporting procedures}\\
+              \, \,\,\footnotesize{>> Guidelines for interacting with external parties (PLAYBOOKS)}\\
+              \, \,\,\footnotesize{>> Define service by Incident Response Team (IRT)}\\
+              \, \,\,\footnotesize{>> Establish and maintain accurate notification mechanism}\\
+              \, \,\,\footnotesize{>> Establish which incidents take precedence}\\
+              -- \blu{ANALYSE}\\
+              \, \,\,\footnotesize{\ora{Magnitude? Severity? Urgency?}}\\
+              -- \blu{CONTAINMENT}\\
+              \, \,\,\footnotesize{Depending on the previous analysis, take action and contain}\\
+              \, \,\,\footnotesize{the damage or the attacker.}\\
+              -- \blu{RECOVERY}\\
+              \, \,\,\footnotesize{Restore the system to regular state and patch it if necessary}\\
+              }\\
               \hline
-              \mc{}\\
+              \mc{\r{Digital Forensics}\\
+              \pic{220622-10}\\
+              }\\
               \hline
-              \mc{}\\
+              \mc{\r{Threat Incident management best practises}\\
+              \pic{220622-11}\\
+              }\\
               \hline
-              \mc{}\\
+              \mc{\r{OWASP TOP 10}}\\
+              \gre{Exploit: How easy is it to exploit it?}\\
+              \gre{Impact: If exploited, how harsh are the consequences?}\\
+              \ora{The top 10 vulnerabilities, redefined each year}\\
+              -- \blu{A1: Broken Access Control}\\
+              \, \,\,\footnotesize{Attackers have access to accounts they shouldn't have}\\
+              \, \,\,\footnotesize{Mitigations: Proper access control..., input validation}
+              \, \,\,\footnotesize{occurred: 318k, Exploit: 6.9, Impact: 5.9}\\
+              -- \blu{A2: Cryptographic Failures}\\
+              \, \,\,\footnotesize{Missing or broken Ciphers like SSL, MD5, etc}\\
+              \, \,\,\footnotesize{Problem right now: TLS 1.2 with ineffective configuration}\\
+              \, \,\,\footnotesize{Mitigation: Use proper crypto tools like TLS 1.3, verify your hardware}\\
+              \, \,\,\footnotesize{Make sure encryption is used correctly}\\
+              \, \,\,\footnotesize{Occurred: 234k, Exploit: 7.3, Impact: 6.8}\\
               \hline
             \end{tabular}
           \end{tabular}
@@ -1898,31 +2060,61 @@
           \begin{tabular}{ccc}
             \begin{tabular}[t]{|@{\hskip1pt}p{10.45cm}|}
               \hline
-              \mc{}\\
+              \mc{              
+              -- \blu{A3: Injection}\\
+              \, \,\,\footnotesize{Why is this still happening?}\\
+              \, \,\,\footnotesize{Just do input validation or use prepared statements ffs!}\\
+              \, \,\,\footnotesize{Output sanitation is also useful, simply encode the dangerous characters!}\\
+              \pic{220622-12}\\
+              \, \,\,\footnotesize{More info in the first 2 pages...}\\
+              \, \,\,\footnotesize{Occurred: 274k, Exploit: 7.3, Impact: 7.2}\\
+              -- \blu{A4: Insecure Design}\\
+              \, \,\,\footnotesize{Use Threat models, better frameworks, lots of testing}\\
+              \, \,\,\footnotesize{most costly problem to fix later, so do it now!}\\
+              \, \,\,\footnotesize{Occurred: 262k, Exploit: 6.5, Impact: 6.8}\\
+              -- \blu{A5: Security Misconfiguration}\\
+              \, \,\,\footnotesize{Outdated and vulnerable software in production, default admin accs}\\
+              \, \,\,\footnotesize{weak passwords, bad ports, leaking info with error messages}\\
+              \, \,\,\footnotesize{Mitigation: Use software to detect misconfiguration and act accordignly.}\\
+              \, \,\,\footnotesize{Harden Systems, deploy in testing first, update systems}\\
+              \, \,\,\footnotesize{\r{Follow Recommendations!}}\\
+              \, \,\,\footnotesize{Occurred: 208k, Exploit: 8.1, Impact: 6.6}\\
+              -- \blu{A6: Vulnerable/Outdated Components}\\
+              \, \,\,\footnotesize{Nothing to say other than don't use old versions for critical systems..}\\
+              \, \,\,\footnotesize{Occurred: 132k, Exploit: 7.4, Impact: 6.5}\\
+              -- \blu{A7: Identification/Authentication Failures}\\
+              \, \,\,\footnotesize{These are login breaches.}\\
+              \, \,\,\footnotesize{Mitigation: use better hash, use one time passwords}\\
+              \, \,\,\footnotesize{Make sure tokens etc are correctly configured}\\
+              \, \,\,\footnotesize{Make sure no part of the authentication is in plaint text}\\
+              \, \,\,\footnotesize{Perhaps internal leak?}\\
+              \, \,\,\footnotesize{Occurred: 262k, Exploit: 6.5, Impact: 6.8}\\
+              -- \blu{A8: Software and Data Integrity Design}\\
+              \, \,\,\footnotesize{Corruption or malicious change of files}\\
+              \, \,\,\footnotesize{Mitigation: Raid 0, backups, validity checks, no plain text packages}\\
+              \, \,\,\footnotesize{Occurred: 47.9k, Exploit: 6.9, Impact: 7.9}\\
+              -- \blu{A9: Security Logging and Monitoring Failures}\\
+              \, \,\,\footnotesize{Useless errors that only say: oops error sorry}\\
+              \, \,\,\footnotesize{This could be an attacker but who knows, the error won't tell you}\\
+              \, \,\,\footnotesize{In other words, the attacker is protected, because you aren't informed!}\\
+              \, \,\,\footnotesize{Mitigation: Offer more information to the user, at the very least on request.}\\
+              \, \,\,\footnotesize{Occurred: 53.6k, Exploit: 6.9, Impact: 5.0}\\
+              -- \blu{A10: Server Side Request Forgery}\\
+              \, \,\,\footnotesize{Server loads URL without checking, making it possible to load malicious stuff}\\
+              \, \,\,\footnotesize{Including commands to execute on website, like banks, hence forgery}\\
+              \, \,\,\footnotesize{Mitigations: deny by default firewall, Sanitize URLs, whitelist for URLs}\\
+              \, \,\,\footnotesize{disable https redirections, DON'T use Blacklists!}\\
+              \, \,\,\footnotesize{Occurred: 9.5k, Exploit: 8.2, Impact: 6.7}\\
+              }\\
               \hline
-              \mc{}\\
-              \hline
-              \mc{}\\
-              \hline
-              \mc{}\\
-              \hline
-              \mc{}\\
+              \\\\\\\\
+              \\\\\\\\
+              \\\\\\\\
+              \\\\\\\\
+              \\\\\\\\
               \hline
             \end{tabular}
             \hspace{-0.1in}
-            \begin{tabular}[t]{|@{\hskip1pt}p{10.45cm}|}
-              \hline
-              \mc{}\\
-              \hline
-              \mc{}\\
-              \hline
-              \mc{}\\
-              \hline
-              \mc{}\\
-              \hline
-              \mc{}\\
-              \hline
-            \end{tabular}
           \end{tabular}
           \hfill
     \end{table}
