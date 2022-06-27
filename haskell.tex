@@ -1,6 +1,7 @@
 \documentclass{article}
 \usepackage[left=3mm, right=3mm, top=5mm, bottom=5mm]{geometry}
 \usepackage[document]{ragged2e}
+\usepackage[T1]{fontenc}
 \usepackage{array, makecell}
 \newcommand{\mc}{\makecell[{{p{1\linewidth}}}]}
 \renewcommand{\arraystretch}{3.5}
@@ -48,15 +49,28 @@
           \hline
           \mc{pure \\ pure func -> wrappedFunc} & \mc{This is essentially the wrap function that will allow you to apply functions to wrapped values. It is defined in the applicative class. (see below) Also note that the pure function often only shows one type: for example the pure function for Maybe only shows Just and doesn't take the function as an explicit parameter -> pure = Just} \\
           \hline
-          \mc{Functor \\ fmap func wrappedValue \\fmap f (Just a) = Just(f a)\\ fmap f Nothing = Nothing} & \mc{A functor is a type that can be modified by regular functions via the fmap function. example: (+3) to Maybe Int -> fmap (+3) (Just 4) -> 7 while fmap (+3) Nothing -> Nothing }\\ 
+          \mc{Functor\\  fmap func wrappedValue \\fmap f (Just a) = Just(f a)\\ fmap f Nothing = Nothing} & \mc{A functor is a type that can be modified by regular functions via the fmap function. example: (+3) to Maybe Int -> fmap (+3) (Just 4) -> 7 while fmap (+3) Nothing -> Nothing \\
+          fmap::(a -> b) -> f a -> f b} where f is a wrapper type!\\ 
           \hline
-          \mc{Applicative \\ Maybe func <*> Maybe Int \\ (Just f) <*> v = fmap  f v \\ Nothing <*> v = Nothing} & \mc{Apply a wrapped function to a wrapped value. The interesting part here is that the function can also be the return type of another function. Essentially allowing you to chain functions.  -> pure func <\$> val1 <*> val2 <*> val3} \\
+          \mc{Applicative \\ Maybe func <*> Maybe Int \\ (Just f) <*> v = fmap  f v \\ Nothing <*> v = Nothing} & \mc{Applicative::() \\Apply a wrapped function to a wrapped value. The interesting part here is that the function can also be the return type of another function. Essentially allowing you to chain functions.  -> pure func <\$> val1 <*> val2 <*> val3\\ (<*>):: f (a -> b) -> f a -> f b} \\
           \hline
-        \mc{Monad \\ wrappedValue >>= func \\ (Just v) >>= f = f v \\ Nothing >>= f = Nothing} & \mc{The Monad has many more functions but the described to the left is the bind operator, \\ it allows you to do the same with as with the functor, \\ just this time you can chain it because of the applicative class.\\
-        The Monad also has the useful operator <|> that allows you to make choices,\\ aka if the first fails then try the second.
-      ex: choice = parseLevel1 <|> parseLevel2 <|> parseLevel3} \\ 
+        \mc{Monad \\ wrappedValue >>= func \\ (Just v) >>= f = f v \\ Nothing >>= f = Nothing} & \mc{The Monad has many more functions but the described to the left is the bind operator, \\ it allows you to do the same with as with the functor, \\ just this time you can chain it because of the applicative class.
+        (>>=) :: f a -> (a -> f b) -> f b\\ }\\
+          \hline
+          \mc{Alternative}& \mc{The useful operator <|> that allows you to make choices,\\ aka if the first fails then try the second.
+      ex: choice = parseLevel1 <|> parseLevel2 <|> parseLevel3}\\
           \hline
           \mc{do notation \\ do x <- monadtype \\ y <- monadtype \\ expression|return statement} & \mc{This is used to easily evaluate a function dealing with Monads. The example is from the parser for the lambda interpreter.} \\
+          \hline
+          \mc{curry and uncurry } & \mc{curry:: ((a,b) -> c) -> (a -> b -> c) curry f = \textbackslash{}x -> (\textbackslash{}y -> f (x,y)) \\ uncurry::(a -> b -> c) -> ((a,b) -> c)
+          uncurry f = \textbackslash{}(x,y) -> f x y }\\
+          \hline
+            \mc{Equational style}& \mc{ double 2 = \{applying double \} \\ 2 + 2 = \{applying +\} \\= 6 \\
+            }\\
+          \hline
+          \mc{prefix and infix}& \mc{infix : (\#+) -> 1 + 2 OR (\#+) 1 2\\
+          definition: (\#+) a b =  a + b  OR  a \#+ b = a + b\\ 
+          prefix : div 4 2 = 2 OR 4 ’div’ 2 \\ definition div a b = a / b\\ Note, text strings can't be defined as infix}\\
           \hline
       \end{tabular}
     \end{table}
